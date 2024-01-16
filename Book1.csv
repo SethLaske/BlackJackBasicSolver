@@ -1,0 +1,40 @@
+PH,Two,Three,Four,Five,Six,Seven,Eight,Nine,Ten,Ace
+20,S,S,S,S,S,S,S,S,S,S
+19,H,S,S,S,S,S,S,S,S,S
+18,H,H,S,S,S,S,S,S,S,S
+17,D,H,H,S,S,S,S,S,S,S
+16,D,D,H,H,S,S,S,S,S,S
+15,S,S,S,S,S,S,S,S,S,S
+14,H,S,S,S,S,S,S,S,S,S
+13,H,H,S,S,S,S,S,S,S,S
+12,D,H,H,S,S,S,S,S,S,S
+11,D,D,H,H,S,S,S,S,S,S
+10,S,S,S,S,S,S,S,S,S,S
+9,H,S,S,S,S,S,S,S,S,S
+8,H,H,S,S,S,S,S,S,S,S
+7,D,H,H,S,S,S,S,S,S,S
+6,D,D,H,H,S,S,S,S,S,S
+5,S,S,S,S,S,S,S,S,S,S
+4,S,S,S,S,S,S,S,S,S,S
+A9,H,S,S,S,S,S,S,S,S,S
+A8,H,H,S,S,S,S,S,S,S,S
+A7,D,H,H,S,S,S,S,S,S,S
+A6,D,D,H,H,S,S,S,S,S,S
+A5,S,S,S,S,S,S,S,S,S,S
+A4,H,S,S,S,S,S,S,S,S,S
+A3,H,H,S,S,S,S,S,S,S,S
+A2,D,H,H,S,S,S,S,S,S,S
+S11,D,D,H,H,S,S,S,S,S,S
+S10,S,S,S,S,S,S,S,S,S,S
+S9,H,S,S,S,S,S,S,S,S,S
+S8,H,H,S,S,S,S,S,S,S,S
+S7,D,H,H,S,S,S,S,S,S,S
+S6,D,D,H,H,S,S,S,S,S,S
+S5,S,S,S,S,S,S,S,S,S,S
+S4,S,S,S,S,S,S,S,S,S,S
+S3,H,S,S,S,S,S,S,S,S,S
+S2,H,H,S,S,S,S,S,S,S,S
+Test,1,2,3,4,5,6,7,8,9,10
+Edge, 3, C, 345, sodfh, 023,324
+Edge2, 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+Edge3, 1, 2, 3, "", ;, :,,

@@ -1,0 +1,22 @@
+# ninja log v5
+2	465	7270681661205737	CMakeFiles/BasicStrategySolver.dir/main.cpp.obj	31ee2a4b29414596
+693	838	7270681664925792	BasicStrategySolver.exe	cec821ab95e5f56e
+5	693	7270681663479652	CMakeFiles/BasicStrategySolver.dir/StrategyGuideHandler.cpp.obj	eb2706fee0b0ea7f
+3	433	7270681761056269	CMakeFiles/BasicStrategySolver.dir/main.cpp.obj	31ee2a4b29414596
+434	577	7270681762462513	BasicStrategySolver.exe	cec821ab95e5f56e
+2	670	7270682364888039	CMakeFiles/BasicStrategySolver.dir/StrategyGuideHandler.cpp.obj	eb2706fee0b0ea7f
+671	816	7270682366344146	BasicStrategySolver.exe	cec821ab95e5f56e
+2	645	7270682627157864	CMakeFiles/BasicStrategySolver.dir/StrategyGuideHandler.cpp.obj	eb2706fee0b0ea7f
+647	788	7270682628574300	BasicStrategySolver.exe	cec821ab95e5f56e
+2	657	7270683213983647	CMakeFiles/BasicStrategySolver.dir/StrategyGuideHandler.cpp.obj	eb2706fee0b0ea7f
+658	797	7270683215369944	BasicStrategySolver.exe	cec821ab95e5f56e
+2	490	7270689776244158	CMakeFiles/BasicStrategySolver.dir/main.cpp.obj	31ee2a4b29414596
+6	738	7270689778716295	CMakeFiles/BasicStrategySolver.dir/StrategyGuideHandler.cpp.obj	eb2706fee0b0ea7f
+738	892	7270689780252185	BasicStrategySolver.exe	cec821ab95e5f56e
+2	679	7270690842172341	CMakeFiles/BasicStrategySolver.dir/StrategyGuideHandler.cpp.obj	eb2706fee0b0ea7f
+679	824	7270690843598552	BasicStrategySolver.exe	cec821ab95e5f56e
+3	477	7270692704304662	CMakeFiles/BasicStrategySolver.dir/main.cpp.obj	31ee2a4b29414596
+6	688	7270692706404321	CMakeFiles/BasicStrategySolver.dir/StrategyGuideHandler.cpp.obj	eb2706fee0b0ea7f
+688	828	7270692707790602	BasicStrategySolver.exe	cec821ab95e5f56e
+2	451	7270692982924027	CMakeFiles/BasicStrategySolver.dir/main.cpp.obj	31ee2a4b29414596
+451	593	7270692984315375	BasicStrategySolver.exe	cec821ab95e5f56e
