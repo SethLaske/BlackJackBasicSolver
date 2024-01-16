@@ -1,6 +1,3 @@
-Edge3, 1, 2, 3, "", ;, :,,BJ,BJ,BJ
-Edge2, 1,1,1,1,1,1,1,1,1,1
-Edge, 3, C, 345, sodfh, 023,324,BJ,BJ,BJ,BJ
 Test,1,2,3,4,5,6,7,8,9,10
 7,D,H,H,S,S,S,S,S,S,S
 10,S,S,S,S,S,S,S,S,S,S
@@ -12,7 +9,7 @@ A3,H,H,S,S,S,S,S,S,S,S
 6,D,D,H,H,S,S,S,S,S,S
 15,S,S,S,S,S,S,S,S,S,S
 20,S,S,S,S,S,S,S,S,S,S
-PH,Two,Three,Four,Five,Six,Seven,Eight,Nine,Monkey,Ace
+PH,Two,Three,Four,Five,Six,Monkey,Eight,Nine,Ten,Ace
 17,D,H,H,S,S,S,S,S,S,S
 12,D,H,H,S,S,S,S,S,S,S
 S10,S,S,S,S,S,S,S,S,S,S

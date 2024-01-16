@@ -1,67 +1,65 @@
-
-
 #include "StrategyGuideHandler.h"
+
+#include <utility>
 
 using namespace std;
 
 // Constructor
 StrategyGuideHandler::StrategyGuideHandler() {
-    strategy = std::unordered_map<std::string, std::array<std::string, 10>>();
+    strategy = unordered_map< string, array<string, POSSIBLE_DEALER_CARDS>>();
 
     cout << "Created a strategy guide" << endl ;
 }
 
 // Destructor
 StrategyGuideHandler::~StrategyGuideHandler() {
-    // Clean up resources if needed
     cout << "Deleting the strategy guide" << endl ;
 }
 
-void StrategyGuideHandler::LoadGuide(const std::string& fileName) {
+//Load a guide into the useable strategy
+void StrategyGuideHandler::loadGuide(const  string& csvFileName) {
 
-    if(CheckForCSV(fileName) == false){ return;}
+    if(!isCSVFile(csvFileName))    {return;}
 
 
-    // Try to open the file
-    std::ifstream file(fileName);
+    ifstream file(csvFileName);
     if (!file.is_open()) {
-        std::cerr << "Error: Unable to open file '" << fileName << "'" << std::endl;
+        cerr << "Error: Unable to open file '" << csvFileName << "'" << endl;
         return;
     }
 
     // Set the total number of entries per line
-    const int entriesPerLine = possibleDealerCards + 1;
+    const int ENTRIES_PER_LINE = POSSIBLE_DEALER_CARDS + 1;
 
-    // Read and populate the std::unordered_map
-    std::string line;
-    while (std::getline(file, line)) {
+    // Read and populate the  unordered_map
+    string line;
+    while (getline(file, line)) {
         // Tokenize the line based on commas
-        std::istringstream ss(line);
-        std::string token;
-        std::vector<std::string> values;
+        istringstream ss(line);
+        string token;
+        vector<string> values;
 
         // Extract values from the line
-        while (std::getline(ss, token, ',')) {
+        while (getline(ss,token,',')) {
             values.push_back(token);
         }
 
         // Check for entries per line not correct
-        if (values.size() < entriesPerLine) {
-            std::cerr << "Error: Entries per line not met. Adding 'NULL' for missing entries." << std::endl;
-            values.resize(entriesPerLine, "BJ");
-        }else if (values.size() > entriesPerLine) {
-            std::cerr << "Error: Entries per line exceeded. Cutting off additional entries." << std::endl;
-            values.resize(entriesPerLine, "BJ");
+        if (values.size() < ENTRIES_PER_LINE) {
+            cerr << "Error: Entries per line not met. Adding 'NULL' for missing entries." << endl;
+            values.resize(ENTRIES_PER_LINE, "BJ");
+        }else if (values.size() > ENTRIES_PER_LINE) {
+            cerr << "Error: Entries per line exceeded. Cutting off additional entries." << endl;
+            values.resize(ENTRIES_PER_LINE, "BJ");
         }
 
-        std::string key = values[0];
+        string key = values[0];
 
-        std::array<std::string, possibleDealerCards> strategyArray;
-        for (int i = 0; i < possibleDealerCards; i++) {
+        array<string, POSSIBLE_DEALER_CARDS> strategyArray;
+        for (int i = 0; i < POSSIBLE_DEALER_CARDS; i++) {
             strategyArray[i] = values[i+1];
         }
 
-        // Add the entry
         strategy[key] = strategyArray;
     }
 
@@ -70,14 +68,13 @@ void StrategyGuideHandler::LoadGuide(const std::string& fileName) {
     //PrintCurrentStrategy();
 }
 
-void StrategyGuideHandler::SaveGuide(const std::string& fileName) {
+void StrategyGuideHandler::saveGuide(const string& csvFileName) {
 
-    if(CheckForCSV(fileName) == false){ return;}
+    if(!isCSVFile(csvFileName))    {return;}
 
-    // Try to open the file for writing
-    std::ofstream file(fileName);
+    ofstream file(csvFileName);
     if (!file.is_open()) {
-        std::cerr << "Error: Unable to open/create file '" << fileName << "'" << std::endl;
+         cerr << "Error: Unable to open/create file '" << csvFileName << "'" <<  endl;
         return;
     }
 
@@ -85,153 +82,140 @@ void StrategyGuideHandler::SaveGuide(const std::string& fileName) {
     for (const auto& pair : strategy) {
         file << pair.first;
 
-        // Save each entry in the array
         for (const auto& entry : pair.second) {
             file << "," << entry;
         }
 
-        file << std::endl;
+        file << endl;
     }
 
     file.close();
 }
 
-basic_string<char> StrategyGuideHandler::GetEntry(const std::string& playerCards, int dealerCard) {
-
+basic_string<char> StrategyGuideHandler::getEntry(const string& playerCards, int dealerCard) {
     //Dealer can have a 2-11, but the indexes will correspond to 0-9
     dealerCard -= 2;
 
-    if(CheckForValidDealerNumber(dealerCard) == false){ return "F";}
+    if(!isValidDealerNumber(dealerCard))    {return "F";}
 
     // Check if the key exists in the strategy map
     auto it = strategy.find(playerCards);
     if (it != strategy.end()) {
         // Key found, modify the corresponding entry
-        std::array<std::string, possibleDealerCards>& arrayPtr = it->second;
+        array< string, POSSIBLE_DEALER_CARDS>& arrayPtr = it->second;
         // Perform modification here, for example:
         return arrayPtr[dealerCard];
     } else {
         // Key not found, handle the error or add a new entry if needed
-        std::cerr << "Entry not found for key: " << playerCards << std::endl;
-
+        cerr << "Entry not found for key: " << playerCards <<  endl;
     }
 
     return "L";
 }
 
-void StrategyGuideHandler::EditEntry(const std::string& playerCards, int dealerCard, string newMove) {
-
+void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, string newMove) {
     //Dealer can have a 2-11, but the indexes will correspond to 0-9
     dealerCard -= 2;
 
-    if(CheckForValidDealerNumber(dealerCard) == false){ return;}
+    if(!isValidDealerNumber(dealerCard)){ return;}
 
     // Check if the key exists in the strategy map
     auto it = strategy.find(playerCards);
     if (it != strategy.end()) {
         // Key found, modify the corresponding entry
-        std::array<std::string, possibleDealerCards>& arrayPtr = it->second;
+        array< string, POSSIBLE_DEALER_CARDS>& arrayPtr = it->second;
         // Perform modification here, for example:
-        arrayPtr[dealerCard] = newMove;
+        arrayPtr[dealerCard] = move(newMove);
     } else {
         // Key not found, handle the error or add a new entry if needed
-        std::cerr << "Entry not found for key: " << playerCards << std::endl;
+         cerr << "Entry not found for key: " << playerCards <<  endl;
         // Add new entry logic if required
         return;
     }
 
-    //PrintCurrentStrategy();
+    //printCurrentStrategy();
 }
 
-void StrategyGuideHandler::PrintFile(const string &fileName) {
-    cout << "Printing a file" << endl ;
+[[maybe_unused]] void StrategyGuideHandler::printFile(const string &csvFileName) {
 
+    if(!isCSVFile(csvFileName))    {return;}
 
-    // Check if the file name has a .csv extension
-    if (fileName.size() < 4 || fileName.substr(fileName.size() - 4) != ".csv") {
-        std::cerr << "Error: Invalid file format. Please provide a .csv file." << std::endl;
-        return;
-    }
-
-    // Try to open the file
-    std::ifstream file(fileName);
+    ifstream file(csvFileName);
     if (!file.is_open()) {
-        std::cerr << "Error: Unable to open file '" << fileName << "'" << std::endl;
+        cerr << "Error: Unable to open file '" << csvFileName << "'" <<  endl;
         return;
     }
-
-    std::cout << "Reading file: " << fileName << std::endl;
 
     // Set the total number of entries per line
-    const int entriesPerLine = possibleDealerCards + 1;
+    const int ENTRIES_PER_LINE = POSSIBLE_DEALER_CARDS + 1;
 
     // Read and print each line from the CSV file
-    std::string line;
-    while (std::getline(file, line)) {
-        std::cout << "NEW LINE: ";
+    string line;
+    while ( getline(file, line)) {
+         cout << "NEW LINE: ";
 
         // Tokenize the line based on commas
-        std::istringstream ss(line);
-        std::string token;
-        std::vector<std::string> values;
+        istringstream ss(line);
+        string token;
+        vector< string> values;
 
-        while (std::getline(ss, token, ',')) {
+        while ( getline(ss, token, ',')) {
             values.push_back(token);
         }
 
         // Check for entries per line exceeded or not met
-        if (values.size() > entriesPerLine) {
-            std::cerr << "Error: Entries per line exceeded. Ignoring extra entries." << std::endl;
-            values.resize(entriesPerLine, "NULL");
-        } else if (values.size() < entriesPerLine) {
-            std::cerr << "Error: Entries per line not met. Adding 'NULL' for missing entries." << std::endl;
-            values.resize(entriesPerLine, "NULL");
+        if (values.size() > ENTRIES_PER_LINE) {
+             cerr << "Error: Entries per line exceeded. Ignoring extra entries." <<  endl;
+            values.resize(ENTRIES_PER_LINE, "NULL");
+        } else if (values.size() < ENTRIES_PER_LINE) {
+             cerr << "Error: Entries per line not met. Adding 'NULL' for missing entries." <<  endl;
+            values.resize(ENTRIES_PER_LINE, "NULL");
         }
 
         // Print the first value by itself
         if (!values.empty()) {
-            std::cout << values[0];
+            cout << values[0];
 
             // Print the rest of the values (excluding the first value)
             for (size_t i = 1; i < values.size(); ++i) {
-                std::cout << ", " << values[i];
+                cout << ", " << values[i];
             }
         }
 
-        std::cout << std::endl;
+        cout <<  endl;
     }
 
     // Close the file
     file.close();
 }
 
-void StrategyGuideHandler::PrintCurrentStrategy() {
+[[maybe_unused]] void StrategyGuideHandler::printCurrentStrategy() {
     cout << "Printing the active strategy" << endl ;
 
     for (const auto& pair : strategy) {
-        std::cout << pair.first << ": [";
+         cout << pair.first << ": [";
 
         // Print each entry in the array
         for (const auto& entry : pair.second) {
-            std::cout << entry << "/";
+             cout << entry << "/";
         }
 
         // Remove the trailing '/' and close the bracket
-        std::cout << "\b]" << std::endl;
+         cout << "\b]" <<  endl;
     }
 }
 
-bool StrategyGuideHandler::CheckForCSV(const string &fileName) {
+bool StrategyGuideHandler::isCSVFile(const std::string &fileName) {
     if (fileName.size() < 4 || fileName.substr(fileName.size() - 4) != ".csv") {
-        std::cerr << "Error: Invalid file format. Please provide a .csv file." << std::endl;
+         cerr << "Error: Invalid file format. Please provide a .csv file." <<  endl;
         return false;
     }
     return true;
 }
 
-bool StrategyGuideHandler::CheckForValidDealerNumber(int dealerCard) {
+bool StrategyGuideHandler::isValidDealerNumber(int dealerCard) {
     if(dealerCard < 0 || dealerCard > 9){
-        std::cerr << "Invalid Dealer card. Must be between 2 and 11 (Ace)." <<  std::endl;
+         cerr << "Invalid Dealer card. Must be between 2 and 11 (Ace)." <<   endl;
         return false;
     }
     return true;

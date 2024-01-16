@@ -14,20 +14,21 @@ public:
     StrategyGuideHandler(); // Constructor
     ~StrategyGuideHandler(); // Destructor
 
-    void LoadGuide(const std::string& fileName);
-    void SaveGuide(const std::string& fileName);
-    std::basic_string<char> GetEntry(const std::string& playerCards, int dealerCard);
-    void EditEntry(const std::string& playerCards, int dealerCard, std::string newMove);
+    void loadGuide(const std::string& csvFileName);
+    void saveGuide(const std::string& csvFileName);
+    std::basic_string<char> getEntry(const std::string& playerCards, int dealerCard);
+    void editEntry(const std::string& playerCards, int dealerCard, std::string newMove);
 
 private:
-    static const int possibleDealerCards = 10;
-    std::unordered_map<std::string, std::array<std::string, possibleDealerCards>> strategy;
+    static const int  POSSIBLE_DEALER_CARDS = 10;
+    std::unordered_map<std::string, std::array<std::string,  POSSIBLE_DEALER_CARDS>> strategy;
 
-    void PrintFile(const std::string& fileName);
-    void PrintCurrentStrategy();
+    [[maybe_unused]] void printFile(const std::string& csvFileName);
 
-    bool CheckForValidDealerNumber(int dealerCard);
-    bool CheckForCSV(const std::string& fileName);
+    [[maybe_unused]] void printCurrentStrategy();
+
+    bool isValidDealerNumber(int dealerCard);
+    bool isCSVFile(const std::string& fileName);
 };
 
 #endif // STRATEGYGUIDEHANDLER_H
