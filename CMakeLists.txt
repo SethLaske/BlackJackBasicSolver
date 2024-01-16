@@ -9,4 +9,10 @@ add_executable(BasicStrategySolver main.cpp
         Card.cpp
         Card.h
         Shoe.cpp
-        Shoe.h)
+        Shoe.h
+        Hand.cpp
+        Hand.h
+        DealerHand.cpp
+        DealerHand.h
+        PlayerHand.cpp
+        PlayerHand.h)

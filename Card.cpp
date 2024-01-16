@@ -20,4 +20,14 @@ std::string Card::toString() const {
     return valueStr + " of " + suitStr;
 }
 
+int Card::getCardValue() const{
+    if(value == ACE){
+        return 11;
+    } else if(value < TEN){
+        return value;
+    } else{
+        return 10;
+    }
+}
+
 

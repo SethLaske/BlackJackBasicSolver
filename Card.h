@@ -33,6 +33,7 @@ public:
 
     std::string toString() const;
 
+    int getCardValue() const;
 
 
 private:
