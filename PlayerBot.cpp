@@ -12,27 +12,11 @@ PlayerBot::PlayerBot(float startingMoney, const StrategyGuideHandler& strategyGu
 }
 
 PlayerBot::~PlayerBot() {
-
+    std::cout << "The players final money was " << money << std::endl;
 }
 
 PLAYERACTION PlayerBot::getPlayerAction(const PlayerHand &playerHand, const DealerHand &dealerHand) {
 
-    /*std::ostringstream playerCardsStream;
-    if(playerHand.canBeSplit && money >= playerHand.getBetSize()){
-        if(playerHand.getSoftAceCount() > 0){
-            playerCardsStream << "S11";
-        }else{
-            playerCardsStream << "S" << playerHand.getHandValue()/2;
-        }
-    }
-
-    else if(playerHand.getSoftAceCount() > 0){
-        playerCardsStream << "A" << playerHand.getHandValue()-11;
-    }
-
-    else {
-        playerCardsStream << playerHand.getHandValue();
-    }*/
 
     std::string playerCardsString;
 
@@ -55,7 +39,7 @@ PLAYERACTION PlayerBot::getPlayerAction(const PlayerHand &playerHand, const Deal
 
     std::basic_string<char> strategyRecommendation = strategyGuideHandler.getEntry(playerCardsString , dealerHand.getHandValue());
 
-    std::cout << "I have a: " << playerHand.getHandValue() << " which results in a: " << playerCardsString << " against the dealers " << dealerHand.getHandValue() << " So I will " << strategyRecommendation;
+    std::cout << "I have a: " << playerHand.getHandValue() << " which results in a: " << playerCardsString << " against the dealers " << dealerHand.getHandValue() << " So I will " << strategyRecommendation << std::endl;
 
     if(strategyRecommendation == "Hit"){
         return PLAYERACTION::HIT;
@@ -76,12 +60,13 @@ PLAYERACTION PlayerBot::getPlayerAction(const PlayerHand &playerHand, const Deal
         return PLAYERACTION::STAY;
     }
 
-    std::cerr << "Couldn't figure out the proper move so Im hitting like a man";
+    std::cerr << "Couldn't figure out the proper move so Im hitting like a man" << std::endl;
     return HIT;
 }
 
 std::vector<int> PlayerBot::getPlayerBets(int maxNumberOfBets, int minBet, int maxBet) {
     //Too soon to deal with analyzing bet sizes
+    money -= (float)(minBet + maxBet);
     return {minBet, maxBet};
 }
 

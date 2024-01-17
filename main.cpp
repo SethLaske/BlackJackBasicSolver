@@ -90,7 +90,7 @@ void testPlayerBot(){
 void testTable(){
     StrategyGuideHandler newStrategy;
     newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
-    float bankRoll = 500;
+    float bankRoll = 5000;
     PlayerBot playerBot(bankRoll, newStrategy);
 
     Table table(playerBot);

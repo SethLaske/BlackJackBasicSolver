@@ -27,17 +27,22 @@ private:
 
 
     void dealHands();
+    void handleBlackjacks();
+    void doAllPlayerHands();
 
     void payPlayer(const PlayerHand& playerHand, float payoutRate);     //1 for push, 2 for win, blackjack payout + 1 for natural blackjack
 
-    void hitHand(Hand& hand);
-    void stayHand(Hand& hand);
+    //void hitHand(Hand& hand);
+    //void stayHand(Hand& hand);
     //Dealer can never double or split
-    void doubleHand(PlayerHand& hand);
-    void splitHand(PlayerHand& hand);
+    //void doubleHand(PlayerHand& hand);
+    //void splitHand(PlayerHand& hand);
 
     void getPlayerAction(PlayerHand& playerHand);
-    void getDealerAction(DealerHand& dealerHand);
+    void getDealerAction();
+
+
+
 };
 
 

@@ -16,5 +16,5 @@ void DealerHand::dealHiddenCard(const Card& newCard) {
 
 void DealerHand::revealHiddenCard() {
     std::cout << "The hidden card was the: " << hiddenCard.toString() << std::endl;
-    cards.push_back(hiddenCard);
+    addCard(hiddenCard);
 }
