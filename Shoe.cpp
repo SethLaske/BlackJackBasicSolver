@@ -51,6 +51,7 @@ Card Shoe::drawCard() {
 
         if(discardedCards.size() > currentCutCardIndex) {needToShuffle = true;}
 
+        //std::cout << "Dealing the: " << drawnCard.toString() << std::endl;
         // Return the drawn card
         return drawnCard;
     } else {

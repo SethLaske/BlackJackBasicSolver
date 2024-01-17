@@ -15,8 +15,8 @@ public:
     void revealHiddenCard();
 
 private:
-    Card hiddenCard;
+    Card hiddenCard = Card(Card::SPADES, Card::ACE);
 };
 
 
-#endif DEALERHAND_H
+#endif //DEALERHAND_H

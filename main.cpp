@@ -3,16 +3,25 @@
 #include "StrategyGuideHandler.h"
 #include "Shoe.h"
 #include "Card.h"
+#include "PlayerHand.h"
+#include "DealerHand.h"
+#include "PlayerBot.h"
+#include "Table.h"
 
 void testStrategyGuideHandler();
 void testShoe();
+void testPlayerBot();
+void testTable();
 
 using namespace std;
 
 int main() {
 
     //testStrategyGuideHandler();
-    testShoe();
+    //testShoe();
+    //testPlayerBot();
+
+    testTable();
 
     return 0;
 }
@@ -56,3 +65,35 @@ void testShoe(){
     }
 }
 
+void testPlayerBot(){
+    StrategyGuideHandler newStrategy;
+
+    newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
+
+    float bankRoll = 500;
+
+    DealerHand dealerHand;
+    PlayerHand playerHand(50);
+
+    Shoe shoe(4, .5, .7);
+
+    playerHand.addCard(shoe.drawCard());
+    dealerHand.dealHiddenCard(shoe.drawCard());
+    playerHand.addCard(shoe.drawCard());
+    dealerHand.addCard(shoe.drawCard());
+
+    PlayerBot playerBot(bankRoll, newStrategy);
+
+    playerBot.getPlayerAction(playerHand, dealerHand);
+}
+
+void testTable(){
+    StrategyGuideHandler newStrategy;
+    newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
+    float bankRoll = 500;
+    PlayerBot playerBot(bankRoll, newStrategy);
+
+    Table table(playerBot);
+
+    table.startGame();
+}

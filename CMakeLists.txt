@@ -15,4 +15,8 @@ add_executable(BasicStrategySolver main.cpp
         DealerHand.cpp
         DealerHand.h
         PlayerHand.cpp
-        PlayerHand.h)
+        PlayerHand.h
+        Table.cpp
+        Table.h
+        PlayerBot.cpp
+        PlayerBot.h)

@@ -91,6 +91,18 @@ build CMakeFiles/BasicStrategySolver.dir/PlayerHand.cpp.obj: CXX_COMPILER__Basic
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
   OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
 
+build CMakeFiles/BasicStrategySolver.dir/Table.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/Table.cpp || cmake_object_order_depends_target_BasicStrategySolver
+  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\Table.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
+  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
+
+build CMakeFiles/BasicStrategySolver.dir/PlayerBot.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/PlayerBot.cpp || cmake_object_order_depends_target_BasicStrategySolver
+  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\PlayerBot.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
+  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target BasicStrategySolver
@@ -99,7 +111,7 @@ build CMakeFiles/BasicStrategySolver.dir/PlayerHand.cpp.obj: CXX_COMPILER__Basic
 #############################################
 # Link the executable BasicStrategySolver.exe
 
-build BasicStrategySolver.exe: CXX_EXECUTABLE_LINKER__BasicStrategySolver_Debug CMakeFiles/BasicStrategySolver.dir/main.cpp.obj CMakeFiles/BasicStrategySolver.dir/StrategyGuideHandler.cpp.obj CMakeFiles/BasicStrategySolver.dir/Card.cpp.obj CMakeFiles/BasicStrategySolver.dir/Shoe.cpp.obj CMakeFiles/BasicStrategySolver.dir/Hand.cpp.obj CMakeFiles/BasicStrategySolver.dir/DealerHand.cpp.obj CMakeFiles/BasicStrategySolver.dir/PlayerHand.cpp.obj
+build BasicStrategySolver.exe: CXX_EXECUTABLE_LINKER__BasicStrategySolver_Debug CMakeFiles/BasicStrategySolver.dir/main.cpp.obj CMakeFiles/BasicStrategySolver.dir/StrategyGuideHandler.cpp.obj CMakeFiles/BasicStrategySolver.dir/Card.cpp.obj CMakeFiles/BasicStrategySolver.dir/Shoe.cpp.obj CMakeFiles/BasicStrategySolver.dir/Hand.cpp.obj CMakeFiles/BasicStrategySolver.dir/DealerHand.cpp.obj CMakeFiles/BasicStrategySolver.dir/PlayerHand.cpp.obj CMakeFiles/BasicStrategySolver.dir/Table.cpp.obj CMakeFiles/BasicStrategySolver.dir/PlayerBot.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir

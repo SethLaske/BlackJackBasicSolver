@@ -31,4 +31,4 @@ protected:
 };
 
 
-#endif HAND_H
+#endif //HAND_H

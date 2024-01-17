@@ -13,7 +13,7 @@ StrategyGuideHandler::StrategyGuideHandler() {
 
 // Destructor
 StrategyGuideHandler::~StrategyGuideHandler() {
-    cout << "Deleting the strategy guide" << endl ;
+    //cout << "Deleting the strategy guide" << endl ;
 }
 
 //Load a guide into the useable strategy

@@ -2,8 +2,8 @@
 // Created by small on 1/16/2024.
 //
 
-#ifndef BASICSTRATEGYSOLVER_PLAYERHAND_H
-#define BASICSTRATEGYSOLVER_PLAYERHAND_H
+#ifndef PLAYERHAND_H
+#define PLAYERHAND_H
 
 #include <memory>
 #include "Hand.h"
@@ -15,7 +15,7 @@ public:
     ~PlayerHand();
 
     void addCard(const Card& addedCard) override;
-    int getBetSize() const;
+    float getBetSize() const;
     void doubleDown(const Card& addedCard);
     Card splitCards();
 
@@ -23,8 +23,8 @@ public:
     bool canBeDoubled;
 
 private:
-    int betSize;
+    float betSize;
 };
 
 
-#endif //BASICSTRATEGYSOLVER_PLAYERHAND_H
+#endif //PLAYERHAND_H

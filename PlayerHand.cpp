@@ -18,6 +18,8 @@ PlayerHand::~PlayerHand() {
 void PlayerHand::addCard(const Card& addedCard) {
     Hand::addCard(addedCard);
 
+    //std::cout << "Card is being added to player hand too" << std::endl;
+
     if(cards.size() == 2){
         canBeDoubled = true;
         if(cards[0].getCardValue() == cards[1].getCardValue()){
@@ -31,7 +33,7 @@ void PlayerHand::addCard(const Card& addedCard) {
     }
 }
 
-int PlayerHand::getBetSize() const {
+float PlayerHand::getBetSize() const {
     return betSize;
 }
 
