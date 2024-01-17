@@ -25,6 +25,7 @@ A5,Stay,Stay,Stay,Stay,Stay,Stay,Stay,Stay,Stay,Stay
 A4,Hit,Stay,Stay,Stay,Stay,Stay,Stay,Stay,Stay,Stay
 A3,Hit,Hit,Stay,Stay,Stay,Stay,Stay,Stay,Stay,Stay
 A2,Double,Hit,Hit,Stay,Stay,Stay,Stay,Stay,Stay,Stay
+A1,Double,Double,Hit,Hit,Split,Split,Split,Split,Split,Split
 S11,Double,Double,Hit,Hit,Split,Split,Split,Split,Split,Split
 S10,Double,Double,Double,Double,Double,Double,Double,Double,Double,Double
 S9,Hit,Split,Split,Split,Split,Split,Split,Split,Split,Split

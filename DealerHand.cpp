@@ -15,6 +15,22 @@ void DealerHand::dealHiddenCard(const Card& newCard) {
 }
 
 void DealerHand::revealHiddenCard() {
-    std::cout << "The hidden card was the: " << hiddenCard.toString() << std::endl;
+    //std::cout << "The hidden card was the: " << hiddenCard.toString() << std::endl;
     addCard(hiddenCard);
+}
+
+void DealerHand::clearHand() {
+    cards.clear();
+    valueCount = 0;
+    softAceCount = 0;
+
+}
+
+void DealerHand::displayHand() {
+    std::cout << "Dealer:" << std::endl;
+    Hand::displayHand();
+    if(cards.size() == 1){
+        std::cout << "? of ?" << std::endl;
+    }
+
 }

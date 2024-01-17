@@ -16,7 +16,9 @@ public:
     Table(PlayerBot playerBot); //House Rules when I get to it
     ~Table();
 
+    void runGameTesting(int numberOfGames);
     void startGame();
+    void endGame();
 
 private:
     Shoe shoe;
@@ -41,7 +43,7 @@ private:
     void getPlayerAction(PlayerHand& playerHand);
     void getDealerAction();
 
-
+    void displayTable();
 
 };
 

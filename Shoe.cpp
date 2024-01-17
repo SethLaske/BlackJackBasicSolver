@@ -103,7 +103,7 @@ void Shoe::placeCutCard() {
 
     currentCutCardIndex = static_cast<int>(randomFloat * static_cast<float>(numberOfDecks * 52));
 
-    std::cout << minPenetration << " - " << maxPenetration << " -> " << random << std::endl;
+    //std::cout << minPenetration << " - " << maxPenetration << " -> " << random << std::endl;
 
-    std::cout << "The deck will need to be shuffled after: " << currentCutCardIndex << " cards." << std::endl;
+    //std::cout << "The deck will need to be shuffled after: " << currentCutCardIndex << " cards." << std::endl;
 }

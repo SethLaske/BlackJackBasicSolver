@@ -16,32 +16,50 @@ Table::~Table() {
 
 }
 
+void Table::runGameTesting(int numberOfGames) {
+    for(int i = 0; i < numberOfGames; i ++){
+        startGame();
+        endGame();
+        if(shoe.needToShuffle){
+            shoe.doShuffle();
+            //std::cout<< "Shuffling on game: " << i << std::endl;
+        }
+        if(i % (numberOfGames/20) == 0){
+            std::cout<< "There should be 20 of these" << std::endl;
+        }
+    }
+    playerBot.displayStats();
+}
+
 void Table::startGame() {
     dealHands();
+    //displayTable();
     handleBlackjacks();
 
     if(playerHands.empty()){
-        std::cout << "No players remaining due to blackjacks" << std::endl;
+        //std::cout << "No players remaining due to blackjacks" << std::endl;
         return;
     }
 
     doAllPlayerHands();
 
     if(playerHands.empty()){
-        std::cout << "No players remaining due to a bunch of NNN fails" << std::endl;
+        //std::cout << "No players remaining due to a bunch of NNN fails" << std::endl;
         return;
     }
 
-    std::cout << "Reached Dealer Logic" << std::endl;
+    //std::cout << "Reached Dealer Logic" << std::endl;
 
     getDealerAction();
 
+    //displayTable();
+
     int finalDealerValue = dealerHand.getHandValue();
 
-    std::cout << "Dealer finished with a " << finalDealerValue << std::endl;
+    //std::cout << "Dealer finished with a " << finalDealerValue << std::endl;
 
     if(finalDealerValue > 21){
-        std::cout << "Dealer Bust, Table Win" << std::endl;
+        //std::cout << "Dealer Bust, Table Win" << std::endl;
         for (PlayerHand& hand : playerHands){
             playerBot.getPaid((float) hand.getBetSize() * 2);
         }
@@ -53,12 +71,17 @@ void Table::startGame() {
             } else if(hand.getHandValue() == finalDealerValue){
                 payPlayer(hand, 1);
             } else{
-                std::cout << "L" << std::endl;
+                //std::cout << "L" << std::endl;
             }
 
         }
     }
 
+}
+
+void Table::endGame() {
+    playerHands.clear();
+    dealerHand.clearHand();
 }
 
 void Table::doAllPlayerHands() {
@@ -72,7 +95,7 @@ void Table::doAllPlayerHands() {
         if(playerHands.front().isHandFinished()){
             if(playerHands.front().getHandValue() <= 21){
                 remainingPlayerHands.push_back(playerHands.front());
-                std::cout << "Bro could have hit one more time" << std::endl;
+                //std::cout << "Bro could have hit one more time" << std::endl;
             }
             playerHands.erase(playerHands.begin());
         }
@@ -96,7 +119,7 @@ void Table::dealHands() {
 
     for (PlayerHand& hand : playerHands){
         hand.addCard(shoe.drawCard());
-        //hand.addCard(Card(Card::SPADES, Card::TEN));
+        //hand.addCard(Card(Card::SPADES, Card::ACE));
     }
     dealerHand.dealHiddenCard(shoe.drawCard());
     for (PlayerHand& hand : playerHands){
@@ -119,7 +142,7 @@ void Table::handleBlackjacks(){
                 payPlayer(hand, 1);
             }
         }
-        std::cout << "The dealer hit blackjack, the game is over" << std::endl;
+        //std::cout << "The dealer hit blackjack, the game is over" << std::endl;
         playerHands.clear();
         return;
     }
@@ -141,11 +164,11 @@ void Table::handleBlackjacks(){
 void Table::payPlayer(const PlayerHand &playerHand, float payoutRate) {
 
     if(payoutRate == 1){
-        std::cout << "Player pushed" << std::endl;
+        //std::cout << "Player pushed" << std::endl;
     } else if(payoutRate == 2){
-        std::cout << "Player won" << std::endl;
+        //std::cout << "Player won" << std::endl;
     } else{
-        std::cout << "Player blackjack" << std::endl;
+        //std::cout << "Player blackjack" << std::endl;
     }
     playerBot.getPaid((float)playerHand.getBetSize() * payoutRate);
 
@@ -181,6 +204,17 @@ void Table::getDealerAction() {
 
     while (dealerHand.getHandValue() < 17 || (dealerHand.getHandValue() == 17 && dealerHand.getSoftAceCount() > 0)){
         dealerHand.addCard(shoe.drawCard());
-        std::cout << "The dealer hits resulting in a " << dealerHand.getHandValue() <<std::endl;
+        //std::cout << "The dealer hits resulting in a " << dealerHand.getHandValue() <<std::endl;
     }
 }
+
+void Table::displayTable() {
+    std::cout << "---------------------------" << std::endl;
+    dealerHand.displayHand();
+    for(PlayerHand player: playerHands){
+        player.displayHand();
+    }
+    std::cout << "---------------------------" << std::endl;
+}
+
+

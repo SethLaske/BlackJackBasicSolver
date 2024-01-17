@@ -45,10 +45,10 @@ void PlayerHand::addCard(const Card& addedCard) {
 
     //These can combine later, this is funnier (and also for testing purposes)
     if(valueCount > 21){
-        std::cout << "Bust" << std::endl;
+        //std::cout << "Bust" << std::endl;
         handFinished = true;
     } else if(valueCount == 21){
-        std::cout << "Whats 9 + 10?" << std::endl;
+        //std::cout << "Whats 9 + 10?" << std::endl;
         handFinished = true;
     }
 }
@@ -64,13 +64,16 @@ void PlayerHand::doubleDown(const Card& addedCard) {
 
 Card PlayerHand::splitCards() {
     if(!canBeSplit){
-        std::cerr << "Can't be split" << std::endl;
+        //std::cerr << "Can't be split" << std::endl;
         return {Card::SPADES, Card::ACE};
     }
     Card removedCard = cards.back();
     cards.pop_back();
 
     valueCount -= removedCard.getCardValue();
+    if(removedCard.getCardValue() == 11){
+        valueCount += 10;
+    }
     //std::cout << "SPLITTING OFF A " << cards[0].getCardValue() << " with a new size of" << cards.size() << std::endl;
 
     return removedCard;
@@ -82,6 +85,13 @@ bool PlayerHand::isHandFinished() const {
 
 int PlayerHand::getHandSize() const {
     return cards.size();
+}
+
+void PlayerHand::displayHand() {
+    std::cout << "Player:" << std::endl;
+    Hand::displayHand();
+    std::cout << " Current value is "<< valueCount << " and the soft ace count is " << softAceCount << std::endl;
+    std::cout << "For a bet of: " << betSize <<std::endl;
 }
 
 

@@ -55,4 +55,11 @@ int Hand::getSoftAceCount() const {
     return softAceCount;
 }
 
+void Hand::displayHand() {
+    for(Card card : cards){
+        std::cout<< card.toString() << std::endl;
+    }
+
+}
+
 

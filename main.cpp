@@ -95,5 +95,5 @@ void testTable(){
 
     Table table(playerBot);
 
-    table.startGame();
+    table.runGameTesting(1000000);
 }

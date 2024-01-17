@@ -26,6 +26,7 @@ public:
     bool canBeDoubled;
 
     bool isHandFinished() const;
+    void displayHand() override;
 
 private:
     bool handFinished;

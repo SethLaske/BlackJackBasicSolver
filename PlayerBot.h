@@ -27,13 +27,23 @@ public:
     ~PlayerBot();
 
     std::vector<int> getPlayerBets(int maxNumberOfBets, int minBet, int maxBet);
-    PLAYERACTION getPlayerAction(const PlayerHand& playerHand, const DealerHand& dealerHand);
+    PLAYERACTION getPlayerAction(PlayerHand& playerHand, const DealerHand& dealerHand);
 
     void getPaid(float addedMoney);
     float money;
 
+    void displayStats();
 
 private:
+    float initialMoney;
+
+    int numberOfGamesPlayed;
+    int numberOfHandsPlayed;
+
+    int numberOfDoubles;
+    int numberOfSplits;
+
+    int numberOfTimesPaid;
 
     StrategyGuideHandler strategyGuideHandler;
 };

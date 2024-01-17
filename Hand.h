@@ -21,6 +21,8 @@ public:
     int getHandValue() const;
     int getSoftAceCount() const;
 
+    virtual void displayHand();
+
 protected:
 
     std::vector<Card> cards;

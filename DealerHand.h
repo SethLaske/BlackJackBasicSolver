@@ -14,6 +14,9 @@ public:
     void dealHiddenCard(const Card& newCard);
     void revealHiddenCard();
 
+    void displayHand() override;
+    void clearHand();
+
 private:
     Card hiddenCard = Card(Card::SPADES, Card::ACE);
 };
