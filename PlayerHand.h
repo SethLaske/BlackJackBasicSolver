@@ -22,15 +22,18 @@ public:
     void doubleDown(const Card& addedCard);
     Card splitCards();
 
-    bool canBeSplit;
-    bool canBeDoubled;
-
+    bool canDouble() const;
+    bool canSplit() const;
     bool isHandFinished() const;
+
     void displayHand() override;
 
 private:
     bool handFinished;
     int betSize;
+
+    //bool splittable;
+    //bool doubleable;
 };
 
 

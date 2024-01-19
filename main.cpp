@@ -7,10 +7,15 @@
 #include "DealerHand.h"
 #include "PlayerBot.h"
 #include "Table.h"
+#include "HouseRules.h"
 
+//Test loading, editing, and saving a .csv into the strategyguidehandler
 void testStrategyGuideHandler();
+//Test drawing cards from a shoe and shuffling
 void testShoe();
+//Test giving the player bot a hand and getting a response
 void testPlayerBot();
+//Test running a table
 void testTable();
 
 using namespace std;
@@ -52,14 +57,14 @@ void testShoe(){
         cout << shoe.drawCard().toString() << endl;
     }*/
 
-    while (!shoe.needToShuffle) {
+    while (!shoe.tryShuffle()) {
         //cout << shoe.drawCard().toString() << endl;
         shoe.drawCard();
     }
 
     shoe.doShuffle();
 
-    while (!shoe.needToShuffle) {
+    while (!shoe.tryShuffle()) {
         //cout << shoe.drawCard().toString() << endl;
         shoe.drawCard();
     }
@@ -78,7 +83,7 @@ void testPlayerBot(){
     Shoe shoe(4, .5, .7);
 
     playerHand.addCard(shoe.drawCard());
-    dealerHand.dealHiddenCard(shoe.drawCard());
+    dealerHand.addHiddenCard(shoe.drawCard());
     playerHand.addCard(shoe.drawCard());
     dealerHand.addCard(shoe.drawCard());
 
@@ -89,11 +94,12 @@ void testPlayerBot(){
 
 void testTable(){
     StrategyGuideHandler newStrategy;
-    newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
+    newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\ActualStrategy.csv)");
     float bankRoll = 5000;
     PlayerBot playerBot(bankRoll, newStrategy);
 
     Table table(playerBot);
 
-    table.runGameTesting(1000000);
+    table.runGameTesting(400);
+    //table.startGame();
 }

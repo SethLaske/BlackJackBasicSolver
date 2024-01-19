@@ -8,7 +8,6 @@ Shoe::Shoe(int numberOfDecks, float minPenetration, float maxPenetration) {
     this->minPenetration = minPenetration;
     this->maxPenetration = maxPenetration;
 
-    //doShuffle();
     initShoe();
 }
 
@@ -17,15 +16,12 @@ Shoe::Shoe(int numberOfDecks, float minPenetration, float maxPenetration) {
 // Implementation for the public function to shuffle the shoe
 void Shoe::doShuffle() {
 
-
-
     availableCards.insert(
             availableCards.end(),
             std::make_move_iterator(discardedCards.begin()),
             std::make_move_iterator(discardedCards.end())
     );
 
-    // Clear the discarded cards vector
     discardedCards.clear();
 
     needToShuffle = false;
@@ -36,31 +32,42 @@ void Shoe::doShuffle() {
 // Implementation for the public function to draw a card from the shoe
 Card Shoe::drawCard() {
 
-
-    // Check if the availableCards vector is not empty
     if (!availableCards.empty()) {
-        // Generate a random index within the availableCards vector
+
         int index = rand() % availableCards.size();
 
-        // Get the randomly selected card
         Card drawnCard = availableCards[index];
 
-        // Remove the drawn card from availableCards and add it to discardedCards
         availableCards.erase(availableCards.begin() + index);
         discardedCards.push_back(drawnCard);
 
-        if(discardedCards.size() > currentCutCardIndex) {needToShuffle = true;}
+        if(discardedCards.size() > currentCutCardIndex) {
+            std::cout<< "WARNING CARDS LOW> Cards available: " << availableCards.size() << std::endl;
+            //std::cout << "Dealing the: " << drawnCard.toString() << std::endl;
+            needToShuffle = true;
+        }
 
         //std::cout << "Dealing the: " << drawnCard.toString() << std::endl;
-        // Return the drawn card
         return drawnCard;
     } else {
-        // Handle the case where there are no available cards
+        //std::cout<< "ERROR: Cards available: " << availableCards.size() << " Cards discarded: " << discardedCards.size() << " Cut card index: " << currentCutCardIndex << std::endl;
         std::cerr << "Error: No available cards to draw." << std::endl;
         needToShuffle = true;
-        return {Card::HEARTS, Card::TWO}; // Placeholder, replace with appropriate logic
-
+        return {Card::HEARTS, Card::TWO};
     }
+}
+
+bool Shoe::tryShuffle() {
+    //std::cout<< "Cards available: " << availableCards.size() << " Cards discarded: " << discardedCards.size() << " Cut card index: " << currentCutCardIndex << std::endl;
+    if(!needToShuffle){
+        return false;
+    }
+    doShuffle();
+    return true;
+}
+
+int Shoe::getNumberOfDecks() const {
+    return numberOfDecks;
 }
 
 // Implementation for the private function to initialize the shoe
@@ -80,18 +87,15 @@ void Shoe::initShoe() {
                 availableCards.push_back(newCard);
                 //std::cout << "Adding card: " << newCard.toString() << " to the deck \n";
             }
-
         }
     }
 
     needToShuffle = false;
     placeCutCard();
-
 }
 
 void Shoe::placeCutCard() {
 
-    //srand (time(NULL));
     int iterations = rand() + 1;
     float random = maxPenetration;
     for(int i = 0; i< iterations; i++){
@@ -101,9 +105,8 @@ void Shoe::placeCutCard() {
     float diff = maxPenetration - minPenetration;
     float randomFloat = random * diff + minPenetration;
 
-    currentCutCardIndex = static_cast<int>(randomFloat * static_cast<float>(numberOfDecks * 52));
+    currentCutCardIndex = (int)(randomFloat * (float)(numberOfDecks * 52));
 
     //std::cout << minPenetration << " - " << maxPenetration << " -> " << random << std::endl;
-
-    //std::cout << "The deck will need to be shuffled after: " << currentCutCardIndex << " cards." << std::endl;
+    std::cout << "The deck will need to be shuffled after: " << currentCutCardIndex << " cards." << std::endl;
 }

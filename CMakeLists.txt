@@ -19,4 +19,5 @@ add_executable(BasicStrategySolver main.cpp
         Table.cpp
         Table.h
         PlayerBot.cpp
-        PlayerBot.h)
+        PlayerBot.h
+        HouseRules.h)

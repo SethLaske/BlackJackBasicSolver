@@ -10,20 +10,23 @@
 class Shoe {
 public:
     // Constructor with default value for the number of decks
-    explicit Shoe(int numberOfDecks = 3, float minPenetration = .4, float maxPenetration = .6);
+    Shoe(int numberOfDecks, float minPenetration, float maxPenetration);
 
-    // Public function to shuffle the shoe
+    //Shuffle the shoe, resulting in a full shoe
     void doShuffle();
 
-    // Public function to draw a card from the shoe
+    //Check if the shoe needs shuffling before shuffling
+    bool tryShuffle();
+
+    //Draw card from shoe
     Card drawCard();
 
-    int numberOfDecks;
+    int getNumberOfDecks() const;
 
-    bool needToShuffle;
+
 
 private:
-    // Private function to initialize the shoe with a specified number of decks
+    //Fill the deck
     void initShoe();
 
     void placeCutCard();
@@ -33,9 +36,12 @@ private:
     std::vector<Card> discardedCards;
 
     // Private variables
+    int numberOfDecks;
     int currentCutCardIndex;
     float minPenetration;
     float maxPenetration;
+
+    bool needToShuffle;
 };
 
 #endif // SHOE_H

@@ -9,11 +9,13 @@
 #include "DealerHand.h"
 #include "PlayerHand.h"
 #include "Shoe.h"
+#include "HouseRules.h"
 
 class Table {
 
 public:
-    Table(PlayerBot playerBot); //House Rules when I get to it
+    Table(const PlayerBot& playerBot, Shoe shoe);
+    Table(const PlayerBot& playerBot);
     ~Table();
 
     void runGameTesting(int numberOfGames);
@@ -33,12 +35,6 @@ private:
     void doAllPlayerHands();
 
     void payPlayer(const PlayerHand& playerHand, float payoutRate);     //1 for push, 2 for win, blackjack payout + 1 for natural blackjack
-
-    //void hitHand(Hand& hand);
-    //void stayHand(Hand& hand);
-    //Dealer can never double or split
-    //void doubleHand(PlayerHand& hand);
-    //void splitHand(PlayerHand& hand);
 
     void getPlayerAction(PlayerHand& playerHand);
     void getDealerAction();

@@ -10,10 +10,13 @@
 
 class DealerHand : public Hand{
 public:
+    //Checks for natural blackjack including the hidden card
     bool isBlackJack() override;
-    void dealHiddenCard(const Card& newCard);
+    void addHiddenCard(const Card& newCard);
+    //Shows the hidden card and adds it to the hand
     void revealHiddenCard();
 
+    //Prints the hand, and shows that there is a hidden card
     void displayHand() override;
     void clearHand();
 

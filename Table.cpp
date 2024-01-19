@@ -4,12 +4,19 @@
 
 #include "Table.h"
 
-Table::Table(PlayerBot playerBot) : playerBot(playerBot) {
-    this->playerBot = playerBot;
+#include <utility>
+
+Table::Table(const PlayerBot& playerBot, Shoe shoe) : playerBot(playerBot), shoe(std::move(shoe)) {
+    //this->playerBot = playerBot;
 
     //Shoe shoe;
 
 
+}
+
+Table::Table(const PlayerBot &playerBot) : playerBot(playerBot), shoe(HouseRules::NUMBEROFDECKSINSHOE, HouseRules::MINPENETRATIONPERCENT, HouseRules::MAXPENETRATIONPERCENT) {
+    //this->playerBot = playerBot;
+    //std::cout << "The number of decks is: " << shoe.getNumberOfDecks() << std::endl;
 }
 
 Table::~Table() {
@@ -17,22 +24,26 @@ Table::~Table() {
 }
 
 void Table::runGameTesting(int numberOfGames) {
+
+
+
     for(int i = 0; i < numberOfGames; i ++){
         startGame();
         endGame();
-        if(shoe.needToShuffle){
-            shoe.doShuffle();
-            //std::cout<< "Shuffling on game: " << i << std::endl;
-        }
-        if(i % (numberOfGames/20) == 0){
-            std::cout<< "There should be 20 of these" << std::endl;
-        }
+        shoe.tryShuffle();
+
+        //std::cout<< "******" << i << std::endl;
+        //if(numberOfGames > 100 && i % (numberOfGames/20) == 0){
+        //    std::cout<< "There should be 20 of these" << std::endl;
+        //}
     }
+    //std::cout<< "player bot?" << std::endl;
     playerBot.displayStats();
 }
 
 void Table::startGame() {
     dealHands();
+
     //displayTable();
     handleBlackjacks();
 
@@ -108,7 +119,7 @@ void Table::dealHands() {
 
     //playerBot
     int maxNumberOfBets = 2;
-    int minBet = 5;
+    int minBet = 10;
     int maxBet = 500;
 
     //Create a hand for all the players created
@@ -119,12 +130,12 @@ void Table::dealHands() {
 
     for (PlayerHand& hand : playerHands){
         hand.addCard(shoe.drawCard());
-        //hand.addCard(Card(Card::SPADES, Card::ACE));
+
     }
-    dealerHand.dealHiddenCard(shoe.drawCard());
+    dealerHand.addHiddenCard(shoe.drawCard());
     for (PlayerHand& hand : playerHands){
         hand.addCard(shoe.drawCard());
-        //hand.addCard(Card(Card::SPADES, Card::ACE));
+
     }
     dealerHand.addCard(shoe.drawCard());
 
@@ -147,7 +158,7 @@ void Table::handleBlackjacks(){
         return;
     }
 
-    float blackJackPayout = 1.5 + 1;    // 3:2 + 1
+    float blackJackPayout = HouseRules::BLACKJACKPAYOUTRATE + 1;    // 3:2 + 1
     std::vector<PlayerHand> unfinishedPlayerHands;
     for(PlayerHand hand : playerHands){
         if(hand.isBlackJack()){
@@ -216,5 +227,7 @@ void Table::displayTable() {
     }
     std::cout << "---------------------------" << std::endl;
 }
+
+
 
 

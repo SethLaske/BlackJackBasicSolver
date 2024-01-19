@@ -27,8 +27,8 @@ private:
 
     [[maybe_unused]] void printCurrentStrategy();
 
-    bool isValidDealerNumber(int dealerCard);
-    bool isCSVFile(const std::string& fileName);
+    bool isCSVFile(const std::string& fileName) const;
+    bool isValidDealerNumber(int dealerCard) const;
 };
 
 #endif // STRATEGYGUIDEHANDLER_H

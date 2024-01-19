@@ -10,7 +10,7 @@ bool DealerHand::isBlackJack() {
     return false;
 }
 
-void DealerHand::dealHiddenCard(const Card& newCard) {
+void DealerHand::addHiddenCard(const Card& newCard) {
     hiddenCard = newCard;
 }
 

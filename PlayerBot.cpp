@@ -27,7 +27,7 @@ PLAYERACTION PlayerBot::getPlayerAction(PlayerHand &playerHand, const DealerHand
 
     std::string playerCardsString;
 
-    if (playerHand.canBeSplit && money >= playerHand.getBetSize()) {
+    if (playerHand.canSplit() && money >= playerHand.getBetSize()) {
         if (playerHand.getSoftAceCount() > 0) {
             playerCardsString = "S11";
         } else {
@@ -53,14 +53,14 @@ PLAYERACTION PlayerBot::getPlayerAction(PlayerHand &playerHand, const DealerHand
     } else if (strategyRecommendation == "Stay"){
         return PLAYERACTION::STAY;
     } else if (strategyRecommendation == "Double"){
-        if(playerHand.canBeDoubled && money > playerHand.getBetSize()){
+        if(playerHand.canDouble() && money > playerHand.getBetSize()){
             money -= playerHand.getBetSize();
             numberOfDoubles ++;
             return PLAYERACTION::DOUBLE;
         }
         return PLAYERACTION::HIT;
     } else if (strategyRecommendation == "Split"){
-        if(playerHand.canBeSplit && money > playerHand.getBetSize()){
+        if(playerHand.canSplit() && money > playerHand.getBetSize()){
             money -= playerHand.getBetSize();
             numberOfSplits++;
             return PLAYERACTION::SPLIT;
@@ -77,7 +77,7 @@ PLAYERACTION PlayerBot::getPlayerAction(PlayerHand &playerHand, const DealerHand
 
 std::vector<int> PlayerBot::getPlayerBets(int maxNumberOfBets, int minBet, int maxBet) {
     //Too soon to deal with analyzing bet sizes
-    std::vector<int> bets = {minBet,minBet};
+    std::vector<int> bets = {minBet};
 
     for(int bet : bets){
         money -= (float) bet;

@@ -7,8 +7,8 @@
 
 PlayerHand::PlayerHand(int betSize) {
     this->betSize = betSize;
-    canBeSplit = false;
-    canBeDoubled = false;
+    /*splittable = false;
+    canBeDoubled = false;*/
     handFinished = false;
 }
 
@@ -31,17 +31,17 @@ void PlayerHand::addCard(const Card& addedCard) {
 
     //std::cout << "Card is being added to player hand too" << std::endl;
 
-    if(cards.size() == 2){
+    /*if(cards.size() == 2){
         canBeDoubled = true;
         if(cards[0].getCardValue() == cards[1].getCardValue()){
-            canBeSplit = true;
+            splittable = true;
         }else{
-            canBeSplit = false;
+            splittable = false;
         }
     } else{
         canBeDoubled = false;
-        canBeSplit = false;
-    }
+        splittable = false;
+    }*/
 
     //These can combine later, this is funnier (and also for testing purposes)
     if(valueCount > 21){
@@ -54,7 +54,7 @@ void PlayerHand::addCard(const Card& addedCard) {
 }
 
 void PlayerHand::doubleDown(const Card& addedCard) {
-    if(!canBeDoubled){
+    if(!canDouble()){
         return;
     }
     betSize *= 2;
@@ -63,7 +63,7 @@ void PlayerHand::doubleDown(const Card& addedCard) {
 }
 
 Card PlayerHand::splitCards() {
-    if(!canBeSplit){
+    if(!canSplit()){
         //std::cerr << "Can't be split" << std::endl;
         return {Card::SPADES, Card::ACE};
     }
@@ -77,6 +77,28 @@ Card PlayerHand::splitCards() {
     //std::cout << "SPLITTING OFF A " << cards[0].getCardValue() << " with a new size of" << cards.size() << std::endl;
 
     return removedCard;
+}
+
+bool PlayerHand::canDouble() const{
+    if(cards.size() != 2){
+        return false;
+    }
+    //May need addition checks for doubling split aces, but for now ignoring
+    return true;
+}
+
+bool PlayerHand::canSplit() const{
+    if(cards.size() != 2){
+        return false;
+    }
+
+    //This might also require some extra logic in checking the total number of times a hand can be split
+        //Assumption is that splitting more than once will happen so infrequently that it won't affect the stats
+    if(cards[0].getCardValue() == cards[1].getCardValue()){
+        return true;
+    }
+
+    return false;
 }
 
 bool PlayerHand::isHandFinished() const {

@@ -19,8 +19,9 @@ StrategyGuideHandler::~StrategyGuideHandler() {
 //Load a guide into the useable strategy
 void StrategyGuideHandler::loadGuide(const  string& csvFileName) {
 
-    if(!isCSVFile(csvFileName))    {return;}
-
+    if(!isCSVFile(csvFileName)){
+        return;
+    }
 
     ifstream file(csvFileName);
     if (!file.is_open()) {
@@ -28,18 +29,16 @@ void StrategyGuideHandler::loadGuide(const  string& csvFileName) {
         return;
     }
 
-    // Set the total number of entries per line
     const int ENTRIES_PER_LINE = POSSIBLE_DEALER_CARDS + 1;
 
     // Read and populate the  unordered_map
     string line;
     while (getline(file, line)) {
-        // Tokenize the line based on commas
+
         istringstream ss(line);
         string token;
         vector<string> values;
 
-        // Extract values from the line
         while (getline(ss,token,',')) {
             values.push_back(token);
         }
@@ -62,15 +61,14 @@ void StrategyGuideHandler::loadGuide(const  string& csvFileName) {
 
         strategy[key] = strategyArray;
     }
-
     file.close();
-
-    //PrintCurrentStrategy();
 }
 
 void StrategyGuideHandler::saveGuide(const string& csvFileName) {
 
-    if(!isCSVFile(csvFileName))    {return;}
+    if(!isCSVFile(csvFileName)){
+        return;
+    }
 
     ofstream file(csvFileName);
     if (!file.is_open()) {
@@ -205,7 +203,7 @@ void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, 
     }
 }
 
-bool StrategyGuideHandler::isCSVFile(const std::string &fileName) {
+bool StrategyGuideHandler::isCSVFile(const std::string &fileName) const {
     if (fileName.size() < 4 || fileName.substr(fileName.size() - 4) != ".csv") {
          cerr << "Error: Invalid file format. Please provide a .csv file." <<  endl;
         return false;
@@ -213,7 +211,7 @@ bool StrategyGuideHandler::isCSVFile(const std::string &fileName) {
     return true;
 }
 
-bool StrategyGuideHandler::isValidDealerNumber(int dealerCard) {
+bool StrategyGuideHandler::isValidDealerNumber(int dealerCard) const {
     if(dealerCard < 0 || dealerCard > 9){
          cerr << "Invalid Dealer card. Must be between 2 and 11 (Ace)." <<   endl;
         return false;
