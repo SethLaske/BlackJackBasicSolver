@@ -3,7 +3,7 @@
 const std::string Card::SUIT_STRINGS[] = { "Spades", "Hearts", "Diamonds",  "Clubs" };
 const std::string Card::VALUE_STRINGS[] = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King" };
 
-Card::Card(Suit suit, Value value) : suit(suit), value(value) {
+Card::Card(Value suit, Value value) : suit(suit), value(value) {
 
 }
 

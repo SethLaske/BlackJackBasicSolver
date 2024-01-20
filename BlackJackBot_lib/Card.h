@@ -28,7 +28,7 @@ public:
         KING = 13
     };
 
-    Card(Suit suit, Value value);
+    Card(Value suit, Value value);
     ~Card();
 
     //Returns the suit and value of the card as a string
