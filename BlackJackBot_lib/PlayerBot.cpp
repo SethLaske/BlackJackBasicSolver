@@ -53,14 +53,14 @@ PLAYERACTION PlayerBot::getPlayerAction(PlayerHand &playerHand, const DealerHand
     } else if (strategyRecommendation == "Stay"){
         return PLAYERACTION::STAY;
     } else if (strategyRecommendation == "Double"){
-        if(playerHand.canDouble() && money > playerHand.getBetSize()){
+        if(playerHand.canDouble() && (HouseRules::IGNOREDEBT || money > playerHand.getBetSize())){
             money -= playerHand.getBetSize();
             numberOfDoubles ++;
             return PLAYERACTION::DOUBLE;
         }
         return PLAYERACTION::HIT;
     } else if (strategyRecommendation == "Split"){
-        if(playerHand.canSplit() && money > playerHand.getBetSize()){
+        if(playerHand.canSplit() && (HouseRules::IGNOREDEBT || money > playerHand.getBetSize())){
             money -= playerHand.getBetSize();
             numberOfSplits++;
             return PLAYERACTION::SPLIT;

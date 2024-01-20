@@ -12,7 +12,7 @@ public:
     inline static const int NUMBEROFDECKSINSHOE = 4;
     inline static const float MINPENETRATIONPERCENT = .4f;
     inline static const float MAXPENETRATIONPERCENT = .6f;
-
+    inline static const bool IGNOREDEBT = true;
 };
 
 

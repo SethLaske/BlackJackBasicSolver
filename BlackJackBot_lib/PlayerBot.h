@@ -9,6 +9,7 @@
 #include "StrategyGuideHandler.h"
 #include "PlayerHand.h"
 #include "DealerHand.h"
+#include "HouseRules.h"
 
 //I am giving the player more control of the player than a casino might typically allow to avoid needing to go back and forth.
 //For example, the player will be responsible for ensuring they have money, and doubling only when acceptable

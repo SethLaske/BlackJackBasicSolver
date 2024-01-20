@@ -55,53 +55,53 @@ build CMakeFiles/BasicStrategySolver.dir/main.cpp.obj: CXX_COMPILER__BasicStrate
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
   OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
 
-build CMakeFiles/BasicStrategySolver.dir/StrategyGuideHandler.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/StrategyGuideHandler.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\StrategyGuideHandler.cpp.obj.d
+build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/StrategyGuideHandler.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/StrategyGuideHandler.cpp || cmake_object_order_depends_target_BasicStrategySolver
+  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\StrategyGuideHandler.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
+  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
 
-build CMakeFiles/BasicStrategySolver.dir/Card.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/Card.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\Card.cpp.obj.d
+build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Card.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/Card.cpp || cmake_object_order_depends_target_BasicStrategySolver
+  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\Card.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
+  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
 
-build CMakeFiles/BasicStrategySolver.dir/Shoe.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/Shoe.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\Shoe.cpp.obj.d
+build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Shoe.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/Shoe.cpp || cmake_object_order_depends_target_BasicStrategySolver
+  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\Shoe.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
+  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
 
-build CMakeFiles/BasicStrategySolver.dir/Hand.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/Hand.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\Hand.cpp.obj.d
+build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Hand.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/Hand.cpp || cmake_object_order_depends_target_BasicStrategySolver
+  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\Hand.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
+  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
 
-build CMakeFiles/BasicStrategySolver.dir/DealerHand.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/DealerHand.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\DealerHand.cpp.obj.d
+build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/DealerHand.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/DealerHand.cpp || cmake_object_order_depends_target_BasicStrategySolver
+  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\DealerHand.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
+  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
 
-build CMakeFiles/BasicStrategySolver.dir/PlayerHand.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/PlayerHand.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\PlayerHand.cpp.obj.d
+build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/PlayerHand.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/PlayerHand.cpp || cmake_object_order_depends_target_BasicStrategySolver
+  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\PlayerHand.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
+  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
 
-build CMakeFiles/BasicStrategySolver.dir/Table.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/Table.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\Table.cpp.obj.d
+build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Table.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/Table.cpp || cmake_object_order_depends_target_BasicStrategySolver
+  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\Table.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
+  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
 
-build CMakeFiles/BasicStrategySolver.dir/PlayerBot.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/PlayerBot.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\PlayerBot.cpp.obj.d
+build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/PlayerBot.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/PlayerBot.cpp || cmake_object_order_depends_target_BasicStrategySolver
+  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\PlayerBot.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
+  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
 
 
 # =============================================================================
@@ -111,7 +111,7 @@ build CMakeFiles/BasicStrategySolver.dir/PlayerBot.cpp.obj: CXX_COMPILER__BasicS
 #############################################
 # Link the executable BasicStrategySolver.exe
 
-build BasicStrategySolver.exe: CXX_EXECUTABLE_LINKER__BasicStrategySolver_Debug CMakeFiles/BasicStrategySolver.dir/main.cpp.obj CMakeFiles/BasicStrategySolver.dir/StrategyGuideHandler.cpp.obj CMakeFiles/BasicStrategySolver.dir/Card.cpp.obj CMakeFiles/BasicStrategySolver.dir/Shoe.cpp.obj CMakeFiles/BasicStrategySolver.dir/Hand.cpp.obj CMakeFiles/BasicStrategySolver.dir/DealerHand.cpp.obj CMakeFiles/BasicStrategySolver.dir/PlayerHand.cpp.obj CMakeFiles/BasicStrategySolver.dir/Table.cpp.obj CMakeFiles/BasicStrategySolver.dir/PlayerBot.cpp.obj
+build BasicStrategySolver.exe: CXX_EXECUTABLE_LINKER__BasicStrategySolver_Debug CMakeFiles/BasicStrategySolver.dir/main.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/StrategyGuideHandler.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Card.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Shoe.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Hand.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/DealerHand.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/PlayerHand.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Table.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/PlayerBot.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir

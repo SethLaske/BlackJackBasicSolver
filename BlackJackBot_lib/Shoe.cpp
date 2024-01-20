@@ -42,7 +42,7 @@ Card Shoe::drawCard() {
         discardedCards.push_back(drawnCard);
 
         if(discardedCards.size() > currentCutCardIndex) {
-            std::cout<< "WARNING CARDS LOW> Cards available: " << availableCards.size() << std::endl;
+            //std::cout<< "WARNING CARDS LOW> Cards available: " << availableCards.size() << std::endl;
             //std::cout << "Dealing the: " << drawnCard.toString() << std::endl;
             needToShuffle = true;
         }
@@ -108,5 +108,5 @@ void Shoe::placeCutCard() {
     currentCutCardIndex = (int)(randomFloat * (float)(numberOfDecks * 52));
 
     //std::cout << minPenetration << " - " << maxPenetration << " -> " << random << std::endl;
-    std::cout << "The deck will need to be shuffled after: " << currentCutCardIndex << " cards." << std::endl;
+    //std::cout << "The deck will need to be shuffled after: " << currentCutCardIndex << " cards." << std::endl;
 }

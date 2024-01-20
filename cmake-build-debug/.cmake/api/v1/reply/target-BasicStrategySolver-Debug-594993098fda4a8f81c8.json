@@ -135,94 +135,94 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "StrategyGuideHandler.cpp",
+			"path" : "BlackJackBot_lib/StrategyGuideHandler.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "StrategyGuideHandler.h",
+			"path" : "BlackJackBot_lib/StrategyGuideHandler.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Card.cpp",
+			"path" : "BlackJackBot_lib/Card.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Card.h",
+			"path" : "BlackJackBot_lib/Card.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Shoe.cpp",
+			"path" : "BlackJackBot_lib/Shoe.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Shoe.h",
+			"path" : "BlackJackBot_lib/Shoe.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Hand.cpp",
+			"path" : "BlackJackBot_lib/Hand.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Hand.h",
+			"path" : "BlackJackBot_lib/Hand.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "DealerHand.cpp",
+			"path" : "BlackJackBot_lib/DealerHand.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "DealerHand.h",
+			"path" : "BlackJackBot_lib/DealerHand.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "PlayerHand.cpp",
+			"path" : "BlackJackBot_lib/PlayerHand.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "PlayerHand.h",
+			"path" : "BlackJackBot_lib/PlayerHand.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Table.cpp",
+			"path" : "BlackJackBot_lib/Table.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Table.h",
+			"path" : "BlackJackBot_lib/Table.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "PlayerBot.cpp",
+			"path" : "BlackJackBot_lib/PlayerBot.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "PlayerBot.h",
+			"path" : "BlackJackBot_lib/PlayerBot.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "HouseRules.h",
+			"path" : "BlackJackBot_lib/HouseRules.h",
 			"sourceGroupIndex" : 1
 		}
 	],

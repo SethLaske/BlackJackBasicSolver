@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
-#include "StrategyGuideHandler.h"
-#include "Shoe.h"
-#include "Card.h"
-#include "PlayerHand.h"
-#include "DealerHand.h"
-#include "PlayerBot.h"
-#include "Table.h"
-#include "HouseRules.h"
+#include "BlackJackBot_lib/StrategyGuideHandler.h"
+#include "BlackJackBot_lib/Shoe.h"
+#include "BlackJackBot_lib/Card.h"
+#include "BlackJackBot_lib/PlayerHand.h"
+#include "BlackJackBot_lib/DealerHand.h"
+#include "BlackJackBot_lib/PlayerBot.h"
+#include "BlackJackBot_lib/Table.h"
+#include "BlackJackBot_lib/HouseRules.h"
 
 //Test loading, editing, and saving a .csv into the strategyguidehandler
 void testStrategyGuideHandler();
@@ -100,6 +100,6 @@ void testTable(){
 
     Table table(playerBot);
 
-    table.runGameTesting(400);
+    table.runGameTesting(4000);
     //table.startGame();
 }
