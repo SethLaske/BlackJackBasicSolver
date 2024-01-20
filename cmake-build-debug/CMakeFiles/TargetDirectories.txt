@@ -1,3 +1,6 @@
 C:/Users/small/CLionProjects/BasicStrategySolver/cmake-build-debug/CMakeFiles/BasicStrategySolver.dir
 C:/Users/small/CLionProjects/BasicStrategySolver/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/small/CLionProjects/BasicStrategySolver/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/small/CLionProjects/BasicStrategySolver/cmake-build-debug/BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir
+C:/Users/small/CLionProjects/BasicStrategySolver/cmake-build-debug/BlackJackBot_lib/CMakeFiles/edit_cache.dir
+C:/Users/small/CLionProjects/BasicStrategySolver/cmake-build-debug/BlackJackBot_lib/CMakeFiles/rebuild_cache.dir

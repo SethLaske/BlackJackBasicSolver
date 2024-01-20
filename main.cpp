@@ -100,6 +100,6 @@ void testTable(){
 
     Table table(playerBot);
 
-    table.runGameTesting(4000);
+    table.runGameTesting(10000);
     //table.startGame();
 }

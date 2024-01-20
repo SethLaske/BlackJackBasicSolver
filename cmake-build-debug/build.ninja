@@ -47,61 +47,14 @@ cmake_ninja_workdir = C$:/Users/small/CLionProjects/BasicStrategySolver/cmake-bu
 #############################################
 # Order-only phony target for BasicStrategySolver
 
-build cmake_object_order_depends_target_BasicStrategySolver: phony || CMakeFiles/BasicStrategySolver.dir
+build cmake_object_order_depends_target_BasicStrategySolver: phony || cmake_object_order_depends_target_BlackJackBot_lib
 
 build CMakeFiles/BasicStrategySolver.dir/main.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/main.cpp || cmake_object_order_depends_target_BasicStrategySolver
   DEP_FILE = CMakeFiles\BasicStrategySolver.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
   OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir
-
-build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/StrategyGuideHandler.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/StrategyGuideHandler.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\StrategyGuideHandler.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
-
-build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Card.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/Card.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\Card.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
-
-build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Shoe.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/Shoe.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\Shoe.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
-
-build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Hand.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/Hand.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\Hand.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
-
-build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/DealerHand.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/DealerHand.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\DealerHand.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
-
-build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/PlayerHand.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/PlayerHand.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\PlayerHand.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
-
-build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Table.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/Table.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\Table.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
-
-build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/PlayerBot.cpp.obj: CXX_COMPILER__BasicStrategySolver_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/PlayerBot.cpp || cmake_object_order_depends_target_BasicStrategySolver
-  DEP_FILE = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib\PlayerBot.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
-  OBJECT_FILE_DIR = CMakeFiles\BasicStrategySolver.dir\BlackJackBot_lib
 
 
 # =============================================================================
@@ -111,9 +64,9 @@ build CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/PlayerBot.cpp.obj: CXX
 #############################################
 # Link the executable BasicStrategySolver.exe
 
-build BasicStrategySolver.exe: CXX_EXECUTABLE_LINKER__BasicStrategySolver_Debug CMakeFiles/BasicStrategySolver.dir/main.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/StrategyGuideHandler.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Card.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Shoe.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Hand.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/DealerHand.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/PlayerHand.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/Table.cpp.obj CMakeFiles/BasicStrategySolver.dir/BlackJackBot_lib/PlayerBot.cpp.obj
+build BasicStrategySolver.exe: CXX_EXECUTABLE_LINKER__BasicStrategySolver_Debug CMakeFiles/BasicStrategySolver.dir/main.cpp.obj | BlackJackBot_lib/libBlackJackBot_lib.a || BlackJackBot_lib/libBlackJackBot_lib.a
   FLAGS = -g
-  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = BlackJackBot_lib/libBlackJackBot_lib.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\BasicStrategySolver.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -145,9 +98,122 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/small/CLionProjects/BasicStrategySolver/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target BlackJackBot_lib
+
+
+#############################################
+# Order-only phony target for BlackJackBot_lib
+
+build cmake_object_order_depends_target_BlackJackBot_lib: phony || BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir
+
+build BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Card.cpp.obj: CXX_COMPILER__BlackJackBot_lib_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/Card.cpp || cmake_object_order_depends_target_BlackJackBot_lib
+  DEP_FILE = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir\Card.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib
+  OBJECT_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+  OBJECT_FILE_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+
+build BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Shoe.cpp.obj: CXX_COMPILER__BlackJackBot_lib_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/Shoe.cpp || cmake_object_order_depends_target_BlackJackBot_lib
+  DEP_FILE = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir\Shoe.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib
+  OBJECT_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+  OBJECT_FILE_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+
+build BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Table.cpp.obj: CXX_COMPILER__BlackJackBot_lib_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/Table.cpp || cmake_object_order_depends_target_BlackJackBot_lib
+  DEP_FILE = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir\Table.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib
+  OBJECT_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+  OBJECT_FILE_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+
+build BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Hand.cpp.obj: CXX_COMPILER__BlackJackBot_lib_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/Hand.cpp || cmake_object_order_depends_target_BlackJackBot_lib
+  DEP_FILE = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir\Hand.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib
+  OBJECT_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+  OBJECT_FILE_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+
+build BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/DealerHand.cpp.obj: CXX_COMPILER__BlackJackBot_lib_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/DealerHand.cpp || cmake_object_order_depends_target_BlackJackBot_lib
+  DEP_FILE = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir\DealerHand.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib
+  OBJECT_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+  OBJECT_FILE_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+
+build BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/PlayerHand.cpp.obj: CXX_COMPILER__BlackJackBot_lib_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/PlayerHand.cpp || cmake_object_order_depends_target_BlackJackBot_lib
+  DEP_FILE = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir\PlayerHand.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib
+  OBJECT_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+  OBJECT_FILE_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+
+build BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/PlayerBot.cpp.obj: CXX_COMPILER__BlackJackBot_lib_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/PlayerBot.cpp || cmake_object_order_depends_target_BlackJackBot_lib
+  DEP_FILE = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir\PlayerBot.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib
+  OBJECT_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+  OBJECT_FILE_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+
+build BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/StrategyGuideHandler.cpp.obj: CXX_COMPILER__BlackJackBot_lib_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/StrategyGuideHandler.cpp || cmake_object_order_depends_target_BlackJackBot_lib
+  DEP_FILE = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir\StrategyGuideHandler.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib
+  OBJECT_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+  OBJECT_FILE_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target BlackJackBot_lib
+
+
+#############################################
+# Link the static library BlackJackBot_lib\libBlackJackBot_lib.a
+
+build BlackJackBot_lib/libBlackJackBot_lib.a: CXX_STATIC_LIBRARY_LINKER__BlackJackBot_lib_Debug BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Card.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Shoe.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Table.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Hand.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/DealerHand.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/PlayerHand.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/PlayerBot.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/StrategyGuideHandler.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = BlackJackBot_lib\libBlackJackBot_lib.a
+  TARGET_PDB = BlackJackBot_lib.a.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build BlackJackBot_lib/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\small\CLionProjects\BasicStrategySolver\cmake-build-debug\BlackJackBot_lib && "C:\Program Files\JetBrains\CLion 2023.2.1\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build BlackJackBot_lib/edit_cache: phony BlackJackBot_lib/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build BlackJackBot_lib/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\small\CLionProjects\BasicStrategySolver\cmake-build-debug\BlackJackBot_lib && "C:\Program Files\JetBrains\CLion 2023.2.1\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\small\CLionProjects\BasicStrategySolver -BC:\Users\small\CLionProjects\BasicStrategySolver\cmake-build-debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build BlackJackBot_lib/rebuild_cache: phony BlackJackBot_lib/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
 
 build BasicStrategySolver: phony BasicStrategySolver.exe
+
+build BlackJackBot_lib: phony BlackJackBot_lib/libBlackJackBot_lib.a
+
+build libBlackJackBot_lib.a: phony BlackJackBot_lib/libBlackJackBot_lib.a
 
 # =============================================================================
 # Folder targets.
@@ -157,7 +223,14 @@ build BasicStrategySolver: phony BasicStrategySolver.exe
 #############################################
 # Folder: C:/Users/small/CLionProjects/BasicStrategySolver/cmake-build-debug
 
-build all: phony BasicStrategySolver.exe
+build all: phony BasicStrategySolver.exe BlackJackBot_lib/all
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/small/CLionProjects/BasicStrategySolver/cmake-build-debug/BlackJackBot_lib
+
+build BlackJackBot_lib/all: phony BlackJackBot_lib/libBlackJackBot_lib.a
 
 # =============================================================================
 # Built-in targets
@@ -166,14 +239,14 @@ build all: phony BasicStrategySolver.exe
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake C$:/Users/small/CLionProjects/BasicStrategySolver/CMakeLists.txt CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeRCCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/CMakeLists.txt C$:/Users/small/CLionProjects/BasicStrategySolver/CMakeLists.txt CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeRCCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake C$:/Users/small/CLionProjects/BasicStrategySolver/CMakeLists.txt CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeRCCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
+build C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.1/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/CMakeLists.txt C$:/Users/small/CLionProjects/BasicStrategySolver/CMakeLists.txt CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeRCCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
 
 
 #############################################
