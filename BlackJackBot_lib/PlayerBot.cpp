@@ -4,18 +4,12 @@
 
 #include "PlayerBot.h"
 
-PlayerBot::PlayerBot(float startingMoney, const StrategyGuideHandler& strategyGuideHandler) {
+PlayerBot::PlayerBot(float startingMoney, const StrategyGuideHandler& strategyGuideHandler) : strategyGuideHandler(strategyGuideHandler){
     initialMoney = startingMoney;
-    money = initialMoney;
-    this->strategyGuideHandler = strategyGuideHandler;
 
-    numberOfHandsPlayed = 0;
-    numberOfGamesPlayed = 0;
+    //this->strategyGuideHandler = strategyGuideHandler;
 
-    numberOfDoubles = 0;
-    numberOfSplits = 0;
-
-    numberOfTimesPaid = 0;
+    resetStats();
 }
 
 PlayerBot::~PlayerBot() {
@@ -23,11 +17,51 @@ PlayerBot::~PlayerBot() {
 }
 
 PLAYERACTION PlayerBot::getPlayerAction(PlayerHand &playerHand, const DealerHand &dealerHand) {
+    std::string playerCardsString = getPlayerCardDecoding(playerHand);
 
+    std::basic_string<char> strategyRecommendation = strategyGuideHandler.getEntry(playerCardsString , dealerHand.getHandValue());
 
+    return getUseableAction(playerHand, strategyRecommendation);
+}
+
+PLAYERACTION PlayerBot::getUseableAction(PlayerHand &playerHand, const std::basic_string<char> &strategyRecommendation) {
+    if(strategyRecommendation == "Hit"){
+        return HIT;
+    }
+
+    if (strategyRecommendation == "Stay"){
+        return STAY;
+    }
+
+    if (strategyRecommendation == "Double"){
+        if(playerHand.canDouble() && (HouseRules::IGNOREDEBT || money > playerHand.getBetSize())){
+            money -= playerHand.getBetSize();
+            numberOfDoubles++;
+            return DOUBLE;
+        }
+        return HIT;
+    }
+
+    if (strategyRecommendation == "Split"){
+        if(playerHand.canSplit() && (HouseRules::IGNOREDEBT || money > playerHand.getBetSize())){
+            money -= playerHand.getBetSize();
+            numberOfSplits++;
+            return SPLIT;
+        }
+
+        return STAY;
+    }
+
+    std::cerr << strategyRecommendation << "Couldn't figure out the proper move" << std::endl;
+    playerHand.displayHand();
+
+    return UNKNOWN;
+}
+
+std::string PlayerBot::getPlayerCardDecoding(const PlayerHand &playerHand) const {
     std::string playerCardsString;
 
-    if (playerHand.canSplit() && money >= playerHand.getBetSize()) {
+    if (playerHand.canSplit() && (HouseRules::IGNOREDEBT || money > playerHand.getBetSize())) {
         if (playerHand.getSoftAceCount() > 0) {
             playerCardsString = "S11";
         } else {
@@ -41,38 +75,7 @@ PLAYERACTION PlayerBot::getPlayerAction(PlayerHand &playerHand, const DealerHand
         // Assuming getHandValue() returns an integer
         playerCardsString = std::to_string(playerHand.getHandValue());
     }
-
-    //playerCardsString = "Fuck you";
-
-    std::basic_string<char> strategyRecommendation = strategyGuideHandler.getEntry(playerCardsString , dealerHand.getHandValue());
-
-    //std::cout << "I have a: " << playerCardsString << " against the dealers " << dealerHand.getHandValue() << " So I will " << strategyRecommendation << std::endl;
-
-    if(strategyRecommendation == "Hit"){
-        return PLAYERACTION::HIT;
-    } else if (strategyRecommendation == "Stay"){
-        return PLAYERACTION::STAY;
-    } else if (strategyRecommendation == "Double"){
-        if(playerHand.canDouble() && (HouseRules::IGNOREDEBT || money > playerHand.getBetSize())){
-            money -= playerHand.getBetSize();
-            numberOfDoubles ++;
-            return PLAYERACTION::DOUBLE;
-        }
-        return PLAYERACTION::HIT;
-    } else if (strategyRecommendation == "Split"){
-        if(playerHand.canSplit() && (HouseRules::IGNOREDEBT || money > playerHand.getBetSize())){
-            money -= playerHand.getBetSize();
-            numberOfSplits++;
-            return PLAYERACTION::SPLIT;
-        }
-
-        return PLAYERACTION::STAY;
-    }
-
-    std::cerr << strategyRecommendation << "Couldn't figure out the proper move" << std::endl;
-    playerHand.displayHand();
-
-    return UNKNOWN;
+    return playerCardsString;
 }
 
 std::vector<int> PlayerBot::getPlayerBets(int maxNumberOfBets, int minBet, int maxBet) {
@@ -112,6 +115,17 @@ void PlayerBot::displayStats() {
     std::cout << "Number of loses " << (numberOfHandsPlayed - numberOfTimesPaid) << std::endl;
     //std::cout << "House edge " << (numberOfHandsPlayed - numberOfTimesPaid) << std::endl;
     std::cout << "********************************" << std::endl;
+}
+
+void PlayerBot::resetStats() {
+    money = initialMoney;
+    numberOfHandsPlayed = 0;
+    numberOfGamesPlayed = 0;
+
+    numberOfDoubles = 0;
+    numberOfSplits = 0;
+
+    numberOfTimesPaid = 0;
 }
 
 float PlayerBot::getMoney() const {

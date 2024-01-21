@@ -5,8 +5,8 @@
 #include "PlayerBot.h"
 
 TEST(PlayerBotSuite, Payments){
-    StrategyGuideHandler strategy;
-    strategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\TestFile.csv)");
+    StrategyGuideHandler strategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\)");
+    strategy.loadGuide("TestFile.csv");
 
     PlayerBot player(500, strategy);
 
@@ -15,9 +15,24 @@ TEST(PlayerBotSuite, Payments){
     EXPECT_EQ(player.getMoney(), 550);
 }
 
+/*TEST(PlayerBotSuite, CheckStringCreation){
+    StrategyGuideHandler strategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\)");
+    strategy.loadGuide("TestFile.csv");
+
+    PlayerBot player(500, strategy);
+
+    PlayerHand playerHand(10);
+
+    playerHand.addCard({Card::SPADES, Card::SEVEN});
+    playerHand.addCard({Card::SPADES, Card::NINE});
+
+
+    EXPECT_EQ(player.getPlayerCardDecoding(playerHand), "16");
+}*/
+
 TEST(PlayerBotSuite, CheckQueriesHard){
-    StrategyGuideHandler strategy;
-    strategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\TestFile.csv)");
+    StrategyGuideHandler strategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\)");
+    strategy.loadGuide("TestFile.csv");
 
     PlayerBot player(500, strategy);
 

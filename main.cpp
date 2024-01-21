@@ -8,6 +8,7 @@
 #include "BlackJackBot_lib/PlayerBot.h"
 #include "BlackJackBot_lib/Table.h"
 #include "BlackJackBot_lib/HouseRules.h"
+#include "StrategyGuideGenerator.h"
 
 //Test loading, editing, and saving a .csv into the strategyguidehandler
 void testStrategyGuideHandler();
@@ -17,6 +18,7 @@ void testShoe();
 void testPlayerBot();
 //Test running a table
 void testTable();
+void testGuideGeneration();
 
 using namespace std;
 
@@ -26,15 +28,16 @@ int main() {
     //testShoe();
     //testPlayerBot();
 
-    testTable();
+    //testTable();
+    testGuideGeneration();
 
     return 0;
 }
 
 void testStrategyGuideHandler() {
-    StrategyGuideHandler newStrategy;
+    StrategyGuideHandler newStrategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\)");
 
-    newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
+    newStrategy.loadGuide("Book1.csv");
 
     cout << "The entry is: " << newStrategy.getEntry("PH", 11) << endl;
 
@@ -71,7 +74,7 @@ void testShoe(){
 }
 
 void testPlayerBot(){
-    StrategyGuideHandler newStrategy;
+    StrategyGuideHandler newStrategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
 
     newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
 
@@ -93,8 +96,8 @@ void testPlayerBot(){
 }
 
 void testTable(){
-    StrategyGuideHandler newStrategy;
-    newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\ActualStrategy.csv)");
+    StrategyGuideHandler newStrategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\)");
+    newStrategy.loadGuide("ActualStrategy.csv");
     float bankRoll = 5000;
     PlayerBot playerBot(bankRoll, newStrategy);
 
@@ -102,4 +105,9 @@ void testTable(){
 
     table.runGameTesting(10000);
     //table.startGame();
+}
+
+void testGuideGeneration(){
+    StrategyGuideGenerator strategyGuideGenerator;
+    strategyGuideGenerator.createRandomGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide.csv)");
 }

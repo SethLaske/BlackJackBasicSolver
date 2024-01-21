@@ -5,7 +5,8 @@
 using namespace std;
 
 // Constructor
-StrategyGuideHandler::StrategyGuideHandler() {
+StrategyGuideHandler::StrategyGuideHandler(const std::string& folderPath) {
+    this->folderPath = folderPath;
     strategy = unordered_map< string, array<string, POSSIBLE_DEALER_CARDS>>();
 
     cout << "Created a strategy guide" << endl ;
@@ -23,7 +24,7 @@ void StrategyGuideHandler::loadGuide(const  string& csvFileName) {
         return;
     }
 
-    ifstream file(csvFileName);
+    ifstream file(folderPath + csvFileName);
     if (!file.is_open()) {
         cerr << "Error: Unable to open file '" << csvFileName << "'" << endl;
         return;
@@ -70,7 +71,7 @@ void StrategyGuideHandler::saveGuide(const string& csvFileName) {
         return;
     }
 
-    ofstream file(csvFileName);
+    ofstream file(folderPath + csvFileName);
     if (!file.is_open()) {
          cerr << "Error: Unable to open/create file '" << csvFileName << "'" <<  endl;
         return;
@@ -138,7 +139,7 @@ void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, 
 
     if(!isCSVFile(csvFileName))    {return;}
 
-    ifstream file(csvFileName);
+    ifstream file(folderPath + csvFileName);
     if (!file.is_open()) {
         cerr << "Error: Unable to open file '" << csvFileName << "'" <<  endl;
         return;
@@ -203,7 +204,7 @@ void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, 
     }
 }
 
-bool StrategyGuideHandler::isCSVFile(const std::string &fileName) const {
+bool StrategyGuideHandler::isCSVFile(const std::string &fileName) {
     if (fileName.size() < 4 || fileName.substr(fileName.size() - 4) != ".csv") {
          cerr << "Error: Invalid file format. Please provide a .csv file." <<  endl;
         return false;

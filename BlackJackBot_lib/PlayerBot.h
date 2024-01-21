@@ -36,6 +36,7 @@ public:
 
 
     void displayStats();
+    void resetStats();
 
 private:
     float initialMoney;
@@ -50,6 +51,10 @@ private:
     int numberOfTimesPaid;
 
     StrategyGuideHandler strategyGuideHandler;
+
+    std::string getPlayerCardDecoding(const PlayerHand &playerHand) const;
+
+    PLAYERACTION getUseableAction(PlayerHand &playerHand, const std::basic_string<char> &strategyRecommendation);
 };
 
 

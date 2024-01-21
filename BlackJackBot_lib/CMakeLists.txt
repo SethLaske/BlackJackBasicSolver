@@ -10,6 +10,8 @@ set(HEADER_FILES
         PlayerHand.h
         PlayerBot.h
         StrategyGuideHandler.h
+        StrategyGuideGenerator.cpp
+        StrategyGuideGenerator.h
 )
 
 set(SOURCE_FILES
@@ -21,6 +23,8 @@ set(SOURCE_FILES
         PlayerHand.cpp
         PlayerBot.cpp
         StrategyGuideHandler.cpp
+        StrategyGuideGenerator.cpp
+        StrategyGuideGenerator.h
 )
 
 add_library(BlackJackBot_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})
