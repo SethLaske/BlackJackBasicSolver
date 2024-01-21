@@ -69,10 +69,10 @@ PLAYERACTION PlayerBot::getPlayerAction(PlayerHand &playerHand, const DealerHand
         return PLAYERACTION::STAY;
     }
 
-    std::cerr << strategyRecommendation << "Couldn't figure out the proper move so Im hitting like a man" << std::endl;
+    std::cerr << strategyRecommendation << "Couldn't figure out the proper move" << std::endl;
     playerHand.displayHand();
 
-    return HIT;
+    return UNKNOWN;
 }
 
 std::vector<int> PlayerBot::getPlayerBets(int maxNumberOfBets, int minBet, int maxBet) {
@@ -112,4 +112,8 @@ void PlayerBot::displayStats() {
     std::cout << "Number of loses " << (numberOfHandsPlayed - numberOfTimesPaid) << std::endl;
     //std::cout << "House edge " << (numberOfHandsPlayed - numberOfTimesPaid) << std::endl;
     std::cout << "********************************" << std::endl;
+}
+
+float PlayerBot::getMoney() const {
+    return money;
 }

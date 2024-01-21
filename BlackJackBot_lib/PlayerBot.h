@@ -18,7 +18,8 @@ enum PLAYERACTION{
     HIT,
     STAY,
     DOUBLE,
-    SPLIT
+    SPLIT,
+    UNKNOWN
 };
 
 class PlayerBot {
@@ -30,13 +31,15 @@ public:
     std::vector<int> getPlayerBets(int maxNumberOfBets, int minBet, int maxBet);
     PLAYERACTION getPlayerAction(PlayerHand& playerHand, const DealerHand& dealerHand);
 
+    float getMoney() const;
     void getPaid(float addedMoney);
-    float money;
+
 
     void displayStats();
 
 private:
     float initialMoney;
+    float money;
 
     int numberOfGamesPlayed;
     int numberOfHandsPlayed;

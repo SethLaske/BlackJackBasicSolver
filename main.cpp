@@ -32,7 +32,7 @@ int main() {
 }
 
 void testStrategyGuideHandler() {
-    StrategyGuideHandlerTests newStrategy;
+    StrategyGuideHandler newStrategy;
 
     newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
 
@@ -71,7 +71,7 @@ void testShoe(){
 }
 
 void testPlayerBot(){
-    StrategyGuideHandlerTests newStrategy;
+    StrategyGuideHandler newStrategy;
 
     newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
 
@@ -93,7 +93,7 @@ void testPlayerBot(){
 }
 
 void testTable(){
-    StrategyGuideHandlerTests newStrategy;
+    StrategyGuideHandler newStrategy;
     newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\ActualStrategy.csv)");
     float bankRoll = 5000;
     PlayerBot playerBot(bankRoll, newStrategy);

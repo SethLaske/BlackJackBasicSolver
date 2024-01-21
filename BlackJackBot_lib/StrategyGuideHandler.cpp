@@ -45,11 +45,11 @@ void StrategyGuideHandler::loadGuide(const  string& csvFileName) {
 
         // Check for entries per line not correct
         if (values.size() < ENTRIES_PER_LINE) {
-            cerr << "Error: Entries per line not met. Adding 'NULL' for missing entries." << endl;
-            values.resize(ENTRIES_PER_LINE, "BJ");
+            cerr << "Error: Entries per line not met. Adding 'Overflow' for missing entries." << endl;
+            values.resize(ENTRIES_PER_LINE, "Overflow");
         }else if (values.size() > ENTRIES_PER_LINE) {
             cerr << "Error: Entries per line exceeded. Cutting off additional entries." << endl;
-            values.resize(ENTRIES_PER_LINE, "BJ");
+            values.resize(ENTRIES_PER_LINE, "Overflow");
         }
 
         string key = values[0];
@@ -94,7 +94,7 @@ basic_string<char> StrategyGuideHandler::getEntry(const string& playerCards, int
     //Dealer can have a 2-11, but the indexes will correspond to 0-9
     dealerCard -= 2;
 
-    if(!isValidDealerNumber(dealerCard))    {return "F";}
+    if(!isValidDealerNumber(dealerCard))    {return "Not Valid Dealer Card";}
 
     // Check if the key exists in the strategy map
     auto it = strategy.find(playerCards);
@@ -164,10 +164,10 @@ void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, 
         // Check for entries per line exceeded or not met
         if (values.size() > ENTRIES_PER_LINE) {
              cerr << "Error: Entries per line exceeded. Ignoring extra entries." <<  endl;
-            values.resize(ENTRIES_PER_LINE, "NULL");
+            values.resize(ENTRIES_PER_LINE, "Overflow");
         } else if (values.size() < ENTRIES_PER_LINE) {
-             cerr << "Error: Entries per line not met. Adding 'NULL' for missing entries." <<  endl;
-            values.resize(ENTRIES_PER_LINE, "NULL");
+             cerr << "Error: Entries per line not met. Adding 'Overflow' for missing entries." <<  endl;
+            values.resize(ENTRIES_PER_LINE, "Overflow");
         }
 
         // Print the first value by itself
