@@ -32,7 +32,7 @@ int main() {
 }
 
 void testStrategyGuideHandler() {
-    StrategyGuideHandler newStrategy;
+    StrategyGuideHandlerTests newStrategy;
 
     newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
 
@@ -46,7 +46,7 @@ void testStrategyGuideHandler() {
     guideHandler->LoadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
     guideHandler->GetEntry("10", 3);
     guideHandler->EditEntry("A7", 5, "X");
-    guideHandler->SaveGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book2.csv)");
+    guideHandler->SaveGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\TestFile.csv)");
     delete guideHandler;*/
 }
 
@@ -71,7 +71,7 @@ void testShoe(){
 }
 
 void testPlayerBot(){
-    StrategyGuideHandler newStrategy;
+    StrategyGuideHandlerTests newStrategy;
 
     newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
 
@@ -93,7 +93,7 @@ void testPlayerBot(){
 }
 
 void testTable(){
-    StrategyGuideHandler newStrategy;
+    StrategyGuideHandlerTests newStrategy;
     newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\ActualStrategy.csv)");
     float bankRoll = 5000;
     PlayerBot playerBot(bankRoll, newStrategy);
