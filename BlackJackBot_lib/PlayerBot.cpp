@@ -115,6 +115,8 @@ void PlayerBot::displayStats() {
     std::cout << "Number of loses " << (numberOfHandsPlayed - numberOfTimesPaid) << std::endl;
     //std::cout << "House edge " << (numberOfHandsPlayed - numberOfTimesPaid) << std::endl;
     std::cout << "********************************" << std::endl;
+
+    strategyGuideHandler.saveResults(profitPerHand);
 }
 
 void PlayerBot::resetStats() {

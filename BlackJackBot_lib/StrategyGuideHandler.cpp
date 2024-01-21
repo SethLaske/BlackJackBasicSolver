@@ -219,3 +219,30 @@ bool StrategyGuideHandler::isValidDealerNumber(int dealerCard) const {
     }
     return true;
 }
+
+void StrategyGuideHandler::saveResults(float results) {
+    // Check if folderPath is not empty
+    if (folderPath.empty()) {
+        std::cerr << "Error: Folder path is empty." << std::endl;
+        return;
+    }
+
+    std::string filePath = folderPath + "Results.txt";
+
+    std::ofstream file(filePath);
+
+    if (!file.is_open()) {
+        std::cerr << "Error: Unable to open/create file '" << filePath << "'" << std::endl;
+        return;
+    }
+
+    file.clear();
+    file.seekp(0, std::ios::beg);
+
+    file << results;
+
+    // Close the file
+    file.close();
+
+    std::cout << "Results saved to: " << filePath << std::endl;
+}

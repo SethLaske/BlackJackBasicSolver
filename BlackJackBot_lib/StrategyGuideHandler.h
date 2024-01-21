@@ -16,6 +16,7 @@ public:
 
     void loadGuide(const std::string& csvFileName);
     void saveGuide(const std::string& csvFileName);
+    void saveResults(float results);
     std::basic_string<char> getEntry(const std::string& playerCards, int dealerCard);
     void editEntry(const std::string& playerCards, int dealerCard, std::string newMove);
 
