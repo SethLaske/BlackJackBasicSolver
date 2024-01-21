@@ -46,7 +46,7 @@ void testStrategyGuideHandler() {
     guideHandler->LoadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
     guideHandler->GetEntry("10", 3);
     guideHandler->EditEntry("A7", 5, "X");
-    guideHandler->SaveGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book2.csv)");
+    guideHandler->SaveGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\TestFile.csv)");
     delete guideHandler;*/
 }
 

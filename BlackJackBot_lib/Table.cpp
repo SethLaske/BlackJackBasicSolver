@@ -190,8 +190,10 @@ void Table::getPlayerAction(PlayerHand &playerHand) {
 
     switch (action) {
         case(PLAYERACTION::STAY):
+        case(PLAYERACTION::UNKNOWN):
             playerHand.stay();
             break;
+
         case(PLAYERACTION::HIT):
             playerHand.addCard(shoe.drawCard());
             break;
@@ -204,6 +206,7 @@ void Table::getPlayerAction(PlayerHand &playerHand) {
             playerHands.back().addCard(splitCard);  // Add the splitCard to the new PlayerHand
 
             break;
+
         //default:
           //  std::cerr << "Fucking dumbass" << std::endl;
             //break;
