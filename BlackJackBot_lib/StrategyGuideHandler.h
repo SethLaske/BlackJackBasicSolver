@@ -22,7 +22,6 @@ public:
     void editEntry(const std::string& playerCards, int dealerCard, std::string newMove);
 
     static const int  POSSIBLE_DEALER_CARDS = 10;
-    static bool isCSVFile(const std::string& fileName) ;
 private:
     std::string folderPath;
 

@@ -71,28 +71,7 @@ void StrategyGuideHandler::saveGuide(const string& csvFileName) {
 
     StrategyGuideGenerator strategyGuideGenerator;
     strategyGuideGenerator.saveStrategyToFile(folderPath + csvFileName, strategy);
-    /*if(!isCSVFile(csvFileName)){
-        return;
-    }
 
-    ofstream file(folderPath + csvFileName);
-    if (!file.is_open()) {
-         cerr << "Error: Unable to open/create file '" << csvFileName << "'" <<  endl;
-        return;
-    }
-
-    // Iterate through the stored strategy and save to the file
-    for (const auto& pair : strategy) {
-        file << pair.first;
-
-        for (const auto& entry : pair.second) {
-            file << "," << entry;
-        }
-
-        file << endl;
-    }
-
-    file.close();*/
 }
 
 basic_string<char> StrategyGuideHandler::getEntry(const string& playerCards, int dealerCard) {
@@ -104,9 +83,8 @@ basic_string<char> StrategyGuideHandler::getEntry(const string& playerCards, int
     // Check if the key exists in the strategy map
     auto it = strategy.find(playerCards);
     if (it != strategy.end()) {
-        // Key found, modify the corresponding entry
+
         array< string, POSSIBLE_DEALER_CARDS>& arrayPtr = it->second;
-        // Perform modification here, for example:
         return arrayPtr[dealerCard];
     } else {
         // Key not found, handle the error or add a new entry if needed
@@ -125,23 +103,18 @@ void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, 
     // Check if the key exists in the strategy map
     auto it = strategy.find(playerCards);
     if (it != strategy.end()) {
-        // Key found, modify the corresponding entry
         array< string, POSSIBLE_DEALER_CARDS>& arrayPtr = it->second;
-        // Perform modification here, for example:
-        arrayPtr[dealerCard] = move(newMove);
+        arrayPtr[dealerCard] = std::move(newMove);
     } else {
-        // Key not found, handle the error or add a new entry if needed
          cerr << "Entry not found for key: " << playerCards <<  endl;
-        // Add new entry logic if required
         return;
     }
-
     //printCurrentStrategy();
 }
 
 [[maybe_unused]] void StrategyGuideHandler::printFile(const string &csvFileName) {
 
-    if(!isCSVFile(csvFileName))    {return;}
+    if(!StrategyGuideGenerator::isCSVFile(csvFileName))    {return;}
 
     ifstream file(folderPath + csvFileName);
     if (!file.is_open()) {
@@ -206,14 +179,6 @@ void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, 
         // Remove the trailing '/' and close the bracket
          cout << "\b]" <<  endl;
     }
-}
-
-bool StrategyGuideHandler::isCSVFile(const std::string &fileName) {
-    if (fileName.size() < 4 || fileName.substr(fileName.size() - 4) != ".csv") {
-         cerr << "Error: Invalid file format. Please provide a .csv file." <<  endl;
-        return false;
-    }
-    return true;
 }
 
 bool StrategyGuideHandler::isValidDealerNumber(int dealerCard) const {

@@ -1,8 +1,3 @@
-//
-// Created by small on 1/21/2024.
-//
-
-
 #include "StrategyGuideGenerator.h"
 
 const std::string StrategyGuideGenerator::COLUMNS[] = {"Player Hands", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Ace"};
@@ -41,7 +36,7 @@ std::string StrategyGuideGenerator::getRandomOption(const std::string &rowHead) 
 }
 
 void StrategyGuideGenerator::createRandomGuideFile(const std::string &filePath) {
-    if(!StrategyGuideHandler::isCSVFile(filePath)){
+    if(!isCSVFile(filePath)){
         return;
     }
 
@@ -73,7 +68,7 @@ void StrategyGuideGenerator::createRandomGuideFile(const std::string &filePath) 
 
 void StrategyGuideGenerator::saveStrategyToFile(const std::string& filePath, std::unordered_map<std::string, std::array<std::string, 10>> strategy) {
 
-    if(!StrategyGuideHandler::isCSVFile(filePath)){
+    if(!isCSVFile(filePath)){
         return;
     }
 
@@ -97,8 +92,7 @@ void StrategyGuideGenerator::saveStrategyToFile(const std::string& filePath, std
     file.close();
 }
 
-void StrategyGuideGenerator::mergeTwoGuides(const std::string &parentFilePath1, const std::string &parentFilePath2,
-                                            const std::string &childFilePath) {
+void StrategyGuideGenerator::mergeTwoGuides(const std::string &parentFilePath1, const std::string &parentFilePath2, const std::string &childFilePath, bool mutate) {
     std::unordered_map<std::string, std::array<std::string, (sizeof(COLUMNS)/sizeof(COLUMNS[0]))-1>> parentStrategy1 = makeStrategyFromFile(parentFilePath1);
     std::unordered_map<std::string, std::array<std::string, (sizeof(COLUMNS)/sizeof(COLUMNS[0]))-1>> parentStrategy2 = makeStrategyFromFile(parentFilePath2);
     std::unordered_map<std::string, std::array<std::string, (sizeof(COLUMNS)/sizeof(COLUMNS[0]))-1>> childStrategy;
@@ -122,6 +116,16 @@ void StrategyGuideGenerator::mergeTwoGuides(const std::string &parentFilePath1, 
             } else{
                 childStrategy[pair.first] = it->second;
             }
+
+            if(mutate){
+                int randomChance = rand()%mutationOdds;
+                if(randomChance < 1 && (pair.first != COLUMNS[0])){
+                    std::cout << "For the column with header " << pair.first << " the array will be rerandomized" << std::endl;
+                    childStrategy[pair.first] = getRandomLine(pair.first);
+                }
+            }
+
+
         } else {
             // Key not found, handle the error or add a new entry if needed
             std::cerr << "The second parent is missing a line" <<  std::endl;
@@ -138,7 +142,7 @@ std::unordered_map<std::string, std::array<std::string, 10>> StrategyGuideGenera
     int possibleDealerCards = lenColumns - 1;   //The first entry is reserved for a header
     std::unordered_map<std::string, std::array<std::string, (sizeof(COLUMNS)/sizeof(COLUMNS[0]))-1>> strategy;
 
-    if(!StrategyGuideHandler::isCSVFile(filePath)){
+    if(!isCSVFile(filePath)){
         return strategy;
     }
 
@@ -181,4 +185,20 @@ std::unordered_map<std::string, std::array<std::string, 10>> StrategyGuideGenera
     file.close();
 
     return strategy;
+}
+
+bool StrategyGuideGenerator::isCSVFile(const std::string &fileName) {
+    if (fileName.size() < 4 || fileName.substr(fileName.size() - 4) != ".csv") {
+        std::cerr << "Error: Invalid file format. Please provide a .csv file." <<  std::endl;
+        return false;
+    }
+    return true;
+}
+
+std::array<std::string, 10> StrategyGuideGenerator::getRandomLine(const std::string &rowHead) {
+    std::array<std::string, 10> newLine;
+    for (int i = 1; i < lenColumns; i++) {
+        newLine [i-1] = getRandomOption(ROWS[i]);
+    }
+    return newLine;
 }

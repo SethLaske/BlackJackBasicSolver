@@ -113,6 +113,6 @@ void testGuideGeneration(){
 
     strategyGuideGenerator.createRandomGuideFile(R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide1.csv)");
     strategyGuideGenerator.createRandomGuideFile(R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide2.csv)");
-    strategyGuideGenerator.mergeTwoGuides(R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide1.csv)", R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide2.csv)", R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide3.csv)");
+    strategyGuideGenerator.mergeTwoGuides(R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide1.csv)", R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide2.csv)", R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide3.csv)", true);
 
 }
