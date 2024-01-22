@@ -28,8 +28,8 @@ int main() {
     //testShoe();
     //testPlayerBot();
 
-    testTable();
-    //testGuideGeneration();
+    //testTable();
+    testGuideGeneration();
 
     return 0;
 }
@@ -98,7 +98,7 @@ void testPlayerBot(){
 void testTable(){
     StrategyGuideHandler newStrategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\)");
     //newStrategy.loadGuide("ActualStrategy.csv");
-    newStrategy.loadGuide("RandomGuide.csv");
+    newStrategy.loadGuide("ActualStrategy.csv");
     float bankRoll = 5000;
     PlayerBot playerBot(bankRoll, newStrategy);
 
@@ -110,5 +110,9 @@ void testTable(){
 
 void testGuideGeneration(){
     StrategyGuideGenerator strategyGuideGenerator;
-    strategyGuideGenerator.createRandomGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide.csv)");
+
+    strategyGuideGenerator.createRandomGuideFile(R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide1.csv)");
+    strategyGuideGenerator.createRandomGuideFile(R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide2.csv)");
+    strategyGuideGenerator.mergeTwoGuides(R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide1.csv)", R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide2.csv)", R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide3.csv)");
+
 }

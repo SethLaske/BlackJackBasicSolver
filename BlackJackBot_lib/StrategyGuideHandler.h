@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <vector>
 #include <array>
+#include "StrategyGuideGenerator.h"
 
 class StrategyGuideHandler {
 public:
@@ -20,10 +21,11 @@ public:
     std::basic_string<char> getEntry(const std::string& playerCards, int dealerCard);
     void editEntry(const std::string& playerCards, int dealerCard, std::string newMove);
 
+    static const int  POSSIBLE_DEALER_CARDS = 10;
     static bool isCSVFile(const std::string& fileName) ;
 private:
     std::string folderPath;
-    static const int  POSSIBLE_DEALER_CARDS = 10;
+
     std::unordered_map<std::string, std::array<std::string,  POSSIBLE_DEALER_CARDS>> strategy;
 
     [[maybe_unused]] void printFile(const std::string& csvFileName);

@@ -20,7 +20,9 @@ StrategyGuideHandler::~StrategyGuideHandler() {
 //Load a guide into the useable strategy
 void StrategyGuideHandler::loadGuide(const  string& csvFileName) {
 
-    if(!isCSVFile(csvFileName)){
+    StrategyGuideGenerator strategyGuideGenerator;
+    strategy = strategyGuideGenerator.makeStrategyFromFile(folderPath + csvFileName);
+    /*if(!isCSVFile(csvFileName)){
         return;
     }
 
@@ -62,12 +64,14 @@ void StrategyGuideHandler::loadGuide(const  string& csvFileName) {
 
         strategy[key] = strategyArray;
     }
-    file.close();
+    file.close();*/
 }
 
 void StrategyGuideHandler::saveGuide(const string& csvFileName) {
 
-    if(!isCSVFile(csvFileName)){
+    StrategyGuideGenerator strategyGuideGenerator;
+    strategyGuideGenerator.saveStrategyToFile(folderPath + csvFileName, strategy);
+    /*if(!isCSVFile(csvFileName)){
         return;
     }
 
@@ -88,7 +92,7 @@ void StrategyGuideHandler::saveGuide(const string& csvFileName) {
         file << endl;
     }
 
-    file.close();
+    file.close();*/
 }
 
 basic_string<char> StrategyGuideHandler::getEntry(const string& playerCards, int dealerCard) {
