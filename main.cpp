@@ -41,13 +41,13 @@ int main() {
 void testStrategyGuideHandler() {
     StrategyGuideHandler newStrategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\)");
 
-    newStrategy.loadGuide("Book1.csv");
+    newStrategy.loadStrategyGuide("Book1.csv");
 
     cout << "The entry is: " << newStrategy.getEntry("PH", 11) << endl;
 
     newStrategy.editEntry("PH", 7, "Monkey");
 
-    newStrategy.saveGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book2.csv)");
+    newStrategy.saveStrategyGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book2.csv)");
 
     /*StrategyGuideHandler* guideHandler = new StrategyGuideHandler();
     guideHandler->LoadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
@@ -80,7 +80,7 @@ void testShoe(){
 void testPlayerBot(){
     StrategyGuideHandler newStrategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
 
-    newStrategy.loadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
+    newStrategy.loadStrategyGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
 
     float bankRoll = 500;
 
@@ -102,7 +102,7 @@ void testPlayerBot(){
 void testTable(){
     StrategyGuideHandler newStrategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\)");
     //newStrategy.loadGuide("ActualStrategy.csv");
-    newStrategy.loadGuide("ActualStrategy.csv");
+    newStrategy.loadStrategyGuide("ActualStrategy.csv");
     float bankRoll = 5000;
     PlayerBot playerBot(bankRoll, newStrategy);
 
@@ -122,6 +122,7 @@ void testGuideGeneration(){
 }
 
 void testGeneticAlgorithm(){
+    cout << HouseRules::toString() << endl;
     GeneticAlgorithManager geneticAlgorithManager;
     geneticAlgorithManager.spawnInitialWave("C:\\Users\\small\\CLionProjects\\BasicStrategySolver\\GA_Testing\\Gen1");
 }

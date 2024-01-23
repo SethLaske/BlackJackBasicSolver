@@ -18,7 +18,7 @@ StrategyGuideHandler::~StrategyGuideHandler() {
 }
 
 //Load a guide into the useable strategy
-void StrategyGuideHandler::loadGuide(const  string& csvFileName) {
+void StrategyGuideHandler::loadStrategyGuide(const std::string &csvFileName) {
 
     StrategyGuideGenerator strategyGuideGenerator;
     strategy = strategyGuideGenerator.makeStrategyFromFile(folderPath + csvFileName);
@@ -67,7 +67,7 @@ void StrategyGuideHandler::loadGuide(const  string& csvFileName) {
     file.close();*/
 }
 
-void StrategyGuideHandler::saveGuide(const string& csvFileName) {
+void StrategyGuideHandler::saveStrategyGuide(const std::string &csvFileName) {
 
     StrategyGuideGenerator strategyGuideGenerator;
     strategyGuideGenerator.saveStrategyToFile(folderPath + csvFileName, strategy);

@@ -6,7 +6,7 @@
 
 TEST(PlayerBotSuite, Payments){
     StrategyGuideHandler strategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\)");
-    strategy.loadGuide("TestFile.csv");
+    strategy.loadStrategyGuide("TestFile.csv");
 
     PlayerBot player(500, strategy);
 
@@ -32,7 +32,7 @@ TEST(PlayerBotSuite, Payments){
 
 TEST(PlayerBotSuite, CheckQueriesHard){
     StrategyGuideHandler strategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\)");
-    strategy.loadGuide("TestFile.csv");
+    strategy.loadStrategyGuide("TestFile.csv");
 
     PlayerBot player(500, strategy);
 

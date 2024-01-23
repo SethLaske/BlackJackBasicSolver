@@ -223,6 +223,13 @@ build BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/GeneticAlgorithManager.cp
   OBJECT_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
   OBJECT_FILE_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
 
+build BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/HouseRules.cpp.obj: CXX_COMPILER__BlackJackBot_lib_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib/HouseRules.cpp || cmake_object_order_depends_target_BlackJackBot_lib
+  DEP_FILE = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir\HouseRules.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib
+  OBJECT_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+  OBJECT_FILE_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target BlackJackBot_lib
@@ -231,7 +238,7 @@ build BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/GeneticAlgorithManager.cp
 #############################################
 # Link the static library BlackJackBot_lib\libBlackJackBot_lib.a
 
-build BlackJackBot_lib/libBlackJackBot_lib.a: CXX_STATIC_LIBRARY_LINKER__BlackJackBot_lib_Debug BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Card.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Shoe.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Table.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Hand.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/DealerHand.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/PlayerHand.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/PlayerBot.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/StrategyGuideHandler.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/StrategyGuideGenerator.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/GeneticAlgorithManager.cpp.obj
+build BlackJackBot_lib/libBlackJackBot_lib.a: CXX_STATIC_LIBRARY_LINKER__BlackJackBot_lib_Debug BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Card.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Shoe.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Table.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Hand.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/DealerHand.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/PlayerHand.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/PlayerBot.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/StrategyGuideHandler.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/StrategyGuideGenerator.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/GeneticAlgorithManager.cpp.obj BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/HouseRules.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = BlackJackBot_lib\CMakeFiles\BlackJackBot_lib.dir
   POST_BUILD = cd .

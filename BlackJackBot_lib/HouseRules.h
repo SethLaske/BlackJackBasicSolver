@@ -5,6 +5,7 @@
 #ifndef HOUSERULES_H
 #define HOUSERULES_H
 
+#include "iostream"
 
 class HouseRules {
 public:
@@ -13,7 +14,11 @@ public:
     inline static const float MINPENETRATIONPERCENT = .4f;
     inline static const float MAXPENETRATIONPERCENT = .6f;
     inline static const bool IGNOREDEBT = true;
+
+    const static std::string toString();
 };
+
+
 
 
 #endif //HOUSERULES_H

@@ -29,6 +29,7 @@ set(SOURCE_FILES
         StrategyGuideGenerator.h
         GeneticAlgorithManager.cpp
         GeneticAlgorithManager.h
+        HouseRules.cpp
 )
 
 add_library(BlackJackBot_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})

@@ -25,7 +25,9 @@ Table::~Table() {
 
 void Table::runGameTesting(int numberOfGames) {
 
-
+    shoe.doShuffle();   //force shuffle at start
+    dealerHand.clearHand();
+    playerHands.clear();
 
     for(int i = 0; i < numberOfGames; i ++){
         startGame();
