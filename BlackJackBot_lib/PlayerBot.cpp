@@ -37,7 +37,7 @@ PLAYERACTION PlayerBot::getUseableAction(PlayerHand &playerHand, const std::basi
         if(playerHand.canDouble() && (HouseRules::IGNOREDEBT || money > playerHand.getBetSize())){
             money -= playerHand.getBetSize();
             numberOfDoubles++;
-            return DOUBLE;
+            return DOUBLEDOWN;
         }
         return HIT;
     }

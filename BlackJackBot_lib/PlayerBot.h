@@ -17,7 +17,7 @@
 enum PLAYERACTION{
     HIT,
     STAY,
-    DOUBLE,
+    DOUBLEDOWN,
     SPLIT,
     UNKNOWN
 };

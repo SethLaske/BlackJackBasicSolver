@@ -197,7 +197,7 @@ void Table::getPlayerAction(PlayerHand &playerHand) {
         case(PLAYERACTION::HIT):
             playerHand.addCard(shoe.drawCard());
             break;
-        case(PLAYERACTION::DOUBLE):
+        case(PLAYERACTION::DOUBLEDOWN):
             playerHand.doubleDown(shoe.drawCard());
             break;
         case(PLAYERACTION::SPLIT):

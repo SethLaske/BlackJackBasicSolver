@@ -2,6 +2,9 @@
 #define GENETICALGORITHMANAGER_H
 
 #include "StrategyGuideGenerator.h"
+#include <iostream>
+#include <string>
+#include <windows.h>
 
 class GeneticAlgorithManager {
 public:
@@ -9,14 +12,21 @@ public:
     ~GeneticAlgorithManager();
 
     //runGeneticAlgorithm(folder, children, waves)
+
+    //Create the Gen 1 folder, the child folders, and completely randomized .csvs in each child
+    void spawnInitialWave(const std::string folderPath);
 private:
+    StrategyGuideGenerator strategyGuideGenerator;
     int currentGeneration;
 
     int numberOfChildrenPerGeneration;
     int numberOfGenerations;
-    //spawnInitialWave(folder)
-    //testAllStrategies(folder)
-    //breedWave(parentFolder, childFolder)
+
+    bool createFolder(const std::string folderPath);
+    //Run all .csvs in the gen folder at tables to get results
+    //testAllStrategies(const std::string folderName)
+    //
+    //breedWave(const std::string parentFolderPath, childFolderPath)
 };
 
 //Folder structure idea

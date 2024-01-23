@@ -9,6 +9,8 @@
 #include "BlackJackBot_lib/Table.h"
 #include "BlackJackBot_lib/HouseRules.h"
 #include "StrategyGuideGenerator.h"
+#include "GeneticAlgorithManager.h"
+//#include <filesystem>
 
 //Test loading, editing, and saving a .csv into the strategyguidehandler
 void testStrategyGuideHandler();
@@ -19,6 +21,7 @@ void testPlayerBot();
 //Test running a table
 void testTable();
 void testGuideGeneration();
+void testGeneticAlgorithm();
 
 using namespace std;
 
@@ -29,7 +32,8 @@ int main() {
     //testPlayerBot();
 
     //testTable();
-    testGuideGeneration();
+    //testGuideGeneration();
+    testGeneticAlgorithm();
 
     return 0;
 }
@@ -115,4 +119,9 @@ void testGuideGeneration(){
     strategyGuideGenerator.createRandomGuideFile(R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide2.csv)");
     strategyGuideGenerator.mergeTwoGuides(R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide1.csv)", R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide2.csv)", R"(C:\Users\small\CLionProjects\BasicStrategySolver\RandomGuide3.csv)", true);
 
+}
+
+void testGeneticAlgorithm(){
+    GeneticAlgorithManager geneticAlgorithManager;
+    geneticAlgorithManager.spawnInitialWave("C:\\Users\\small\\CLionProjects\\BasicStrategySolver\\GA_Testing\\Gen1");
 }
