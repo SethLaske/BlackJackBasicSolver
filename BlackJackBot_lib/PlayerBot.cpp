@@ -4,7 +4,7 @@
 
 #include "PlayerBot.h"
 
-PlayerBot::PlayerBot(float startingMoney, const StrategyGuideHandler& strategyGuideHandler) : strategyGuideHandler(strategyGuideHandler){
+PlayerBot::PlayerBot(float startingMoney, StrategyGuideHandler& strategyGuideHandler) : strategyGuideHandler(strategyGuideHandler){
     initialMoney = startingMoney;
 
     //this->strategyGuideHandler = strategyGuideHandler;

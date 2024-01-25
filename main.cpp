@@ -108,7 +108,16 @@ void testTable(){
 
     Table table(playerBot);
 
-    table.runGameTesting(10000);
+    table.runGameTesting(100000);
+
+    //StrategyGuideHandler newStrategy2(R"(C:\Users\small\CLionProjects\BasicStrategySolver\)");
+    newStrategy.loadStrategyGuide("Book1.csv");
+
+    //PlayerBot playerBot2(bankRoll, newStrategy2);
+
+    //Table table2(playerBot2);
+
+    table.runGameTesting(100000);
     //table.startGame();
 }
 
@@ -125,4 +134,5 @@ void testGeneticAlgorithm(){
     cout << HouseRules::toString() << endl;
     GeneticAlgorithManager geneticAlgorithManager;
     geneticAlgorithManager.spawnInitialWave("C:\\Users\\small\\CLionProjects\\BasicStrategySolver\\GA_Testing\\Gen1");
+    geneticAlgorithManager.testAllStrategies("C:\\Users\\small\\CLionProjects\\BasicStrategySolver\\GA_Testing\\Gen1");
 }

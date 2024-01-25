@@ -15,6 +15,7 @@ public:
 
     //Create the Gen 1 folder, the child folders, and completely randomized .csvs in each child
     void spawnInitialWave(const std::string folderPath);
+    void testAllStrategies(const std::string folderName);
 private:
     StrategyGuideGenerator strategyGuideGenerator;
     int currentGeneration;
@@ -24,7 +25,7 @@ private:
 
     bool createFolder(const std::string folderPath);
     //Run all .csvs in the gen folder at tables to get results
-    void testAllStrategies(const std::string folderName);
+
     //
     //breedWave(const std::string parentFolderPath, childFolderPath)
 };

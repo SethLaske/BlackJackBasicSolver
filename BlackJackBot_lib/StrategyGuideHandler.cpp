@@ -196,7 +196,7 @@ void StrategyGuideHandler::saveResults(float results) {
         return;
     }
 
-    std::string filePath = folderPath + "Results.txt";
+    std::string filePath = folderPath + "\\Results.txt";
 
     std::ofstream file(filePath);
 
@@ -214,4 +214,8 @@ void StrategyGuideHandler::saveResults(float results) {
     file.close();
 
     std::cout << "Results saved to: " << filePath << std::endl;
+}
+
+void StrategyGuideHandler::setNewFolder(const string &folderPath) {
+    this->folderPath = folderPath;
 }

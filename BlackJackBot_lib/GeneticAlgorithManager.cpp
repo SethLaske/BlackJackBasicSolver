@@ -4,6 +4,8 @@
 
 #include "GeneticAlgorithManager.h"
 #include "StrategyGuideHandler.h"
+#include "PlayerBot.h"
+#include "Table.h"
 
 GeneticAlgorithManager::GeneticAlgorithManager() {
     currentGeneration = 0;
@@ -66,7 +68,13 @@ void GeneticAlgorithManager::testAllStrategies(const std::string folderName) {
         //Ill insert code here
 
     */
+
     StrategyGuideHandler newStrategy(folderName + "\\");
+
+    float bankRoll = 5000;
+    PlayerBot playerBot(bankRoll, newStrategy);
+
+    Table table(playerBot);
 
     WIN32_FIND_DATA findFileData;
     HANDLE hFind = FindFirstFile((folderName + "\\*").c_str(), &findFileData);
@@ -82,13 +90,16 @@ void GeneticAlgorithManager::testAllStrategies(const std::string folderName) {
                 // Build the full path to the strategy file in the current subdirectory
                 std::string strategyFilePath = folderName + "\\" + findFileData.cFileName + "\\strategy.csv";
 
+                //std::string strategyFilePath = "\\" + std::string(findFileData.cFileName) + "\\strategy.csv";
+
                 // Check if the strategy file exists in the subdirectory
                 if (GetFileAttributes(strategyFilePath.c_str()) != INVALID_FILE_ATTRIBUTES) {
                     // Load the strategy from the CSV file
-
-                    newStrategy.loadStrategyGuide(strategyFilePath);
+                    newStrategy.setNewFolder(folderName + "\\" + findFileData.cFileName);
+                    newStrategy.loadStrategyGuide("\\strategy.csv");
 
                     //Tests
+                    table.runGameTesting(10000);
                 } else {
                     // Handle the case where the strategy file is not found in the subdirectory
                     std::cerr << "Error: Strategy file not found in " << findFileData.cFileName << std::endl;

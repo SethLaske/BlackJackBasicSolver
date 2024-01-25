@@ -17,6 +17,7 @@ public:
 
     void loadStrategyGuide(const std::string& csvFileName);
     void saveStrategyGuide(const std::string& csvFileName);
+    void setNewFolder(const std::string& folderPath);
     void saveResults(float results);
     std::basic_string<char> getEntry(const std::string& playerCards, int dealerCard);
     void editEntry(const std::string& playerCards, int dealerCard, std::string newMove);

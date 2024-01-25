@@ -14,8 +14,8 @@
 class Table {
 
 public:
-    Table(const PlayerBot& playerBot, Shoe shoe);
-    Table(const PlayerBot& playerBot);
+    Table(PlayerBot& playerBot, Shoe shoe);
+    Table(PlayerBot& playerBot);
     ~Table();
 
     void runGameTesting(int numberOfGames);
@@ -24,7 +24,7 @@ public:
 
 private:
     Shoe shoe;
-    PlayerBot playerBot;
+    PlayerBot& playerBot;
     DealerHand dealerHand;
     std::vector<PlayerHand> playerHands;    //Sadly in order to split I need to include it from the start
     //House Rules

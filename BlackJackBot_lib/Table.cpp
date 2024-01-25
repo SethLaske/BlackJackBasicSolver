@@ -6,7 +6,7 @@
 
 #include <utility>
 
-Table::Table(const PlayerBot& playerBot, Shoe shoe) : playerBot(playerBot), shoe(std::move(shoe)) {
+Table::Table(PlayerBot& playerBot, Shoe shoe) : playerBot(playerBot), shoe(shoe) {
     //this->playerBot = playerBot;
 
     //Shoe shoe;
@@ -14,7 +14,7 @@ Table::Table(const PlayerBot& playerBot, Shoe shoe) : playerBot(playerBot), shoe
 
 }
 
-Table::Table(const PlayerBot &playerBot) : playerBot(playerBot), shoe(HouseRules::NUMBEROFDECKSINSHOE, HouseRules::MINPENETRATIONPERCENT, HouseRules::MAXPENETRATIONPERCENT) {
+Table::Table(PlayerBot &playerBot) : playerBot(playerBot), shoe(HouseRules::NUMBEROFDECKSINSHOE, HouseRules::MINPENETRATIONPERCENT, HouseRules::MAXPENETRATIONPERCENT) {
     //this->playerBot = playerBot;
     //std::cout << "The number of decks is: " << shoe.getNumberOfDecks() << std::endl;
 }
@@ -41,6 +41,7 @@ void Table::runGameTesting(int numberOfGames) {
     }
     //std::cout<< "player bot?" << std::endl;
     playerBot.displayStats();
+    playerBot.resetStats();
 }
 
 void Table::startGame() {

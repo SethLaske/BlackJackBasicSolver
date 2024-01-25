@@ -25,7 +25,7 @@ enum PLAYERACTION{
 class PlayerBot {
 
 public:
-    PlayerBot(float startingMoney, const StrategyGuideHandler& strategyGuideHandler);
+    PlayerBot(float startingMoney, StrategyGuideHandler& strategyGuideHandler);
     ~PlayerBot();
 
     std::vector<int> getPlayerBets(int maxNumberOfBets, int minBet, int maxBet);
@@ -50,7 +50,7 @@ private:
 
     int numberOfTimesPaid;
 
-    StrategyGuideHandler strategyGuideHandler;
+    StrategyGuideHandler& strategyGuideHandler;
 
     std::string getPlayerCardDecoding(const PlayerHand &playerHand) const;
 
