@@ -33,7 +33,8 @@ private:
     std::string getRandomOption(const std::string& rowHead);
     std::array<std::string, 10> getRandomLine(const std::string &rowHead);
 
-    const int mutationOdds = 10;
+
+    const int lineMutationOdds = 10;    //Calculated as 1/x so if this is 20, its a 5% chance
 
     const static std::string COLUMNS[];
     int lenColumns;

@@ -134,8 +134,12 @@ void testGeneticAlgorithm(){
     //cout << HouseRules::toString() << endl;
 
     GeneticAlgorithmManager geneticAlgorithmManager;
-    geneticAlgorithmManager.spawnInitialWave(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen1)");
-    geneticAlgorithmManager.testAllStrategies(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen1)");
-    geneticAlgorithmManager.breedWave(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen1)", R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen2)");
-    geneticAlgorithmManager.testAllStrategies(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen2)");
+    geneticAlgorithmManager.spawnInitialGeneration(
+            R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen1)");
+    geneticAlgorithmManager.testGenerationStrategies(
+            R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen1)");
+    geneticAlgorithmManager.breedGeneration(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen1)",
+                                            R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen2)");
+    geneticAlgorithmManager.testGenerationStrategies(
+            R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen2)");
 }

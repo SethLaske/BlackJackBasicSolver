@@ -117,12 +117,16 @@ void StrategyGuideGenerator::mergeTwoGuides(const std::string &parentFilePath1, 
                 childStrategy[pair.first] = it->second;
             }
 
+
             if(mutate){
-                int randomChance = rand()%mutationOdds;
+                int randomChance = rand() % lineMutationOdds;
                 if(randomChance < 1 && (pair.first != COLUMNS[0])){
                     //std::cout << "For the column with header " << pair.first << " the array will be rerandomized" << std::endl;
                     childStrategy[pair.first] = getRandomLine(pair.first);
                 }
+
+                //Always randomizes a single entry from each line,
+                childStrategy[pair.first][rand() % 10] = getRandomOption(pair.first);
             }
 
 

@@ -7,12 +7,16 @@
 #include "PlayerBot.h"
 #include "Table.h"
 
+
+
 GeneticAlgorithmManager::GeneticAlgorithmManager() {
     currentGeneration = 0;
 
     //Default to these while testing other functions
     numberOfChildrenPerGeneration = 4;
     numberOfGenerations = 4;
+
+    srand(time(NULL));
 }
 
 GeneticAlgorithmManager::~GeneticAlgorithmManager() {
@@ -20,18 +24,18 @@ GeneticAlgorithmManager::~GeneticAlgorithmManager() {
 }
 
 
-void GeneticAlgorithmManager::spawnInitialWave(const std::string& folderPath) {
+void GeneticAlgorithmManager::spawnInitialGeneration(const std::string& generationFolderPath) {
     //std::filesystem::path directoryPath = "path/to/your/directory";
-    if(!createFolder(folderPath)){
+    if(!createFolder(generationFolderPath)){
         return;
     }
 
     for(int i = 0; i < numberOfChildrenPerGeneration; i++){
 
-        if(createFolder(folderPath + "\\Child" + std::to_string(i+1))){
-            strategyGuideGenerator.createRandomGuideFile(folderPath + "\\Child" + std::to_string(i+1) + "\\Strategy.csv");
+        if(createFolder(generationFolderPath + childFolderName + std::to_string(i + 1))){
+            strategyGuideGenerator.createRandomGuideFile(generationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName);
         }else{
-            std::cerr << "While spawning the initial wave, was unable to spawn " + folderPath + "\\Child" + std::to_string(i+1)<< std::endl;
+            std::cerr << "While spawning the initial wave, was unable to spawn " + generationFolderPath + childFolderName + std::to_string(i + 1) << std::endl;
         }
     }
 
@@ -50,7 +54,7 @@ bool GeneticAlgorithmManager::createFolder(const std::string& folderPath) {
 
 }
 
-void GeneticAlgorithmManager::testAllStrategies(const std::string& folderPath) {
+void GeneticAlgorithmManager::testGenerationStrategies(const std::string& generationFolderPath) {
 
 
     StrategyGuideHandler newStrategy;
@@ -61,10 +65,10 @@ void GeneticAlgorithmManager::testAllStrategies(const std::string& folderPath) {
     Table table(playerBot);
 
     WIN32_FIND_DATA findFileData;
-    HANDLE hFind = FindFirstFile((folderPath + "\\*").c_str(), &findFileData);
+    HANDLE hFind = FindFirstFile((generationFolderPath + "\\*").c_str(), &findFileData);
 
     if (hFind == INVALID_HANDLE_VALUE) {
-        std::cerr << "Error: Unable to open directory " << folderPath << " for testing." << std::endl;
+        std::cerr << "Error: Unable to open directory " << generationFolderPath << " for testing." << std::endl;
         return;
     }
 
@@ -73,7 +77,7 @@ void GeneticAlgorithmManager::testAllStrategies(const std::string& folderPath) {
         if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
             if (strcmp(findFileData.cFileName, ".") != 0 && strcmp(findFileData.cFileName, "..") != 0) {
                 // Build the full path to the strategy file in the current subdirectory
-                std::string strategyFilePath = folderPath + "\\" + findFileData.cFileName + "\\Strategy.csv";
+                std::string strategyFilePath = generationFolderPath + "\\" + findFileData.cFileName + strategyFileName;
 
                 // Check if the strategy file exists in the subdirectory
                 if (GetFileAttributes(strategyFilePath.c_str()) != INVALID_FILE_ATTRIBUTES) {
@@ -82,7 +86,7 @@ void GeneticAlgorithmManager::testAllStrategies(const std::string& folderPath) {
                     newStrategy.loadStrategyGuide(strategyFilePath);
 
                     //Tests
-                    table.runGameTesting(1);
+                    table.runGameTesting(10);
                 } else {
                     // Handle the case where the strategy file is not found in the subdirectory
                     std::cerr << "Error: Strategy file not found in " << findFileData.cFileName << std::endl;
@@ -94,8 +98,8 @@ void GeneticAlgorithmManager::testAllStrategies(const std::string& folderPath) {
     FindClose(hFind);
 }
 
-void GeneticAlgorithmManager::breedWave(const std::string& parentFolderName, const std::string& childFolderPath) {
-    if(!createFolder(childFolderPath)){
+void GeneticAlgorithmManager::breedGeneration(const std::string& parentGenerationFolderName, const std::string& childGenerationFolderPath) {
+    if(!createFolder(childGenerationFolderPath)){
         return;
     }
 
@@ -103,10 +107,10 @@ void GeneticAlgorithmManager::breedWave(const std::string& parentFolderName, con
     std::unordered_map<std::string, float> parentResults;
 
     WIN32_FIND_DATA findFileData;
-    HANDLE hFind = FindFirstFile((parentFolderName + "\\*").c_str(), &findFileData);
+    HANDLE hFind = FindFirstFile((parentGenerationFolderName + "\\*").c_str(), &findFileData);
 
     if (hFind == INVALID_HANDLE_VALUE) {
-        std::cerr << "Error: Unable to open directory " << parentFolderName << " for testing." << std::endl;
+        std::cerr << "Error: Unable to open directory " << parentGenerationFolderName << " for testing." << std::endl;
         return;
     }
 
@@ -116,8 +120,8 @@ void GeneticAlgorithmManager::breedWave(const std::string& parentFolderName, con
     do {
         if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
             if (strcmp(findFileData.cFileName, ".") != 0 && strcmp(findFileData.cFileName, "..") != 0) {
-                std::string childFolderPath1 = parentFolderName + "\\" + findFileData.cFileName;
-                std::string resultsFilePath = childFolderPath1 + "\\Results.txt";
+                std::string childFolderPath = parentGenerationFolderName + "\\" + findFileData.cFileName;
+                std::string resultsFilePath = childFolderPath + "\\Results.txt";
 
                 // Check if Results.txt file exists in the current child folder
                 if (GetFileAttributes(resultsFilePath.c_str()) != INVALID_FILE_ATTRIBUTES) {
@@ -136,9 +140,9 @@ void GeneticAlgorithmManager::breedWave(const std::string& parentFolderName, con
                         }
 
                         // Add entry to parentResults map
-                        parentResults[childFolderPath1] = resultValue;
+                        parentResults[childFolderPath] = resultValue;
                     } else {
-                        std::cerr << "Error: Unable to open Results.txt in " << childFolderPath1 << std::endl;
+                        std::cerr << "Error: Unable to open Results.txt in " << childFolderPath << std::endl;
                     }
                 }
             }
@@ -147,20 +151,42 @@ void GeneticAlgorithmManager::breedWave(const std::string& parentFolderName, con
 
     FindClose(hFind);
 
+    //TEMP: Saving the generation results here for now, just because they were already found here
+
+
+    std::string filePath = parentGenerationFolderName + "\\Generation_Results.txt";
+
+    std::ofstream file(filePath);
+
+    if (!file.is_open()) {
+        std::cerr << "Error: Unable to open/create file '" << filePath << " while saving" << std::endl;
+        return;
+    }
+
+    file.clear();
+    file.seekp(0, std::ios::beg);
+
+
+
+    // Close the file
+
 
     for(const auto& entry : parentResults){
 
-        std::cout << "Folder: " << entry.first << ", Results: " << entry.second << std::endl;
+        std::cout << "Folder: " << entry.first << ", Results: " << entry.second;
+        file << entry.first << " scored: " << entry.second << "\n";
         parentResults[entry.first] = entry.second - lowestResult + 1;
+        std::cout << " Converts to: " << entry.second << std::endl;
     }
 
+    file.close();
 
     //strategyGuideGenerator.mergeTwoGuides("file1", "file2", "child", true);
     for(int i = 0; i < numberOfChildrenPerGeneration; i++){
-        if(createFolder(childFolderPath + "\\Child" + std::to_string(i+1))){
-            std::cout << "Trying to breed files into: " << childFolderPath + "\\Child" + std::to_string(i+1) + "\\Strategy.csv" << std::endl;
-            strategyGuideGenerator.mergeTwoGuides(selectWeightedEntry(parentResults) + "\\Strategy.csv", selectWeightedEntry(parentResults) + "\\Strategy.csv",
-                                                  childFolderPath + "\\Child" + std::to_string(i+1) + "\\Strategy.csv", true);
+        if(createFolder(childGenerationFolderPath + childFolderName + std::to_string(i + 1))){
+            std::cout << "Trying to breed files into: " << childGenerationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName << std::endl;
+            strategyGuideGenerator.mergeTwoGuides(selectWeightedEntry(parentResults) + strategyFileName, selectWeightedEntry(parentResults) + strategyFileName,
+                                                  childGenerationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName, true);
         }
 
     }
@@ -175,11 +201,7 @@ std::string GeneticAlgorithmManager::selectWeightedEntry(const std::unordered_ma
         totalSum += entry.second;
     }
 
-    // Generate a random number between 0 and the total sum
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<float> dis(0.0f, totalSum);
-    float randomNumber = dis(gen);
+    float randomNumber = rand() % (int)totalSum;
 
     // Iterate through the map and find the entry whose cumulative probability range includes the random number
     float cumulativeSum = 0.0f;
