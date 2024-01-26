@@ -110,7 +110,7 @@ void StrategyGuideGenerator::mergeTwoGuides(const std::string &parentFilePath1, 
         auto it = parentStrategy2.find(pair.first);
         if (it != parentStrategy2.end()) {
             int parent = rand() % 2;
-            std::cout << "For the column with header " << pair.first << " the array will come from parent " << parent + 1 << std::endl;
+            //std::cout << "For the column with header " << pair.first << " the array will come from parent " << parent + 1 << std::endl;
             if(parent == 0){
                 childStrategy[pair.first] = pair.second;
             } else{
@@ -120,7 +120,7 @@ void StrategyGuideGenerator::mergeTwoGuides(const std::string &parentFilePath1, 
             if(mutate){
                 int randomChance = rand()%mutationOdds;
                 if(randomChance < 1 && (pair.first != COLUMNS[0])){
-                    std::cout << "For the column with header " << pair.first << " the array will be rerandomized" << std::endl;
+                    //std::cout << "For the column with header " << pair.first << " the array will be rerandomized" << std::endl;
                     childStrategy[pair.first] = getRandomLine(pair.first);
                 }
             }
@@ -148,7 +148,7 @@ std::unordered_map<std::string, std::array<std::string, 10>> StrategyGuideGenera
 
     std::ifstream file(filePath);
     if (!file.is_open()) {
-        std::cerr << "Error: Unable to open file '" << filePath << "'" << std::endl;
+        std::cerr << "Error: Unable to open file '" << filePath << "' to make a strategy from" << std::endl;
         return strategy;
     }
 

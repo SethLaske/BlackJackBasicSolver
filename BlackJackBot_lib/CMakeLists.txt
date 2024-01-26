@@ -12,8 +12,8 @@ set(HEADER_FILES
         StrategyGuideHandler.h
         StrategyGuideGenerator.cpp
         StrategyGuideGenerator.h
-        GeneticAlgorithManager.cpp
-        GeneticAlgorithManager.h
+        GeneticAlgorithmManager.cpp
+        GeneticAlgorithmManager.h
 )
 
 set(SOURCE_FILES
@@ -27,8 +27,8 @@ set(SOURCE_FILES
         StrategyGuideHandler.cpp
         StrategyGuideGenerator.cpp
         StrategyGuideGenerator.h
-        GeneticAlgorithManager.cpp
-        GeneticAlgorithManager.h
+        GeneticAlgorithmManager.cpp
+        GeneticAlgorithmManager.h
         HouseRules.cpp
 )
 

@@ -16,6 +16,9 @@ public:
     inline static const bool IGNOREDEBT = true;
 
     const static std::string toString();
+
+    //Dev Variables
+    inline static const bool DISPLAYRESULTS = true;
 };
 
 

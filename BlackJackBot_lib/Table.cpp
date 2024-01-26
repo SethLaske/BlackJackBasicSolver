@@ -40,7 +40,10 @@ void Table::runGameTesting(int numberOfGames) {
         //}
     }
     //std::cout<< "player bot?" << std::endl;
-    playerBot.displayStats();
+    if(HouseRules::DISPLAYRESULTS){
+        playerBot.displayStats();
+    }
+
     playerBot.resetStats();
 }
 

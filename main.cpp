@@ -9,7 +9,7 @@
 #include "BlackJackBot_lib/Table.h"
 #include "BlackJackBot_lib/HouseRules.h"
 #include "StrategyGuideGenerator.h"
-#include "GeneticAlgorithManager.h"
+#include "GeneticAlgorithmManager.h"
 //#include <filesystem>
 
 //Test loading, editing, and saving a .csv into the strategyguidehandler
@@ -39,9 +39,9 @@ int main() {
 }
 
 void testStrategyGuideHandler() {
-    StrategyGuideHandler newStrategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\)");
+    StrategyGuideHandler newStrategy;
 
-    newStrategy.loadStrategyGuide("Book1.csv");
+    newStrategy.loadStrategyGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
 
     cout << "The entry is: " << newStrategy.getEntry("PH", 11) << endl;
 
@@ -78,7 +78,7 @@ void testShoe(){
 }
 
 void testPlayerBot(){
-    StrategyGuideHandler newStrategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
+    StrategyGuideHandler newStrategy;
 
     newStrategy.loadStrategyGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
 
@@ -100,9 +100,9 @@ void testPlayerBot(){
 }
 
 void testTable(){
-    StrategyGuideHandler newStrategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\)");
+    StrategyGuideHandler newStrategy;
     //newStrategy.loadGuide("ActualStrategy.csv");
-    newStrategy.loadStrategyGuide("ActualStrategy.csv");
+    newStrategy.loadStrategyGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\ActualStrategy.csv)");
     float bankRoll = 5000;
     PlayerBot playerBot(bankRoll, newStrategy);
 
@@ -131,8 +131,11 @@ void testGuideGeneration(){
 }
 
 void testGeneticAlgorithm(){
-    cout << HouseRules::toString() << endl;
-    GeneticAlgorithManager geneticAlgorithManager;
-    geneticAlgorithManager.spawnInitialWave("C:\\Users\\small\\CLionProjects\\BasicStrategySolver\\GA_Testing\\Gen1");
-    geneticAlgorithManager.testAllStrategies("C:\\Users\\small\\CLionProjects\\BasicStrategySolver\\GA_Testing\\Gen1");
+    //cout << HouseRules::toString() << endl;
+
+    GeneticAlgorithmManager geneticAlgorithmManager;
+    geneticAlgorithmManager.spawnInitialWave(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen1)");
+    geneticAlgorithmManager.testAllStrategies(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen1)");
+    geneticAlgorithmManager.breedWave(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen1)", R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen2)");
+    geneticAlgorithmManager.testAllStrategies(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen2)");
 }

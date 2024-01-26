@@ -1,0 +1,272 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.26"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "BlackJackBot_lib",
+					"jsonFile" : "directory-BlackJackBot_lib-Debug-78194e084af5ab51f6e7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.26"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "BlackJackBot_lib",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "Google_tests",
+					"childIndexes" : 
+					[
+						3
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-Google_tests-Debug-0edb77f8d1483ac16915.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.26"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "Google_tests",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "Google_tests/lib",
+					"childIndexes" : 
+					[
+						4
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-Google_tests.lib-Debug-e2071534875f67d50854.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 3,
+					"source" : "Google_tests/lib"
+				},
+				{
+					"build" : "Google_tests/lib/googlemock",
+					"childIndexes" : 
+					[
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-Google_tests.lib.googlemock-Debug-86bd422e1b4f21e96c88.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 4,
+					"source" : "Google_tests/lib/googlemock",
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				},
+				{
+					"build" : "Google_tests/lib/googletest",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-Google_tests.lib.googletest-Debug-ae9809381b1719394c9a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 5,
+					"source" : "Google_tests/lib/googletest",
+					"targetIndexes" : 
+					[
+						5,
+						6
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "BasicStrategySolver",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "BlackJackBot_lib",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						3
+					],
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "Google_tests",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						4
+					],
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "googletest-distribution",
+					"parentIndex" : 2
+				},
+				{
+					"childIndexes" : 
+					[
+						5
+					],
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "gmock",
+					"parentIndex" : 3,
+					"targetIndexes" : 
+					[
+						3,
+						4
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						5
+					],
+					"name" : "gtest",
+					"parentIndex" : 4,
+					"targetIndexes" : 
+					[
+						5,
+						6
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "BasicStrategySolver_run::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-BasicStrategySolver_run-Debug-b7fdd764d5f88228f76f.json",
+					"name" : "BasicStrategySolver_run",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "BlackJackBot_lib::@fb8575ff1ca520ab7763",
+					"jsonFile" : "target-BlackJackBot_lib-Debug-a23a6e823cadaa79c4ee.json",
+					"name" : "BlackJackBot_lib",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "Google_Tests_run::@eb06d550d4862b816b8d",
+					"jsonFile" : "target-Google_Tests_run-Debug-e5a7188871a12ee0d088.json",
+					"name" : "Google_Tests_run",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "gmock::@8e4042a334827d542816",
+					"jsonFile" : "target-gmock-Debug-dc1f565451093e7c19e0.json",
+					"name" : "gmock",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "gmock_main::@8e4042a334827d542816",
+					"jsonFile" : "target-gmock_main-Debug-f318a9e791693ccae3fd.json",
+					"name" : "gmock_main",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "gtest::@30f1f5c04acc29f5722e",
+					"jsonFile" : "target-gtest-Debug-47ad0414c30531f42cea.json",
+					"name" : "gtest",
+					"projectIndex" : 5
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "gtest_main::@30f1f5c04acc29f5722e",
+					"jsonFile" : "target-gtest_main-Debug-b8b86010d2baba39cc56.json",
+					"name" : "gtest_main",
+					"projectIndex" : 5
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/small/CLionProjects/BasicStrategySolver/cmake-build-debug",
+		"source" : "C:/Users/small/CLionProjects/BasicStrategySolver"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 5
+	}
+}

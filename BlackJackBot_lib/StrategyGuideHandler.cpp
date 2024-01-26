@@ -5,8 +5,8 @@
 using namespace std;
 
 // Constructor
-StrategyGuideHandler::StrategyGuideHandler(const std::string& folderPath) {
-    this->folderPath = folderPath;
+StrategyGuideHandler::StrategyGuideHandler() {
+
     strategy = unordered_map< string, array<string, POSSIBLE_DEALER_CARDS>>();
 
     cout << "Created a strategy guide" << endl ;
@@ -20,51 +20,27 @@ StrategyGuideHandler::~StrategyGuideHandler() {
 //Load a guide into the useable strategy
 void StrategyGuideHandler::loadStrategyGuide(const std::string &csvFileName) {
 
+
     StrategyGuideGenerator strategyGuideGenerator;
-    strategy = strategyGuideGenerator.makeStrategyFromFile(folderPath + csvFileName);
-    /*if(!isCSVFile(csvFileName)){
-        return;
+
+    if(StrategyGuideGenerator::isCSVFile(csvFileName)){
+
+        size_t lastBackSlashPos = csvFileName.find_last_of('\\');
+
+        // Extract the folder path from the file name
+        if (lastBackSlashPos != string::npos) {
+            string newFolderPath = csvFileName.substr(0, lastBackSlashPos+1);
+            setNewFolder(newFolderPath);
+        } else {
+            cerr << "Invalid file path for loading a strategy guide." << endl;
+        }
+    }else{
+        cerr << "Invalid .csv for loading a strategy guide." << endl;
     }
 
-    ifstream file(folderPath + csvFileName);
-    if (!file.is_open()) {
-        cerr << "Error: Unable to open file '" << csvFileName << "'" << endl;
-        return;
-    }
+    strategy = strategyGuideGenerator.makeStrategyFromFile( csvFileName);
 
-    const int ENTRIES_PER_LINE = POSSIBLE_DEALER_CARDS + 1;
 
-    // Read and populate the  unordered_map
-    string line;
-    while (getline(file, line)) {
-
-        istringstream ss(line);
-        string token;
-        vector<string> values;
-
-        while (getline(ss,token,',')) {
-            values.push_back(token);
-        }
-
-        // Check for entries per line not correct
-        if (values.size() < ENTRIES_PER_LINE) {
-            cerr << "Error: Entries per line not met. Adding 'Overflow' for missing entries." << endl;
-            values.resize(ENTRIES_PER_LINE, "Overflow");
-        }else if (values.size() > ENTRIES_PER_LINE) {
-            cerr << "Error: Entries per line exceeded. Cutting off additional entries." << endl;
-            values.resize(ENTRIES_PER_LINE, "Overflow");
-        }
-
-        string key = values[0];
-
-        array<string, POSSIBLE_DEALER_CARDS> strategyArray;
-        for (int i = 0; i < POSSIBLE_DEALER_CARDS; i++) {
-            strategyArray[i] = values[i+1];
-        }
-
-        strategy[key] = strategyArray;
-    }
-    file.close();*/
 }
 
 void StrategyGuideHandler::saveStrategyGuide(const std::string &csvFileName) {
@@ -116,9 +92,9 @@ void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, 
 
     if(!StrategyGuideGenerator::isCSVFile(csvFileName))    {return;}
 
-    ifstream file(folderPath + csvFileName);
+    ifstream file(csvFileName);
     if (!file.is_open()) {
-        cerr << "Error: Unable to open file '" << csvFileName << "'" <<  endl;
+        cerr << "Error: Unable to open file '" << csvFileName << " while printing" <<  endl;
         return;
     }
 
@@ -196,12 +172,12 @@ void StrategyGuideHandler::saveResults(float results) {
         return;
     }
 
-    std::string filePath = folderPath + "\\Results.txt";
+    std::string filePath = folderPath + "Results.txt";
 
     std::ofstream file(filePath);
 
     if (!file.is_open()) {
-        std::cerr << "Error: Unable to open/create file '" << filePath << "'" << std::endl;
+        std::cerr << "Error: Unable to open/create file '" << filePath << " while saving" << std::endl;
         return;
     }
 
@@ -213,9 +189,10 @@ void StrategyGuideHandler::saveResults(float results) {
     // Close the file
     file.close();
 
-    std::cout << "Results saved to: " << filePath << std::endl;
+    //std::cout << "Results saved to: " << filePath << std::endl;
 }
 
 void StrategyGuideHandler::setNewFolder(const string &folderPath) {
+    //std::cout << "Setting folder path to " + folderPath << std::endl;
     this->folderPath = folderPath;
 }

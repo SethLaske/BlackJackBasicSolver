@@ -12,7 +12,7 @@
 
 class StrategyGuideHandler {
 public:
-    StrategyGuideHandler(const std::string& folderPath); // Constructor
+    StrategyGuideHandler(); // Constructor
     ~StrategyGuideHandler(); // Destructor
 
     void loadStrategyGuide(const std::string& csvFileName);
