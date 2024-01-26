@@ -54,7 +54,7 @@ bool GeneticAlgorithmManager::createFolder(const std::string& folderPath) {
 
 }
 
-void GeneticAlgorithmManager::testGenerationStrategies(const std::string& generationFolderPath) {
+void GeneticAlgorithmManager::testGenerationStrategies(const std::string& generationFolderPath, const int gamesPerStrategy) {
 
 
     StrategyGuideHandler newStrategy;
@@ -86,7 +86,7 @@ void GeneticAlgorithmManager::testGenerationStrategies(const std::string& genera
                     newStrategy.loadStrategyGuide(strategyFilePath);
 
                     //Tests
-                    table.runGameTesting(10);
+                    table.runGameTesting(gamesPerStrategy);
                 } else {
                     // Handle the case where the strategy file is not found in the subdirectory
                     std::cerr << "Error: Strategy file not found in " << findFileData.cFileName << std::endl;
@@ -173,10 +173,10 @@ void GeneticAlgorithmManager::breedGeneration(const std::string& parentGeneratio
 
     for(const auto& entry : parentResults){
 
-        std::cout << "Folder: " << entry.first << ", Results: " << entry.second;
+        //std::cout << "Folder: " << entry.first << ", Results: " << entry.second;
         file << entry.first << " scored: " << entry.second << "\n";
         parentResults[entry.first] = entry.second - lowestResult + 1;
-        std::cout << " Converts to: " << entry.second << std::endl;
+        //std::cout << " Converts to: " << entry.second << std::endl;
     }
 
     file.close();
@@ -184,7 +184,7 @@ void GeneticAlgorithmManager::breedGeneration(const std::string& parentGeneratio
     //strategyGuideGenerator.mergeTwoGuides("file1", "file2", "child", true);
     for(int i = 0; i < numberOfChildrenPerGeneration; i++){
         if(createFolder(childGenerationFolderPath + childFolderName + std::to_string(i + 1))){
-            std::cout << "Trying to breed files into: " << childGenerationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName << std::endl;
+            //std::cout << "Trying to breed files into: " << childGenerationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName << std::endl;
             strategyGuideGenerator.mergeTwoGuides(selectWeightedEntry(parentResults) + strategyFileName, selectWeightedEntry(parentResults) + strategyFileName,
                                                   childGenerationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName, true);
         }
@@ -208,7 +208,7 @@ std::string GeneticAlgorithmManager::selectWeightedEntry(const std::unordered_ma
     for (const auto& entry : weightedMap) {
         cumulativeSum += entry.second;
         if (randomNumber <= cumulativeSum) {
-            std::cout << "Randomly selected " << entry.first << " for breeding." << std::endl;
+            //std::cout << "Randomly selected " << entry.first << " for breeding." << std::endl;
             return entry.first; // Return the selected entry
         }
     }
@@ -218,4 +218,24 @@ std::string GeneticAlgorithmManager::selectWeightedEntry(const std::unordered_ma
     } else {
         return ""; // Return an empty string if the map is empty
     }
+}
+
+float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolderName, int childrenPerGeneration,
+                                                   int generationCount) {
+    this->numberOfChildrenPerGeneration = childrenPerGeneration;
+    this->numberOfGenerations = generationCount;
+    currentGeneration = 0;
+    int testsPerStrategy = 10000;
+    spawnInitialGeneration(rootFolderName + "\\Gen0");
+
+    for(int i = 0; i < numberOfGenerations; i ++){
+        std::cout << "Testing generation: " << i << std::endl;
+        testGenerationStrategies(rootFolderName + "\\Gen" + std::to_string(i), testsPerStrategy);
+        std::cout << "Breeding generation: " << i << " into generation: " << (i+1) <<std::endl;
+        breedGeneration(rootFolderName + "\\Gen" + std::to_string(i), rootFolderName + "\\Gen" + std::to_string(i+1));
+    }
+    testGenerationStrategies(rootFolderName + "\\Gen" + std::to_string(numberOfGenerations), testsPerStrategy);
+
+
+    return 0;
 }

@@ -1,0 +1,4 @@
+C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen4\Child4 scored: -4.6685
+C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen4\Child1 scored: -4.763
+C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen4\Child3 scored: -4.231
+C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen4\Child2 scored: -4.5785

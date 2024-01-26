@@ -134,12 +134,13 @@ void testGeneticAlgorithm(){
     //cout << HouseRules::toString() << endl;
 
     GeneticAlgorithmManager geneticAlgorithmManager;
-    geneticAlgorithmManager.spawnInitialGeneration(
+    /*geneticAlgorithmManager.spawnInitialGeneration(
             R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen1)");
     geneticAlgorithmManager.testGenerationStrategies(
             R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen1)");
     geneticAlgorithmManager.breedGeneration(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen1)",
                                             R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen2)");
     geneticAlgorithmManager.testGenerationStrategies(
-            R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen2)");
+            R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Gen2)");*/
+    geneticAlgorithmManager.runGeneticAlgorithm(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing)", 4, 5);
 }

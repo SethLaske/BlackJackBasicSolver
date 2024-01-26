@@ -11,11 +11,11 @@ public:
     GeneticAlgorithmManager();
     ~GeneticAlgorithmManager();
 
-    //runGeneticAlgorithm(folder, children, waves)
+    float runGeneticAlgorithm(const std::string& rootFolderName, int childrenPerGeneration, int generationCount);
 
     //Create the Gen 1 folder, the child folders, and completely randomized .csvs in each child
     void spawnInitialGeneration(const std::string& generationFolderPath);
-    void testGenerationStrategies(const std::string& generationFolderPath);
+    void testGenerationStrategies(const std::string& generationFolderPath, const int gamesPerStrategy);
     void breedGeneration(const std::string& parentGenerationFolderName, const std::string& childGenerationFolderPath);
 private:
     StrategyGuideGenerator strategyGuideGenerator;
