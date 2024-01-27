@@ -209,7 +209,7 @@ float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolder
     }
     testGenerationStrategies(parentGenerationPath, testsPerStrategy);
     std::unordered_map<std::string, float> lastGenerationResults = getGenerationResults(parentGenerationPath);
-    saveGenerationResultsToFile(parentGenerationPath + "\\Generation_Results.txt", lastGenerationResults);
+    saveGenerationResultsToFile(parentGenerationPath + "\\_Generation_Results.txt", lastGenerationResults);
 
     return 0;
 }
