@@ -10,7 +10,7 @@
 
 
 GeneticAlgorithmManager::GeneticAlgorithmManager() {
-    currentGeneration = 0;
+    //currentGeneration = 0;
 
     //Default to these while testing other functions
     numberOfChildrenPerGeneration = 4;
@@ -172,11 +172,20 @@ std::string GeneticAlgorithmManager::selectWeightedEntry(const std::unordered_ma
     }
 }
 
-float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolderName, int childrenPerGeneration, int generationCount) {
+float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolderName, int testsPerChild, int childrenPerGeneration, int generationCount) {
+
+    highestResult = -999;
+    highestResultPath = "";
+
+    if(!createFolder(rootFolderName)){
+        std::cerr<< "Not running GA, because Root Folder '" << rootFolderName << "' can not be created"<<std::endl;
+        return highestResult;
+    }
+
     this->numberOfChildrenPerGeneration = childrenPerGeneration;
     this->numberOfGenerations = generationCount;
-    currentGeneration = 0;
-    int testsPerStrategy = 10000;
+    //currentGeneration = 0;
+
     spawnInitialGeneration(rootFolderName + "\\Gen0");
 
     /*for(int i = 0; i < numberOfGenerations; i ++){
@@ -193,7 +202,7 @@ float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolder
         std::cout << "Testing generation: " << i << std::endl;
 
         //std::cout << "Path: " << parentGenerationPath << std::endl;
-        testGenerationStrategies(parentGenerationPath, testsPerStrategy);
+        testGenerationStrategies(parentGenerationPath, testsPerChild);
 
         std::unordered_map<std::string, float> previousGenerationResults = getGenerationResults(parentGenerationPath);
 
@@ -207,11 +216,17 @@ float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolder
         nextGenerationPath = rootFolderName + "\\Gen" + std::to_string(i+2);
         //std::cout << "I: " << i << "Parent Generation Path: " << parentGenerationPath << " Next Generation Path: " << nextGenerationPath << std::endl;
     }
-    testGenerationStrategies(parentGenerationPath, testsPerStrategy);
+    std::cout << "Testing generation: " << numberOfGenerations << std::endl;
+    testGenerationStrategies(parentGenerationPath, testsPerChild);
     std::unordered_map<std::string, float> lastGenerationResults = getGenerationResults(parentGenerationPath);
     saveGenerationResultsToFile(parentGenerationPath + "\\_Generation_Results.txt", lastGenerationResults);
 
-    return 0;
+    std::cout << "*******GA Recap*******" << std::endl;
+    std::cout << "Highest Results: "<< highestResult << std::endl;
+    std::cout << "Available at: "<< highestResultPath << std::endl;
+    std::cout << "**********************" << std::endl;
+
+    return highestResult;
 }
 
 std::unordered_map<std::string, float>
@@ -271,6 +286,10 @@ void GeneticAlgorithmManager::saveGenerationResultsToFile(const std::string &fil
 
     for(const auto& entry : results){
         file << entry.first << " scored: " << entry.second << "\n";
+        if(entry.second > highestResult){
+            highestResult = entry.second;
+            highestResultPath = entry.first;
+        }
     }
 
     file.close();

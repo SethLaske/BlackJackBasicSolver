@@ -11,7 +11,7 @@ public:
     GeneticAlgorithmManager();
     ~GeneticAlgorithmManager();
 
-    float runGeneticAlgorithm(const std::string& rootFolderName, int childrenPerGeneration, int generationCount);
+    float runGeneticAlgorithm(const std::string& rootFolderName, int testsPerChild, int childrenPerGeneration, int generationCount);
 
     //Create the Gen 1 folder, the child folders, and completely randomized .csvs in each child
     void spawnInitialGeneration(const std::string& generationFolderPath);
@@ -20,7 +20,7 @@ public:
     void breedGeneration(const std::unordered_map<std::string, float>& parentGenerationResults, const std::string& childGenerationFolderPath);
 private:
     StrategyGuideGenerator strategyGuideGenerator;
-    int currentGeneration;
+    //int currentGeneration;
 
     int numberOfChildrenPerGeneration;
     int numberOfGenerations;
@@ -38,6 +38,9 @@ private:
 
     std::string selectWeightedEntry(const std::unordered_map<std::string, float>& weightedMap);
     //Run all .csvs in the gen folder at tables to get results
+
+    float highestResult;
+    std::string highestResultPath;
 
 };
 
