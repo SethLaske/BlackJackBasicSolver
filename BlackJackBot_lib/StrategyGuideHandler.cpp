@@ -9,7 +9,7 @@ StrategyGuideHandler::StrategyGuideHandler() {
 
     strategy = unordered_map< string, array<string, POSSIBLE_DEALER_CARDS>>();
 
-    cout << "Created a strategy guide" << endl ;
+    //cout << "Created a strategy guide" << endl ;
 }
 
 // Destructor

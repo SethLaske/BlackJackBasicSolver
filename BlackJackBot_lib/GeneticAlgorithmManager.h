@@ -17,6 +17,7 @@ public:
     void spawnInitialGeneration(const std::string& generationFolderPath);
     void testGenerationStrategies(const std::string& generationFolderPath, const int gamesPerStrategy);
     void breedGeneration(const std::string& parentGenerationFolderName, const std::string& childGenerationFolderPath);
+    void breedGeneration(const std::unordered_map<std::string, float>& parentGenerationResults, const std::string& childGenerationFolderPath);
 private:
     StrategyGuideGenerator strategyGuideGenerator;
     int currentGeneration;
@@ -28,6 +29,12 @@ private:
     const std::string childFolderName = "\\Child";
 
     bool createFolder(const std::string& folderPath);
+
+
+    std::unordered_map<std::string, float> getGenerationResults(const std::string& generationFolderPath);
+    void saveGenerationResultsToFile(const std::string& filePath, std::unordered_map<std::string, float> results);
+    void processGenerationResults(std::unordered_map<std::string, float>& results);
+
 
     std::string selectWeightedEntry(const std::unordered_map<std::string, float>& weightedMap);
     //Run all .csvs in the gen folder at tables to get results

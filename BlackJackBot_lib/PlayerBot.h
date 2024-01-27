@@ -35,8 +35,10 @@ public:
     void getPaid(float addedMoney);
 
 
-    void displayStats();
+    void displayStats() const;
     void resetStats();
+
+    void saveResults();
 
 private:
     float initialMoney;

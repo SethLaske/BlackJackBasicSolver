@@ -96,7 +96,7 @@ void PlayerBot::getPaid(float addedMoney) {
     money += addedMoney;
 }
 
-void PlayerBot::displayStats() {
+void PlayerBot::displayStats() const {
     float netProfit = money - initialMoney;
     float profitPerGame = netProfit/numberOfGamesPlayed;
     float profitPerHand = netProfit/numberOfHandsPlayed;
@@ -116,7 +116,7 @@ void PlayerBot::displayStats() {
     //std::cout << "House edge " << (numberOfHandsPlayed - numberOfTimesPaid) << std::endl;
     std::cout << "********************************" << std::endl;
 
-    strategyGuideHandler.saveResults(profitPerHand);
+    //strategyGuideHandler.saveResults(profitPerHand);
 }
 
 void PlayerBot::resetStats() {
@@ -128,6 +128,12 @@ void PlayerBot::resetStats() {
     numberOfSplits = 0;
 
     numberOfTimesPaid = 0;
+}
+
+void PlayerBot::saveResults() {
+    float netProfit = money - initialMoney;
+    float profitPerHand = netProfit/numberOfHandsPlayed;
+    strategyGuideHandler.saveResults(profitPerHand);
 }
 
 float PlayerBot::getMoney() const {

@@ -103,83 +103,35 @@ void GeneticAlgorithmManager::breedGeneration(const std::string& parentGeneratio
         return;
     }
 
+    std::unordered_map<std::string, float> parentResults = getGenerationResults(parentGenerationFolderName);
 
-    std::unordered_map<std::string, float> parentResults;
-
-    WIN32_FIND_DATA findFileData;
-    HANDLE hFind = FindFirstFile((parentGenerationFolderName + "\\*").c_str(), &findFileData);
-
-    if (hFind == INVALID_HANDLE_VALUE) {
-        std::cerr << "Error: Unable to open directory " << parentGenerationFolderName << " for testing." << std::endl;
-        return;
-    }
-
-    float lowestResult = 1;
-    float highestResult = -1000;
-
-    do {
-        if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
-            if (strcmp(findFileData.cFileName, ".") != 0 && strcmp(findFileData.cFileName, "..") != 0) {
-                std::string childFolderPath = parentGenerationFolderName + "\\" + findFileData.cFileName;
-                std::string resultsFilePath = childFolderPath + "\\Results.txt";
-
-                // Check if Results.txt file exists in the current child folder
-                if (GetFileAttributes(resultsFilePath.c_str()) != INVALID_FILE_ATTRIBUTES) {
-                    // Open the Results.txt file and extract the float value
-                    std::ifstream resultsFile(resultsFilePath);
-                    if (resultsFile.is_open()) {
-                        float resultValue;
-                        resultsFile >> resultValue;
-                        resultsFile.close();
-
-                        if(resultValue > highestResult){
-                            highestResult = resultValue;
-                        }
-                        if(resultValue < lowestResult){
-                            lowestResult = resultValue;
-                        }
-
-                        // Add entry to parentResults map
-                        parentResults[childFolderPath] = resultValue;
-                    } else {
-                        std::cerr << "Error: Unable to open Results.txt in " << childFolderPath << std::endl;
-                    }
-                }
-            }
-        }
-    } while (FindNextFile(hFind, &findFileData) != 0);
-
-    FindClose(hFind);
 
     //TEMP: Saving the generation results here for now, just because they were already found here
 
 
-    std::string filePath = parentGenerationFolderName + "\\Generation_Results.txt";
+    saveGenerationResultsToFile(parentGenerationFolderName + "\\Generation_Results.txt", parentResults);
 
-    std::ofstream file(filePath);
+    for(const auto& entry : parentResults){
 
-    if (!file.is_open()) {
-        std::cerr << "Error: Unable to open/create file '" << filePath << " while saving" << std::endl;
-        return;
+        std::cout << "Folder: " << entry.first << ", Results: " << entry.second << std::endl;
+
     }
 
-    file.clear();
-    file.seekp(0, std::ios::beg);
+    processGenerationResults(parentResults);
 
 
 
-    // Close the file
+
+    std::cout << "Processed files" << std::endl;
 
 
     for(const auto& entry : parentResults){
 
-        //std::cout << "Folder: " << entry.first << ", Results: " << entry.second;
-        file << entry.first << " scored: " << entry.second << "\n";
-        parentResults[entry.first] = entry.second - lowestResult + 1;
-        //std::cout << " Converts to: " << entry.second << std::endl;
+        std::cout << "Folder: " << entry.first << ", Results: " << entry.second << std::endl;
+
     }
 
-    file.close();
+
 
     //strategyGuideGenerator.mergeTwoGuides("file1", "file2", "child", true);
     for(int i = 0; i < numberOfChildrenPerGeneration; i++){
@@ -220,22 +172,142 @@ std::string GeneticAlgorithmManager::selectWeightedEntry(const std::unordered_ma
     }
 }
 
-float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolderName, int childrenPerGeneration,
-                                                   int generationCount) {
+float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolderName, int childrenPerGeneration, int generationCount) {
     this->numberOfChildrenPerGeneration = childrenPerGeneration;
     this->numberOfGenerations = generationCount;
     currentGeneration = 0;
     int testsPerStrategy = 10000;
     spawnInitialGeneration(rootFolderName + "\\Gen0");
 
-    for(int i = 0; i < numberOfGenerations; i ++){
+    /*for(int i = 0; i < numberOfGenerations; i ++){
         std::cout << "Testing generation: " << i << std::endl;
         testGenerationStrategies(rootFolderName + "\\Gen" + std::to_string(i), testsPerStrategy);
         std::cout << "Breeding generation: " << i << " into generation: " << (i+1) <<std::endl;
         breedGeneration(rootFolderName + "\\Gen" + std::to_string(i), rootFolderName + "\\Gen" + std::to_string(i+1));
     }
-    testGenerationStrategies(rootFolderName + "\\Gen" + std::to_string(numberOfGenerations), testsPerStrategy);
+    testGenerationStrategies(rootFolderName + "\\Gen" + std::to_string(numberOfGenerations), testsPerStrategy);*/
+    std::string parentGenerationPath = rootFolderName + "\\Gen0";
+    std::string nextGenerationPath = rootFolderName + "\\Gen1";
 
+    for(int i = 0; i < numberOfGenerations; i ++){
+        std::cout << "Testing generation: " << i << std::endl;
+
+        //std::cout << "Path: " << parentGenerationPath << std::endl;
+        testGenerationStrategies(parentGenerationPath, testsPerStrategy);
+
+        std::unordered_map<std::string, float> previousGenerationResults = getGenerationResults(parentGenerationPath);
+
+        saveGenerationResultsToFile(parentGenerationPath + "\\Generation_Results.txt", previousGenerationResults);
+
+        processGenerationResults(previousGenerationResults);
+
+        std::cout << "Breeding generation: " << i << " into generation: " << (i+1) <<std::endl;
+        breedGeneration(previousGenerationResults, nextGenerationPath);
+        parentGenerationPath = nextGenerationPath;
+        nextGenerationPath = rootFolderName + "\\Gen" + std::to_string(i+2);
+        //std::cout << "I: " << i << "Parent Generation Path: " << parentGenerationPath << " Next Generation Path: " << nextGenerationPath << std::endl;
+    }
+    testGenerationStrategies(parentGenerationPath, testsPerStrategy);
+    std::unordered_map<std::string, float> lastGenerationResults = getGenerationResults(parentGenerationPath);
+    saveGenerationResultsToFile(parentGenerationPath + "\\Generation_Results.txt", lastGenerationResults);
 
     return 0;
+}
+
+std::unordered_map<std::string, float>
+GeneticAlgorithmManager::getGenerationResults(const std::string &generationFolderPath) {
+    std::unordered_map<std::string, float> generationResults;
+
+    WIN32_FIND_DATA findFileData;
+    HANDLE hFind = FindFirstFile((generationFolderPath + "\\*").c_str(), &findFileData);
+
+    if (hFind == INVALID_HANDLE_VALUE) {
+        std::cerr << "Error: Unable to open directory " << generationFolderPath << " for testing." << std::endl;
+        return generationResults;
+    }
+
+
+    do {
+        if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+            if (strcmp(findFileData.cFileName, ".") != 0 && strcmp(findFileData.cFileName, "..") != 0) {
+                std::string childFolderPath = generationFolderPath + "\\" + findFileData.cFileName;
+                std::string resultsFilePath = childFolderPath + "\\Results.txt";
+
+                // Check if Results.txt file exists in the current child folder
+                if (GetFileAttributes(resultsFilePath.c_str()) != INVALID_FILE_ATTRIBUTES) {
+                    // Open the Results.txt file and extract the float value
+                    std::ifstream resultsFile(resultsFilePath);
+                    if (resultsFile.is_open()) {
+                        float resultValue;
+                        resultsFile >> resultValue;
+                        resultsFile.close();
+
+                        // Add entry to parentResults map
+                        generationResults[childFolderPath] = resultValue;
+                    } else {
+                        std::cerr << "Error: Unable to open Results.txt in " << childFolderPath << std::endl;
+                    }
+                }
+            }
+        }
+    } while (FindNextFile(hFind, &findFileData) != 0);
+
+    FindClose(hFind);
+
+    return generationResults;
+}
+
+void GeneticAlgorithmManager::saveGenerationResultsToFile(const std::string &filePath, std::unordered_map<std::string, float> results) {
+    std::ofstream file(filePath);
+
+    if (!file.is_open()) {
+        std::cerr << "Error: Unable to open/create file '" << filePath << " while saving" << std::endl;
+        return;
+    }
+
+    file.clear();
+    file.seekp(0, std::ios::beg);
+
+
+    for(const auto& entry : results){
+        file << entry.first << " scored: " << entry.second << "\n";
+    }
+
+    file.close();
+
+}
+
+void GeneticAlgorithmManager::processGenerationResults(std::unordered_map<std::string, float> &results) {
+    float lowestResult = 0;
+
+    for(const auto& pair : results){
+        if(pair.second < lowestResult){
+            lowestResult = pair.second;
+        }
+        if(pair.second > 0){
+
+            std::cout << "********POSITIVE RESULTS********" << std::endl;
+        }
+    }
+
+    for(const auto& pair : results){
+        results[pair.first] = pair.second - lowestResult + 1;
+    }
+
+}
+
+void GeneticAlgorithmManager::breedGeneration(const std::unordered_map<std::string, float> &parentGenerationResults,
+                                              const std::string &childGenerationFolderPath) {
+    if(!createFolder(childGenerationFolderPath)){
+        return;
+    }
+
+    for(int i = 0; i < numberOfChildrenPerGeneration; i++){
+        if(createFolder(childGenerationFolderPath + childFolderName + std::to_string(i + 1))){
+
+            strategyGuideGenerator.mergeTwoGuides(selectWeightedEntry(parentGenerationResults) + strategyFileName, selectWeightedEntry(parentGenerationResults) + strategyFileName,
+                                                  childGenerationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName, true);
+        }
+
+    }
 }

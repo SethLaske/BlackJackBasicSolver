@@ -18,7 +18,7 @@ public:
     const static std::string toString();
 
     //Dev Variables
-    inline static const bool DISPLAYRESULTS = true;
+    inline static const bool DISPLAYRESULTS = false;
 };
 
 
