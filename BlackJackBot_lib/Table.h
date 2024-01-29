@@ -14,33 +14,32 @@
 class Table {
 
 public:
-    Table(PlayerBot& playerBot, Shoe shoe);
+    //Table(PlayerBot& playerBot, Shoe shoe);
     Table(PlayerBot& playerBot);
     ~Table();
 
+    //Repeats games, shuffling until finished
     void runGameTesting(int numberOfGames);
-    void startGame();
-    void endGame();
+    //Plays a single game
+    void playGame();
 
 private:
     Shoe shoe;
     PlayerBot& playerBot;
     DealerHand dealerHand;
-    std::vector<PlayerHand> playerHands;    //Sadly in order to split I need to include it from the start
-    //House Rules
+    std::vector<PlayerHand> playerHands;
 
-
+    //Individual parts of the game
     void dealHands();
     void handleBlackjacks();
     void doAllPlayerHands();
+    void getPlayerAction(PlayerHand& playerHand);
+    void getDealerAction();
+    void endGame();
 
     void payPlayer(const PlayerHand& playerHand, float payoutRate);     //1 for push, 2 for win, blackjack payout + 1 for natural blackjack
 
-    void getPlayerAction(PlayerHand& playerHand);
-    void getDealerAction();
-
     void displayTable();
-
 };
 
 

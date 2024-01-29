@@ -6,17 +6,16 @@
 
 #include <utility>
 
-Table::Table(PlayerBot& playerBot, Shoe shoe) : playerBot(playerBot), shoe(shoe) {
+/*Table::Table(PlayerBot& playerBot, Shoe shoe) : playerBot(playerBot), shoe(shoe) {
     //this->playerBot = playerBot;
 
     //Shoe shoe;
 
 
-}
+}*/
 
 Table::Table(PlayerBot &playerBot) : playerBot(playerBot), shoe(HouseRules::NUMBEROFDECKSINSHOE, HouseRules::MINPENETRATIONPERCENT, HouseRules::MAXPENETRATIONPERCENT) {
-    //this->playerBot = playerBot;
-    //std::cout << "The number of decks is: " << shoe.getNumberOfDecks() << std::endl;
+
 }
 
 Table::~Table() {
@@ -30,16 +29,17 @@ void Table::runGameTesting(int numberOfGames) {
     playerHands.clear();
 
     for(int i = 0; i < numberOfGames; i ++){
-        startGame();
-        endGame();
+        playGame();
+
         shoe.tryShuffle();
 
-        //std::cout<< "******" << i << std::endl;
-        //if(numberOfGames > 100 && i % (numberOfGames/20) == 0){
-        //    std::cout<< "There should be 20 of these" << std::endl;
-        //}
+
+        if(HouseRules::DISPLAYTRIALSPROGRESS) {
+            if (numberOfGames > 100 && i % (numberOfGames / HouseRules::TRIALPROGRESSINCREMENTS) == 0) {
+                std::cout << (i * 100/numberOfGames) << "% completed with this trial" << std::endl;
+            }
+        }
     }
-    //std::cout<< "player bot?" << std::endl;
     if(HouseRules::DISPLAYRESULTS){
         playerBot.displayStats();
     }
@@ -48,36 +48,40 @@ void Table::runGameTesting(int numberOfGames) {
     playerBot.resetStats();
 }
 
-void Table::startGame() {
+void Table::playGame() {
     dealHands();
 
-    //displayTable();
+    if(HouseRules::DISPLAYGAMEINPROGRESS) displayTable();
+
     handleBlackjacks();
 
+
+
     if(playerHands.empty()){
-        //std::cout << "No players remaining due to blackjacks" << std::endl;
+        if(HouseRules::DISPLAYGAMEINPROGRESS) std::cout << "Game ended due to blackjacks" << std::endl;
+        endGame();
         return;
     }
 
     doAllPlayerHands();
 
     if(playerHands.empty()){
-        //std::cout << "No players remaining due to a bunch of NNN fails" << std::endl;
+        if(HouseRules::DISPLAYGAMEINPROGRESS) std::cout << "Game ended due to players busting" << std::endl;
+        endGame();
         return;
     }
 
-    //std::cout << "Reached Dealer Logic" << std::endl;
 
     getDealerAction();
 
-    //displayTable();
+    if(HouseRules::DISPLAYGAMEINPROGRESS) displayTable();
 
     int finalDealerValue = dealerHand.getHandValue();
 
-    //std::cout << "Dealer finished with a " << finalDealerValue << std::endl;
+
 
     if(finalDealerValue > 21){
-        //std::cout << "Dealer Bust, Table Win" << std::endl;
+        if(HouseRules::DISPLAYGAMEINPROGRESS) std::cout << "Dealer busted" << std::endl;
         for (PlayerHand& hand : playerHands){
             playerBot.payPlayer((float) hand.getBetSize() * 2);
         }
@@ -86,15 +90,17 @@ void Table::startGame() {
         for (PlayerHand& hand : playerHands){
             if(hand.getHandValue() > finalDealerValue){
                 payPlayer(hand, 2);
+                if(HouseRules::DISPLAYGAMEINPROGRESS) std::cout << "Player win" << std::endl;
             } else if(hand.getHandValue() == finalDealerValue){
                 payPlayer(hand, 1);
+                if(HouseRules::DISPLAYGAMEINPROGRESS) std::cout << "Player push" << std::endl;
             } else{
-                //std::cout << "L" << std::endl;
+                if(HouseRules::DISPLAYGAMEINPROGRESS) std::cout << "Player lose" << std::endl;
             }
 
         }
     }
-
+    endGame();
 }
 
 void Table::endGame() {
@@ -113,7 +119,6 @@ void Table::doAllPlayerHands() {
         if(playerHands.front().isHandFinished()){
             if(playerHands.front().getHandValue() <= 21){
                 remainingPlayerHands.push_back(playerHands.front());
-                //std::cout << "Bro could have hit one more time" << std::endl;
             }
             playerHands.erase(playerHands.begin());
         }
@@ -124,7 +129,6 @@ void Table::doAllPlayerHands() {
 
 void Table::dealHands() {
 
-    //playerBot
     int maxNumberOfBets = 2;
     int minBet = 10;
     int maxBet = 500;
@@ -135,6 +139,7 @@ void Table::dealHands() {
         playerHands.push_back(playerHand);
     }
 
+    //Its randomized each time, but still dealing from shoe in proper order
     for (PlayerHand& hand : playerHands){
         hand.addCard(shoe.drawCard());
 
@@ -145,12 +150,6 @@ void Table::dealHands() {
 
     }
     dealerHand.addCard(shoe.drawCard());
-
-
-
-
-
-
 }
 
 void Table::handleBlackjacks(){
@@ -160,7 +159,6 @@ void Table::handleBlackjacks(){
                 payPlayer(hand, 1);
             }
         }
-        //std::cout << "The dealer hit blackjack, the game is over" << std::endl;
         playerHands.clear();
         return;
     }
@@ -181,13 +179,6 @@ void Table::handleBlackjacks(){
 
 void Table::payPlayer(const PlayerHand &playerHand, float payoutRate) {
 
-    if(payoutRate == 1){
-        //std::cout << "Player pushed" << std::endl;
-    } else if(payoutRate == 2){
-        //std::cout << "Player won" << std::endl;
-    } else{
-        //std::cout << "Player blackjack" << std::endl;
-    }
     playerBot.payPlayer((float) playerHand.getBetSize() * payoutRate);
 
 }
@@ -214,6 +205,7 @@ void Table::getPlayerAction(PlayerHand &playerHand) {
 
             break;
 
+            //I have no idea why I can't add a default here
         //default:
           //  std::cerr << "Fucking dumbass" << std::endl;
             //break;
@@ -223,9 +215,9 @@ void Table::getPlayerAction(PlayerHand &playerHand) {
 void Table::getDealerAction() {
     dealerHand.revealHiddenCard();
 
+    //Should be permanent dealer rules, hit until 17 or soft 17
     while (dealerHand.getHandValue() < 17 || (dealerHand.getHandValue() == 17 && dealerHand.getSoftAceCount() > 0)){
         dealerHand.addCard(shoe.drawCard());
-        //std::cout << "The dealer hits resulting in a " << dealerHand.getHandValue() <<std::endl;
     }
 }
 

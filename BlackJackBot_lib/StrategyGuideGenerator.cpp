@@ -8,6 +8,8 @@ const std::string StrategyGuideGenerator::SPLITOPTIONS[] = {"Stay", "Hit", "Doub
 
 StrategyGuideGenerator::StrategyGuideGenerator() {
     srand(time(NULL));
+
+    //Getting the length at the start for easier use later
     lenColumns = sizeof(COLUMNS)/sizeof(COLUMNS[0]);
     lenRows = sizeof(ROWS)/sizeof(ROWS[0]);
     lenNormalOptions = sizeof(NORMALOPTIONS)/sizeof(NORMALOPTIONS[0]);
@@ -26,7 +28,7 @@ std::string StrategyGuideGenerator::getRandomOption(const std::string &rowHead) 
     }
     char firstChar = rowHead.at(0);
 
-    if(firstChar == 'S'){   //Splits have more options that can be used
+    if(firstChar == 'S'){   //If the first letter is S then the hand can be split
         int index = rand() % lenSplitOptions;
         return SPLITOPTIONS[index];
     }
@@ -46,12 +48,13 @@ void StrategyGuideGenerator::createRandomGuideFile(const std::string &filePath) 
         return;
     }
 
+    //Adds the headers
     file << COLUMNS[0];
     for (int j = 1; j < lenColumns; j++) {
-        //std::cout << COLUMNS[j] << std::endl;
         file << "," << COLUMNS[j];
     }
 
+    //Adds a line for every player hand combination
     file << std::endl;
     for (int i = 0; i < lenRows; i++) {
         file << ROWS[i];
@@ -96,6 +99,7 @@ void StrategyGuideGenerator::mergeTwoGuides(const std::string &parentFilePath1, 
     std::unordered_map<std::string, std::array<std::string, (sizeof(COLUMNS)/sizeof(COLUMNS[0]))-1>> parentStrategy1 = makeStrategyFromFile(parentFilePath1);
     std::unordered_map<std::string, std::array<std::string, (sizeof(COLUMNS)/sizeof(COLUMNS[0]))-1>> parentStrategy2 = makeStrategyFromFile(parentFilePath2);
     std::unordered_map<std::string, std::array<std::string, (sizeof(COLUMNS)/sizeof(COLUMNS[0]))-1>> childStrategy;
+
     if(parentStrategy1.size() != lenRows + 1){
         std::cerr << "The first file does not have the proper number of rows";
         return;
@@ -106,11 +110,13 @@ void StrategyGuideGenerator::mergeTwoGuides(const std::string &parentFilePath1, 
         return;
     }
 
+    //Iterates through both files, ensuring they both have the same rows
+    //Each line is picked based on a 50/50 to be selected for the child
+    //If mutation is enabled (which it will typically be), a line may be completely rerandomized, and a single entry will be rerandomized
     for (const auto& pair : parentStrategy1) {
         auto it = parentStrategy2.find(pair.first);
         if (it != parentStrategy2.end()) {
             int parent = rand() % 2;
-            //std::cout << "For the column with header " << pair.first << " the array will come from parent " << parent + 1 << std::endl;
             if(parent == 0){
                 childStrategy[pair.first] = pair.second;
             } else{
@@ -121,11 +127,10 @@ void StrategyGuideGenerator::mergeTwoGuides(const std::string &parentFilePath1, 
             if(mutate){
                 int randomChance = rand() % lineMutationOdds;
                 if(randomChance < 1 && (pair.first != COLUMNS[0])){
-                    //std::cout << "For the column with header " << pair.first << " the array will be rerandomized" << std::endl;
                     childStrategy[pair.first] = getRandomLine(pair.first);
                 }
 
-                //Always randomizes a single entry from each line,
+                //Randomizes a single entry from each line, ensuring constant smaller changes
                 childStrategy[pair.first][rand() % 10] = getRandomOption(pair.first);
             }
 
@@ -144,7 +149,7 @@ void StrategyGuideGenerator::mergeTwoGuides(const std::string &parentFilePath1, 
 std::unordered_map<std::string, std::array<std::string, 10>> StrategyGuideGenerator::makeStrategyFromFile(const std::string& filePath) {
 
     int possibleDealerCards = lenColumns - 1;   //The first entry is reserved for a header
-    std::unordered_map<std::string, std::array<std::string, (sizeof(COLUMNS)/sizeof(COLUMNS[0]))-1>> strategy;
+    std::unordered_map<std::string, std::array<std::string, 10>> strategy;
 
     if(!isCSVFile(filePath)){
         return strategy;

@@ -45,16 +45,10 @@ void testStrategyGuideHandler() {
 
     cout << "The entry is: " << newStrategy.getEntry("PH", 11) << endl;
 
-    newStrategy.editEntry("PH", 7, "Monkey");
+    //newStrategy.editEntry("PH", 7, "Monkey");
 
     newStrategy.saveStrategyGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book2.csv)");
 
-    /*StrategyGuideHandler* guideHandler = new StrategyGuideHandler();
-    guideHandler->LoadGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Book1.csv)");
-    guideHandler->GetEntry("10", 3);
-    guideHandler->EditEntry("A7", 5, "X");
-    guideHandler->SaveGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\TestFile.csv)");
-    delete guideHandler;*/
 }
 
 void testShoe(){
@@ -135,5 +129,5 @@ void testGeneticAlgorithm(){
 
     GeneticAlgorithmManager geneticAlgorithmManager;
 
-    geneticAlgorithmManager.runGeneticAlgorithm(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Root)", 500, 10, 10);
+    geneticAlgorithmManager.runGeneticAlgorithm(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Root)", 500, 100, 100);
 }

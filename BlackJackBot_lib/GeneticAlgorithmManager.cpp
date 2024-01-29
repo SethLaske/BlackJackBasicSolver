@@ -39,7 +39,13 @@ float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolder
     std::string nextGenerationPath = rootFolderName + "\\Gen1";
 
     for(int i = 0; i < numberOfGenerations; i ++){
-        std::cout << "Testing generation: " << i << std::endl;
+        //std::cout << "Testing generation: " << i << std::endl;
+
+        if(HouseRules::DISPLAYGENETICALGORITHMPROGRESS) {
+            if (numberOfGenerations > HouseRules::GENETICALGORITHMPROGRESSINCREMENTS && i % (numberOfGenerations / HouseRules::GENETICALGORITHMPROGRESSINCREMENTS) == 0) {
+                std::cout << (i * 100/numberOfGenerations) << "% completed with this trial" << std::endl;
+            }
+        }
 
         testGenerationStrategies(parentGenerationPath, testsPerChild);
 
@@ -54,12 +60,12 @@ float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolder
         nextGenerationPath = rootFolderName + "\\Gen" + std::to_string(i+2);
 
     }
-    std::cout << "Testing generation: " << numberOfGenerations << std::endl;
+
     testGenerationStrategies(parentGenerationPath, testsPerChild);
     std::unordered_map<std::string, float> lastGenerationResults = getGenerationResults(parentGenerationPath);
     saveGenerationResultsToFile(parentGenerationPath + "\\_Generation_Results.txt", lastGenerationResults);
 
-    std::cout << "*******GA Recap*******" << std::endl;
+    std::cout << std::endl << "*******GA Recap*******" << std::endl;
     std::cout << "Highest Results: "<< highestResult << std::endl;
     std::cout << "Available at: "<< highestResultPath << std::endl;
     std::cout << "**********************" << std::endl;

@@ -12,15 +12,15 @@
 
 class StrategyGuideHandler {
 public:
-    StrategyGuideHandler(); // Constructor
-    ~StrategyGuideHandler(); // Destructor
+    StrategyGuideHandler();
+    ~StrategyGuideHandler();
 
     void loadStrategyGuide(const std::string& csvFileName);
     void saveStrategyGuide(const std::string& csvFileName);
-    void setNewFolder(const std::string& folderPath);
+
     void saveResults(float results);
     std::basic_string<char> getEntry(const std::string& playerCards, int dealerCard);
-    void editEntry(const std::string& playerCards, int dealerCard, std::string newMove);
+    //void editEntry(const std::string& playerCards, int dealerCard, std::string newMove);
 
     static const int  POSSIBLE_DEALER_CARDS = 10;
 private:
@@ -32,7 +32,7 @@ private:
 
     [[maybe_unused]] void printCurrentStrategy();
 
-
+    void setNewFolder(const std::string& folderPath);
     bool isValidDealerNumber(int dealerCard) const;
 };
 

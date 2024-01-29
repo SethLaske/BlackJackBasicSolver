@@ -6,28 +6,20 @@ using namespace std;
 
 // Constructor
 StrategyGuideHandler::StrategyGuideHandler() {
-
     strategy = unordered_map< string, array<string, POSSIBLE_DEALER_CARDS>>();
-
-    //cout << "Created a strategy guide" << endl ;
 }
 
 // Destructor
 StrategyGuideHandler::~StrategyGuideHandler() {
-    //cout << "Deleting the strategy guide" << endl ;
 }
 
-//Load a guide into the useable strategy
 void StrategyGuideHandler::loadStrategyGuide(const std::string &csvFileName) {
-
-
     StrategyGuideGenerator strategyGuideGenerator;
 
     if(StrategyGuideGenerator::isCSVFile(csvFileName)){
 
         size_t lastBackSlashPos = csvFileName.find_last_of('\\');
 
-        // Extract the folder path from the file name
         if (lastBackSlashPos != string::npos) {
             string newFolderPath = csvFileName.substr(0, lastBackSlashPos+1);
             setNewFolder(newFolderPath);
@@ -39,8 +31,6 @@ void StrategyGuideHandler::loadStrategyGuide(const std::string &csvFileName) {
     }
 
     strategy = strategyGuideGenerator.makeStrategyFromFile( csvFileName);
-
-
 }
 
 void StrategyGuideHandler::saveStrategyGuide(const std::string &csvFileName) {
@@ -70,7 +60,7 @@ basic_string<char> StrategyGuideHandler::getEntry(const string& playerCards, int
     return "L";
 }
 
-void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, string newMove) {
+/*void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, string newMove) {
     //Dealer can have a 2-11, but the indexes will correspond to 0-9
     dealerCard -= 2;
 
@@ -86,7 +76,7 @@ void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, 
         return;
     }
     //printCurrentStrategy();
-}
+}*/
 
 [[maybe_unused]] void StrategyGuideHandler::printFile(const string &csvFileName) {
 
@@ -98,15 +88,12 @@ void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, 
         return;
     }
 
-    // Set the total number of entries per line
     const int ENTRIES_PER_LINE = POSSIBLE_DEALER_CARDS + 1;
 
-    // Read and print each line from the CSV file
     string line;
     while ( getline(file, line)) {
          cout << "NEW LINE: ";
 
-        // Tokenize the line based on commas
         istringstream ss(line);
         string token;
         vector< string> values;
@@ -115,7 +102,6 @@ void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, 
             values.push_back(token);
         }
 
-        // Check for entries per line exceeded or not met
         if (values.size() > ENTRIES_PER_LINE) {
              cerr << "Error: Entries per line exceeded. Ignoring extra entries." <<  endl;
             values.resize(ENTRIES_PER_LINE, "Overflow");
@@ -124,11 +110,9 @@ void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, 
             values.resize(ENTRIES_PER_LINE, "Overflow");
         }
 
-        // Print the first value by itself
         if (!values.empty()) {
             cout << values[0];
 
-            // Print the rest of the values (excluding the first value)
             for (size_t i = 1; i < values.size(); ++i) {
                 cout << ", " << values[i];
             }
@@ -137,7 +121,6 @@ void StrategyGuideHandler::editEntry(const string& playerCards, int dealerCard, 
         cout <<  endl;
     }
 
-    // Close the file
     file.close();
 }
 
@@ -166,7 +149,6 @@ bool StrategyGuideHandler::isValidDealerNumber(int dealerCard) const {
 }
 
 void StrategyGuideHandler::saveResults(float results) {
-    // Check if folderPath is not empty
     if (folderPath.empty()) {
         std::cerr << "Error: Folder path is empty." << std::endl;
         return;
@@ -186,13 +168,9 @@ void StrategyGuideHandler::saveResults(float results) {
 
     file << results;
 
-    // Close the file
     file.close();
-
-    //std::cout << "Results saved to: " << filePath << std::endl;
 }
 
 void StrategyGuideHandler::setNewFolder(const string &folderPath) {
-    //std::cout << "Setting folder path to " + folderPath << std::endl;
     this->folderPath = folderPath;
 }
