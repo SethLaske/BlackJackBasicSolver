@@ -1,6 +1,6 @@
 #include "HouseRules.h"
 
-const std::string HouseRules::toString() {
+std::string HouseRules::toString() {
     std::string returnString = "***HOUSE RULES***";
     returnString += "\n Blackjack payout: " + std::to_string(BLACKJACKPAYOUTRATE);
     returnString += "\n Number of decks: " + std::to_string(NUMBEROFDECKSINSHOE);

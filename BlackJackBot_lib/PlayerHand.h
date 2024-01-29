@@ -14,10 +14,11 @@ public:
     PlayerHand(int betSize);
     ~PlayerHand();
 
-
     int getBetSize() const;
     int getHandSize() const;
+
     void stay();
+    //Hit
     void addCard(const Card& addedCard) override;
     void doubleDown(const Card& addedCard);
     Card splitCards();
@@ -31,9 +32,6 @@ public:
 private:
     bool handFinished;
     int betSize;
-
-    //bool splittable;
-    //bool doubleable;
 };
 
 

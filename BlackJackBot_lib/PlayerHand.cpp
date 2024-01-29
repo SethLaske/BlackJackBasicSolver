@@ -7,16 +7,12 @@
 
 PlayerHand::PlayerHand(int betSize) {
     this->betSize = betSize;
-    /*splittable = false;
-    canBeDoubled = false;*/
     handFinished = false;
 }
 
 PlayerHand::~PlayerHand() {
 
 }
-
-
 
 int PlayerHand::getBetSize() const {
     return betSize;
@@ -29,32 +25,16 @@ void PlayerHand::stay() {
 void PlayerHand::addCard(const Card& addedCard) {
     Hand::addCard(addedCard);
 
-    //std::cout << "Card is being added to player hand too" << std::endl;
-
-    /*if(cards.size() == 2){
-        canBeDoubled = true;
-        if(cards[0].getCardValue() == cards[1].getCardValue()){
-            splittable = true;
-        }else{
-            splittable = false;
-        }
-    } else{
-        canBeDoubled = false;
-        splittable = false;
-    }*/
-
-    //These can combine later, this is funnier (and also for testing purposes)
-    if(valueCount > 21){
-        //std::cout << "Bust" << std::endl;
-        handFinished = true;
-    } else if(valueCount == 21){
-        //std::cout << "Whats 9 + 10?" << std::endl;
+    //If its equal to 21, then the player will be forced to stop, and if over then they busted and cant do anything
+    if(valueCount >= 21){
         handFinished = true;
     }
 }
 
 void PlayerHand::doubleDown(const Card& addedCard) {
     if(!canDouble()){
+        std::cerr << "This hand can not be doubled" << std::endl;
+        displayHand();
         return;
     }
     betSize *= 2;
@@ -64,17 +44,18 @@ void PlayerHand::doubleDown(const Card& addedCard) {
 
 Card PlayerHand::splitCards() {
     if(!canSplit()){
-        //std::cerr << "Can't be split" << std::endl;
+        std::cerr << "This hand can't be split" << std::endl;
+        displayHand();
         return {Card::SPADES, Card::ACE};
     }
     Card removedCard = cards.back();
     cards.pop_back();
 
     valueCount -= removedCard.getCardValue();
+    //Handling aces, there will be a soft ace remaining
     if(removedCard.getCardValue() == 11){
         valueCount += 10;
     }
-    //std::cout << "SPLITTING OFF A " << cards[0].getCardValue() << " with a new size of" << cards.size() << std::endl;
 
     return removedCard;
 }
@@ -93,7 +74,8 @@ bool PlayerHand::canSplit() const{
     }
 
     //This might also require some extra logic in checking the total number of times a hand can be split
-        //Assumption is that splitting more than once will happen so infrequently that it won't affect the stats
+    //Assumption is that splitting more than once will happen so infrequently that it won't affect the stats
+
     if(cards[0].getCardValue() == cards[1].getCardValue()){
         return true;
     }
@@ -112,7 +94,7 @@ int PlayerHand::getHandSize() const {
 void PlayerHand::displayHand() {
     std::cout << "Player:" << std::endl;
     Hand::displayHand();
-    std::cout << " Current value is "<< valueCount << " and the soft ace count is " << softAceCount << std::endl;
+    std::cout << "Current value is "<< valueCount << " and the soft ace count is " << softAceCount << std::endl;
     std::cout << "For a bet of: " << betSize <<std::endl;
 }
 

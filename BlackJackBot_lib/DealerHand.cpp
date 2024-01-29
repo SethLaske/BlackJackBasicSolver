@@ -15,7 +15,6 @@ void DealerHand::addHiddenCard(const Card& newCard) {
 }
 
 void DealerHand::revealHiddenCard() {
-    //std::cout << "The hidden card was the: " << hiddenCard.toString() << std::endl;
     addCard(hiddenCard);
 }
 
@@ -32,5 +31,4 @@ void DealerHand::displayHand() {
     if(cards.size() == 1){
         std::cout << "? of ?" << std::endl;
     }
-
 }

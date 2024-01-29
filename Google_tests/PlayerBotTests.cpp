@@ -10,7 +10,7 @@ TEST(PlayerBotSuite, Payments){
 
     PlayerBot player(500, strategy);
 
-    player.getPaid(50);
+    player.payPlayer(50);
 
     EXPECT_EQ(player.getMoney(), 550);
 }

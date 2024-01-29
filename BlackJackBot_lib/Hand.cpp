@@ -18,7 +18,6 @@ void Hand::addCard(const Card& addedCard) {
 
     cards.push_back(addedCard);
 
-    //std::cout << "The card being added to the hand is the " << addedCard.toString() << " with a value of: " << addedCard.getCardValue() << std::endl;
     if(addedCard.getCardValue() == 11){
         softAceCount ++;
     }

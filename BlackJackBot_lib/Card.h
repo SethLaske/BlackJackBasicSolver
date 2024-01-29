@@ -34,7 +34,7 @@ public:
     //Returns the suit and value of the card as a string
     std::string toString() const;
 
-    //Handle blackjack logic of getting a cards in game value
+    //Handle blackjack logic of getting a cards in-game value
     int getCardValue() const;
 
 

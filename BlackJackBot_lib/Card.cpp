@@ -18,7 +18,6 @@ std::string Card::toString() const {
     suitStr = SUIT_STRINGS[suit];
     valueStr = VALUE_STRINGS[value-1];
 
-
     return valueStr + " of " + suitStr;
 }
 

@@ -15,7 +15,7 @@ public:
     inline static const float MAXPENETRATIONPERCENT = .6f;
     inline static const bool IGNOREDEBT = true;
 
-    const static std::string toString();
+    static std::string toString();
 
     //Dev Variables
     inline static const bool DISPLAYRESULTS = false;

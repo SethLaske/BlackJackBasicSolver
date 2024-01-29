@@ -8,54 +8,89 @@
 #include "Table.h"
 
 
-
 GeneticAlgorithmManager::GeneticAlgorithmManager() {
-    //currentGeneration = 0;
 
-    //Default to these while testing other functions
     numberOfChildrenPerGeneration = 4;
     numberOfGenerations = 4;
 
-    srand(time(NULL));
+    srand(time(nullptr));
 }
 
 GeneticAlgorithmManager::~GeneticAlgorithmManager() {
 
 }
 
+float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolderName, int testsPerChild, int childrenPerGeneration, int generationCount) {
+
+    highestResult = -999;
+    highestResultPath = "";
+
+    if(!createFolder(rootFolderName)){
+        std::cerr<< "Not running GA, because Root Folder '" << rootFolderName << "' can not be created"<<std::endl;
+        return highestResult;
+    }
+
+    this->numberOfChildrenPerGeneration = childrenPerGeneration;
+    this->numberOfGenerations = generationCount;
+
+    spawnInitialGeneration(rootFolderName + "\\Gen0");
+
+    std::string parentGenerationPath = rootFolderName + "\\Gen0";
+    std::string nextGenerationPath = rootFolderName + "\\Gen1";
+
+    for(int i = 0; i < numberOfGenerations; i ++){
+        std::cout << "Testing generation: " << i << std::endl;
+
+        testGenerationStrategies(parentGenerationPath, testsPerChild);
+
+        std::unordered_map<std::string, float> previousGenerationResults = getGenerationResults(parentGenerationPath);
+
+        saveGenerationResultsToFile(parentGenerationPath + "\\Generation_Results.txt", previousGenerationResults);
+
+        processGenerationResults(previousGenerationResults);
+
+        breedGeneration(previousGenerationResults, nextGenerationPath);
+        parentGenerationPath = nextGenerationPath;
+        nextGenerationPath = rootFolderName + "\\Gen" + std::to_string(i+2);
+
+    }
+    std::cout << "Testing generation: " << numberOfGenerations << std::endl;
+    testGenerationStrategies(parentGenerationPath, testsPerChild);
+    std::unordered_map<std::string, float> lastGenerationResults = getGenerationResults(parentGenerationPath);
+    saveGenerationResultsToFile(parentGenerationPath + "\\_Generation_Results.txt", lastGenerationResults);
+
+    std::cout << "*******GA Recap*******" << std::endl;
+    std::cout << "Highest Results: "<< highestResult << std::endl;
+    std::cout << "Available at: "<< highestResultPath << std::endl;
+    std::cout << "**********************" << std::endl;
+
+    return highestResult;
+}
 
 void GeneticAlgorithmManager::spawnInitialGeneration(const std::string& generationFolderPath) {
-    //std::filesystem::path directoryPath = "path/to/your/directory";
     if(!createFolder(generationFolderPath)){
         return;
     }
 
     for(int i = 0; i < numberOfChildrenPerGeneration; i++){
-
         if(createFolder(generationFolderPath + childFolderName + std::to_string(i + 1))){
             strategyGuideGenerator.createRandomGuideFile(generationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName);
         }else{
             std::cerr << "While spawning the initial wave, was unable to spawn " + generationFolderPath + childFolderName + std::to_string(i + 1) << std::endl;
         }
     }
-
-
 }
 
 bool GeneticAlgorithmManager::createFolder(const std::string& folderPath) {
-
-    if (!CreateDirectoryA(folderPath.c_str(), NULL)) {
+    if (!CreateDirectoryA(folderPath.c_str(), nullptr)) {
         std::cerr << "Error: Unable to create directory " << folderPath << std::endl;
         return false;
     } else {
-        //std::cout << "Directory " << folderPath << " created successfully." << std::endl;
         return true;
     }
-
 }
 
-void GeneticAlgorithmManager::testGenerationStrategies(const std::string& generationFolderPath, const int gamesPerStrategy) {
-
+void GeneticAlgorithmManager::testGenerationStrategies(const std::string& generationFolderPath, int gamesPerStrategy) {
 
     StrategyGuideHandler newStrategy;
 
@@ -76,19 +111,14 @@ void GeneticAlgorithmManager::testGenerationStrategies(const std::string& genera
 
         if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
             if (strcmp(findFileData.cFileName, ".") != 0 && strcmp(findFileData.cFileName, "..") != 0) {
-                // Build the full path to the strategy file in the current subdirectory
                 std::string strategyFilePath = generationFolderPath + "\\" + findFileData.cFileName + strategyFileName;
 
-                // Check if the strategy file exists in the subdirectory
                 if (GetFileAttributes(strategyFilePath.c_str()) != INVALID_FILE_ATTRIBUTES) {
 
-                    //std::cout << "Passing in file " << strategyFilePath << " for testing" << std::endl;
                     newStrategy.loadStrategyGuide(strategyFilePath);
 
-                    //Tests
                     table.runGameTesting(gamesPerStrategy);
                 } else {
-                    // Handle the case where the strategy file is not found in the subdirectory
                     std::cerr << "Error: Strategy file not found in " << findFileData.cFileName << std::endl;
                 }
             }
@@ -98,56 +128,7 @@ void GeneticAlgorithmManager::testGenerationStrategies(const std::string& genera
     FindClose(hFind);
 }
 
-void GeneticAlgorithmManager::breedGeneration(const std::string& parentGenerationFolderName, const std::string& childGenerationFolderPath) {
-    if(!createFolder(childGenerationFolderPath)){
-        return;
-    }
-
-    std::unordered_map<std::string, float> parentResults = getGenerationResults(parentGenerationFolderName);
-
-
-    //TEMP: Saving the generation results here for now, just because they were already found here
-
-
-    saveGenerationResultsToFile(parentGenerationFolderName + "\\Generation_Results.txt", parentResults);
-
-    for(const auto& entry : parentResults){
-
-        std::cout << "Folder: " << entry.first << ", Results: " << entry.second << std::endl;
-
-    }
-
-    processGenerationResults(parentResults);
-
-
-
-
-    std::cout << "Processed files" << std::endl;
-
-
-    for(const auto& entry : parentResults){
-
-        std::cout << "Folder: " << entry.first << ", Results: " << entry.second << std::endl;
-
-    }
-
-
-
-    //strategyGuideGenerator.mergeTwoGuides("file1", "file2", "child", true);
-    for(int i = 0; i < numberOfChildrenPerGeneration; i++){
-        if(createFolder(childGenerationFolderPath + childFolderName + std::to_string(i + 1))){
-            //std::cout << "Trying to breed files into: " << childGenerationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName << std::endl;
-            strategyGuideGenerator.mergeTwoGuides(selectWeightedEntry(parentResults) + strategyFileName, selectWeightedEntry(parentResults) + strategyFileName,
-                                                  childGenerationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName, true);
-        }
-
-    }
-
-
-}
-
 std::string GeneticAlgorithmManager::selectWeightedEntry(const std::unordered_map<std::string, float>& weightedMap) {
-    // Calculate the total sum of probabilities
     float totalSum = 0.0f;
     for (const auto& entry : weightedMap) {
         totalSum += entry.second;
@@ -155,82 +136,23 @@ std::string GeneticAlgorithmManager::selectWeightedEntry(const std::unordered_ma
 
     float randomNumber = rand() % (int)totalSum;
 
-    // Iterate through the map and find the entry whose cumulative probability range includes the random number
     float cumulativeSum = 0.0f;
     for (const auto& entry : weightedMap) {
         cumulativeSum += entry.second;
         if (randomNumber <= cumulativeSum) {
-            //std::cout << "Randomly selected " << entry.first << " for breeding." << std::endl;
-            return entry.first; // Return the selected entry
+            return entry.first;
         }
     }
 
     if (!weightedMap.empty()) {
         return weightedMap.begin()->first;
-    } else {
-        return ""; // Return an empty string if the map is empty
     }
+
+    return "";
+
 }
 
-float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolderName, int testsPerChild, int childrenPerGeneration, int generationCount) {
-
-    highestResult = -999;
-    highestResultPath = "";
-
-    if(!createFolder(rootFolderName)){
-        std::cerr<< "Not running GA, because Root Folder '" << rootFolderName << "' can not be created"<<std::endl;
-        return highestResult;
-    }
-
-    this->numberOfChildrenPerGeneration = childrenPerGeneration;
-    this->numberOfGenerations = generationCount;
-    //currentGeneration = 0;
-
-    spawnInitialGeneration(rootFolderName + "\\Gen0");
-
-    /*for(int i = 0; i < numberOfGenerations; i ++){
-        std::cout << "Testing generation: " << i << std::endl;
-        testGenerationStrategies(rootFolderName + "\\Gen" + std::to_string(i), testsPerStrategy);
-        std::cout << "Breeding generation: " << i << " into generation: " << (i+1) <<std::endl;
-        breedGeneration(rootFolderName + "\\Gen" + std::to_string(i), rootFolderName + "\\Gen" + std::to_string(i+1));
-    }
-    testGenerationStrategies(rootFolderName + "\\Gen" + std::to_string(numberOfGenerations), testsPerStrategy);*/
-    std::string parentGenerationPath = rootFolderName + "\\Gen0";
-    std::string nextGenerationPath = rootFolderName + "\\Gen1";
-
-    for(int i = 0; i < numberOfGenerations; i ++){
-        std::cout << "Testing generation: " << i << std::endl;
-
-        //std::cout << "Path: " << parentGenerationPath << std::endl;
-        testGenerationStrategies(parentGenerationPath, testsPerChild);
-
-        std::unordered_map<std::string, float> previousGenerationResults = getGenerationResults(parentGenerationPath);
-
-        saveGenerationResultsToFile(parentGenerationPath + "\\Generation_Results.txt", previousGenerationResults);
-
-        processGenerationResults(previousGenerationResults);
-
-        std::cout << "Breeding generation: " << i << " into generation: " << (i+1) <<std::endl;
-        breedGeneration(previousGenerationResults, nextGenerationPath);
-        parentGenerationPath = nextGenerationPath;
-        nextGenerationPath = rootFolderName + "\\Gen" + std::to_string(i+2);
-        //std::cout << "I: " << i << "Parent Generation Path: " << parentGenerationPath << " Next Generation Path: " << nextGenerationPath << std::endl;
-    }
-    std::cout << "Testing generation: " << numberOfGenerations << std::endl;
-    testGenerationStrategies(parentGenerationPath, testsPerChild);
-    std::unordered_map<std::string, float> lastGenerationResults = getGenerationResults(parentGenerationPath);
-    saveGenerationResultsToFile(parentGenerationPath + "\\_Generation_Results.txt", lastGenerationResults);
-
-    std::cout << "*******GA Recap*******" << std::endl;
-    std::cout << "Highest Results: "<< highestResult << std::endl;
-    std::cout << "Available at: "<< highestResultPath << std::endl;
-    std::cout << "**********************" << std::endl;
-
-    return highestResult;
-}
-
-std::unordered_map<std::string, float>
-GeneticAlgorithmManager::getGenerationResults(const std::string &generationFolderPath) {
+std::unordered_map<std::string, float> GeneticAlgorithmManager::getGenerationResults(const std::string &generationFolderPath) {
     std::unordered_map<std::string, float> generationResults;
 
     WIN32_FIND_DATA findFileData;
@@ -315,15 +237,13 @@ void GeneticAlgorithmManager::processGenerationResults(std::unordered_map<std::s
 
 }
 
-void GeneticAlgorithmManager::breedGeneration(const std::unordered_map<std::string, float> &parentGenerationResults,
-                                              const std::string &childGenerationFolderPath) {
+void GeneticAlgorithmManager::breedGeneration(const std::unordered_map<std::string, float> &parentGenerationResults, const std::string &childGenerationFolderPath) {
     if(!createFolder(childGenerationFolderPath)){
         return;
     }
 
     for(int i = 0; i < numberOfChildrenPerGeneration; i++){
         if(createFolder(childGenerationFolderPath + childFolderName + std::to_string(i + 1))){
-
             strategyGuideGenerator.mergeTwoGuides(selectWeightedEntry(parentGenerationResults) + strategyFileName, selectWeightedEntry(parentGenerationResults) + strategyFileName,
                                                   childGenerationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName, true);
         }

@@ -1,30 +1,24 @@
-//
-// Created by small on 1/16/2024.
-//
-
 #include "PlayerBot.h"
 
 PlayerBot::PlayerBot(float startingMoney, StrategyGuideHandler& strategyGuideHandler) : strategyGuideHandler(strategyGuideHandler){
     initialMoney = startingMoney;
 
-    //this->strategyGuideHandler = strategyGuideHandler;
-
     resetStats();
 }
 
 PlayerBot::~PlayerBot() {
-    //std::cout << "The players final money was " << money << std::endl;
+
 }
 
 PLAYERACTION PlayerBot::getPlayerAction(PlayerHand &playerHand, const DealerHand &dealerHand) {
     std::string playerCardsString = getPlayerCardDecoding(playerHand);
-
     std::basic_string<char> strategyRecommendation = strategyGuideHandler.getEntry(playerCardsString , dealerHand.getHandValue());
-
     return getUseableAction(playerHand, strategyRecommendation);
 }
 
 PLAYERACTION PlayerBot::getUseableAction(PlayerHand &playerHand, const std::basic_string<char> &strategyRecommendation) {
+
+    //Leaving room to add functionality for more specifics. For example, adding SplitIfDOS
     if(strategyRecommendation == "Hit"){
         return HIT;
     }
@@ -33,6 +27,7 @@ PLAYERACTION PlayerBot::getUseableAction(PlayerHand &playerHand, const std::basi
         return STAY;
     }
 
+    //Adding a second layer of checks for being able to double and split to handle the complexities of a strategy guide
     if (strategyRecommendation == "Double"){
         if(playerHand.canDouble() && (HouseRules::IGNOREDEBT || money > playerHand.getBetSize())){
             money -= playerHand.getBetSize();
@@ -48,11 +43,11 @@ PLAYERACTION PlayerBot::getUseableAction(PlayerHand &playerHand, const std::basi
             numberOfSplits++;
             return SPLIT;
         }
-
         return STAY;
     }
 
-    std::cerr << strategyRecommendation << "Couldn't figure out the proper move" << std::endl;
+    //If the options are ever not provided the hand is shown
+    std::cerr << "Couldn't figure out the proper action: " << strategyRecommendation << std::endl;
     playerHand.displayHand();
 
     return UNKNOWN;
@@ -62,17 +57,17 @@ std::string PlayerBot::getPlayerCardDecoding(const PlayerHand &playerHand) const
     std::string playerCardsString;
 
     if (playerHand.canSplit() && (HouseRules::IGNOREDEBT || money > playerHand.getBetSize())) {
+        //Pair of aces would have value of 12, but one ace would be soft
         if (playerHand.getSoftAceCount() > 0) {
             playerCardsString = "S11";
         } else {
-            // Assuming getHandValue() returns an integer
             playerCardsString = "S" + std::to_string(playerHand.getHandValue() / 2);
         }
     } else if (playerHand.getSoftAceCount() > 0) {
-        // Assuming getHandValue() returns an integer
+        //A1 (if can't split aces) to A10
         playerCardsString = "A" + std::to_string(playerHand.getHandValue() - 11);
     } else {
-        // Assuming getHandValue() returns an integer
+        //If there's no splitting or soft aces, it's just a hard value
         playerCardsString = std::to_string(playerHand.getHandValue());
     }
     return playerCardsString;
@@ -91,7 +86,7 @@ std::vector<int> PlayerBot::getPlayerBets(int maxNumberOfBets, int minBet, int m
     return bets;
 }
 
-void PlayerBot::getPaid(float addedMoney) {
+void PlayerBot::payPlayer(float addedMoney) {
     numberOfTimesPaid++;
     money += addedMoney;
 }
@@ -115,8 +110,6 @@ void PlayerBot::displayStats() const {
     std::cout << "Number of loses " << (numberOfHandsPlayed - numberOfTimesPaid) << std::endl;
     //std::cout << "House edge " << (numberOfHandsPlayed - numberOfTimesPaid) << std::endl;
     std::cout << "********************************" << std::endl;
-
-    //strategyGuideHandler.saveResults(profitPerHand);
 }
 
 void PlayerBot::resetStats() {
@@ -130,7 +123,7 @@ void PlayerBot::resetStats() {
     numberOfTimesPaid = 0;
 }
 
-void PlayerBot::saveResults() {
+void PlayerBot::saveResultsToFile() {
     float netProfit = money - initialMoney;
     float profitPerHand = netProfit/numberOfHandsPlayed;
     strategyGuideHandler.saveResults(profitPerHand);

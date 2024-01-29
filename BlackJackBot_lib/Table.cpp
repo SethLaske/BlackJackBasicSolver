@@ -43,7 +43,7 @@ void Table::runGameTesting(int numberOfGames) {
     if(HouseRules::DISPLAYRESULTS){
         playerBot.displayStats();
     }
-    playerBot.saveResults();
+    playerBot.saveResultsToFile();
 
     playerBot.resetStats();
 }
@@ -79,7 +79,7 @@ void Table::startGame() {
     if(finalDealerValue > 21){
         //std::cout << "Dealer Bust, Table Win" << std::endl;
         for (PlayerHand& hand : playerHands){
-            playerBot.getPaid((float) hand.getBetSize() * 2);
+            playerBot.payPlayer((float) hand.getBetSize() * 2);
         }
     }
     else{
@@ -188,7 +188,7 @@ void Table::payPlayer(const PlayerHand &playerHand, float payoutRate) {
     } else{
         //std::cout << "Player blackjack" << std::endl;
     }
-    playerBot.getPaid((float)playerHand.getBetSize() * payoutRate);
+    playerBot.payPlayer((float) playerHand.getBetSize() * payoutRate);
 
 }
 
