@@ -2,6 +2,7 @@
 // Created by small on 1/22/2024.
 //
 
+#include <algorithm>
 #include "GeneticAlgorithmManager.h"
 #include "StrategyGuideHandler.h"
 #include "PlayerBot.h"
@@ -39,6 +40,7 @@ float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolder
     std::string nextGenerationPath = rootFolderName + "\\Gen1";
 
     for(int i = 0; i < numberOfGenerations; i ++){
+
         //std::cout << "Testing generation: " << i << std::endl;
 
         if(HouseRules::DISPLAYGENETICALGORITHMPROGRESS) {
@@ -51,7 +53,7 @@ float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolder
 
         std::unordered_map<std::string, float> previousGenerationResults = getGenerationResults(parentGenerationPath);
 
-        saveGenerationResultsToFile(parentGenerationPath + "\\Generation_Results.txt", previousGenerationResults);
+        saveGenerationResultsToFile(parentGenerationPath + "\\_Generation_Results.txt", previousGenerationResults);
 
         processGenerationResults(previousGenerationResults);
 
@@ -233,13 +235,29 @@ void GeneticAlgorithmManager::processGenerationResults(std::unordered_map<std::s
         }
         if(pair.second > 0){
 
-            std::cout << "********POSITIVE RESULTS********" << std::endl;
+            std::cerr << "********POSITIVE RESULTS********" << std::endl;
         }
     }
 
     for(const auto& pair : results){
-        results[pair.first] = pair.second - lowestResult + 1;
+        //I would like to find a way to scale out the data even more, so the highest results are even more heavily favored
+        //results[pair.first] = pair.second - lowestResult + 1;
+        results[pair.first] = pair.second - (lowestResult) + 1;
     }
+
+    /*float percentToRemove = .5;
+    std::vector<std::pair<std::string, float>> sortedMap(results.begin(), results.end());
+    std::sort(sortedMap.begin(), sortedMap.end(), [](const auto& a, const auto& b) {
+        return a.second < b.second;
+    });
+
+    // Step 2: Calculate the threshold value
+    int thresholdIndex = static_cast<int>(sortedMap.size() * percentToRemove);
+
+    // Step 3: Remove elements below the threshold
+    for (int i = 0; i < thresholdIndex; ++i) {
+        results.erase(sortedMap[i].first);
+    }*/
 
 }
 
@@ -248,11 +266,20 @@ void GeneticAlgorithmManager::breedGeneration(const std::unordered_map<std::stri
         return;
     }
 
+    /*int r = 1;
+    for(const auto& pair : parentGenerationResults){
+        if(createFolder(childGenerationFolderPath + childFolderName + "Repeat" + std::to_string(r))) {
+            strategyGuideGenerator.mergeTwoGuides(pair.first + strategyFileName, pair.first + strategyFileName,
+                                                  childGenerationFolderPath + childFolderName + "Repeat" +
+                                                  std::to_string(r) + strategyFileName, true);
+            r++;
+        }
+    }*/
+
     for(int i = 0; i < numberOfChildrenPerGeneration; i++){
         if(createFolder(childGenerationFolderPath + childFolderName + std::to_string(i + 1))){
             strategyGuideGenerator.mergeTwoGuides(selectWeightedEntry(parentGenerationResults) + strategyFileName, selectWeightedEntry(parentGenerationResults) + strategyFileName,
                                                   childGenerationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName, true);
         }
-
     }
 }

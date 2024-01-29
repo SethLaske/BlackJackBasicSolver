@@ -101,12 +101,12 @@ void StrategyGuideGenerator::mergeTwoGuides(const std::string &parentFilePath1, 
     std::unordered_map<std::string, std::array<std::string, (sizeof(COLUMNS)/sizeof(COLUMNS[0]))-1>> childStrategy;
 
     if(parentStrategy1.size() != lenRows + 1){
-        std::cerr << "The first file does not have the proper number of rows";
+        std::cerr << "The first file does not have the proper number of rows, it has: " << parentStrategy1.size() << std::endl;
         return;
     }
 
     if(parentStrategy2.size() != lenRows + 1){
-        std::cerr << "The second file does not have the proper number of rows";
+        std::cerr << "The second file does not have the proper number of rows" << parentStrategy2.size() << std::endl;
         return;
     }
 
@@ -123,10 +123,11 @@ void StrategyGuideGenerator::mergeTwoGuides(const std::string &parentFilePath1, 
                 childStrategy[pair.first] = it->second;
             }
 
-
-            if(mutate){
+            //Assuming we want mutations and its not the header row
+            if(mutate && (pair.first != COLUMNS[0])){
                 int randomChance = rand() % lineMutationOdds;
-                if(randomChance < 1 && (pair.first != COLUMNS[0])){
+
+                if(randomChance < 1){
                     childStrategy[pair.first] = getRandomLine(pair.first);
                 }
 
