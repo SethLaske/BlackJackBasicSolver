@@ -10,11 +10,6 @@ TEST(CardTestSuite, CheckCardValue){
     EXPECT_EQ(kingCard.getCardValue(), 10);
     Card twoCard(Card::HEARTS, Card::TWO);
     EXPECT_EQ(twoCard.getCardValue(), 2);
-
-    Card sevenCard(Card::SPADES, Card::SEVEN);
-    EXPECT_EQ(sevenCard.toString(), "Seven of Spades");
-    Card queenCard(Card::HEARTS, Card::QUEEN);
-    EXPECT_EQ(queenCard.toString(), "Queen of Hearts");
 }
 
 TEST(CardTestSuite, CheckCardString){
@@ -22,9 +17,4 @@ TEST(CardTestSuite, CheckCardString){
     EXPECT_EQ(sevenCard.toString(), "Seven of Spades");
     Card queenCard(Card::HEARTS, Card::QUEEN);
     EXPECT_EQ(queenCard.toString(), "Queen of Hearts");
-}
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
 }

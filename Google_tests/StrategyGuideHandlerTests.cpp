@@ -2,9 +2,9 @@
 #include "StrategyGuideHandler.h"
 
 TEST(StrategyTestSuite, RegularLine){
-    StrategyGuideHandler strategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\)");
+    StrategyGuideHandler strategy;
 
-    strategy.loadStrategyGuide("TestFile.csv");
+    strategy.loadStrategyGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\TestFile.csv)");
 
     EXPECT_EQ(strategy.getEntry("Test",2), "Two");
     EXPECT_EQ(strategy.getEntry("Test",11), "Ace");

@@ -5,8 +5,8 @@
 #include "PlayerBot.h"
 
 TEST(PlayerBotSuite, Payments){
-    StrategyGuideHandler strategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\)");
-    strategy.loadStrategyGuide("TestFile.csv");
+    StrategyGuideHandler strategy;
+    strategy.loadStrategyGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\TestFile.csv)");
 
     PlayerBot player(500, strategy);
 
@@ -31,8 +31,8 @@ TEST(PlayerBotSuite, Payments){
 }*/
 
 TEST(PlayerBotSuite, CheckQueriesHard){
-    StrategyGuideHandler strategy(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\)");
-    strategy.loadStrategyGuide("TestFile.csv");
+    StrategyGuideHandler strategy;
+    strategy.loadStrategyGuide(R"(C:\Users\small\CLionProjects\BasicStrategySolver\Google_tests\TestFile.csv)");
 
     PlayerBot player(500, strategy);
 

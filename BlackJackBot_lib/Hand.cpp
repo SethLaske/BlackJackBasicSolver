@@ -25,7 +25,7 @@ void Hand::addCard(const Card& addedCard) {
     valueCount += addedCard.getCardValue();
 
     //Assuming every ace has the opportunity to be 11 or 1
-    if(valueCount > 21 && softAceCount > 0){
+    while(valueCount > 21 && softAceCount > 0){
         valueCount -= 10;
         softAceCount--;
     }

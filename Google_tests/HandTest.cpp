@@ -2,67 +2,44 @@
 #include "PlayerHand.h"
 #include "DealerHand.h"
 
-TEST(HandTestSuite, RegularHandBust){
-    PlayerHand fakeHand(10);
+TEST(HandTestSuite, StandardHand){
+    Hand hand;
 
-    fakeHand.addCard({Card::SPADES, Card::SEVEN});
-    fakeHand.addCard({Card::SPADES, Card::NINE});
+    hand.addCard({Card::HEARTS, Card::FIVE});
+    hand.addCard({Card::HEARTS, Card::ACE});
 
-    EXPECT_EQ(fakeHand.getHandValue(), 16);
-    EXPECT_EQ(fakeHand.getSoftAceCount(), 0);
-    EXPECT_EQ(fakeHand.isBlackJack(), false);
-    EXPECT_EQ(fakeHand.canSplit(), false);
-    EXPECT_EQ(fakeHand.canDouble(), true);
-    EXPECT_EQ(fakeHand.isHandFinished(), false);
+    EXPECT_EQ(hand.getHandValue(), 16);
+    EXPECT_EQ(hand.getSoftAceCount(), 1);
+    EXPECT_EQ(hand.isBlackJack(), false);
 
-    fakeHand.addCard({Card::SPADES, Card::TEN});
+    hand.addCard({Card::HEARTS, Card::SEVEN});
+    EXPECT_EQ(hand.getHandValue(), 13);
+    EXPECT_EQ(hand.getSoftAceCount(), 0);
+    EXPECT_EQ(hand.isBlackJack(), false);
 
-    EXPECT_EQ(fakeHand.canDouble(), false);
-    EXPECT_EQ(fakeHand.isHandFinished(), true);
+    hand.addCard({Card::HEARTS, Card::EIGHT});
+    EXPECT_EQ(hand.getHandValue(), 21);
+    EXPECT_EQ(hand.getSoftAceCount(), 0);
+    EXPECT_EQ(hand.isBlackJack(), false);
 }
 
-TEST(HandTestSuite, DealerBlackjack){
-    DealerHand dealerBlackJack;
-    DealerHand dealerNoBlackJack;
+TEST(HandTestSuite, BlackjackHand){
+    Hand hand;
 
-    dealerNoBlackJack.addCard({Card::SPADES, Card::SEVEN});
-    dealerNoBlackJack.addHiddenCard({Card::SPADES, Card::NINE});
+    hand.addCard({Card::HEARTS, Card::QUEEN});
+    hand.addCard({Card::HEARTS, Card::ACE});
 
-    dealerBlackJack.addCard({Card::SPADES, Card::ACE});
-    dealerBlackJack.addHiddenCard({Card::SPADES, Card::JACK});
+    EXPECT_EQ(hand.getHandValue(), 21);
+    EXPECT_EQ(hand.getSoftAceCount(), 1);
+    EXPECT_EQ(hand.isBlackJack(), true);
 
-    EXPECT_EQ(dealerNoBlackJack.isBlackJack(), false);
-    EXPECT_EQ(dealerBlackJack.isBlackJack(), true);
+    hand.addCard({Card::HEARTS, Card::ACE});
+    EXPECT_EQ(hand.getHandValue(), 12);
+    EXPECT_EQ(hand.getSoftAceCount(), 0);
+    EXPECT_EQ(hand.isBlackJack(), false);
 
-    EXPECT_EQ(dealerNoBlackJack.getHandValue(), 7);
-
-    dealerNoBlackJack.revealHiddenCard();
-    EXPECT_EQ(dealerNoBlackJack.getHandValue(), 16);
-
-    dealerNoBlackJack.addCard({Card::SPADES, Card::FIVE});
-
-    EXPECT_EQ(dealerNoBlackJack.isBlackJack(), false);
-    EXPECT_EQ(dealerNoBlackJack.getHandValue(), 21);
-}
-
-TEST(HandTestSuite, PlayerDoubling){
-
-    PlayerHand fakeHand(10);
-
-    fakeHand.addCard({Card::SPADES, Card::SIX});
-    fakeHand.addCard({Card::SPADES, Card::FOUR});
-
-    EXPECT_EQ(fakeHand.getHandValue(), 10);
-    EXPECT_EQ(fakeHand.getSoftAceCount(), 0);
-    EXPECT_EQ(fakeHand.isBlackJack(), false);
-    EXPECT_EQ(fakeHand.canDouble(), true);
-    EXPECT_EQ(fakeHand.isHandFinished(), false);
-
-    fakeHand.addCard({Card::SPADES, Card::ACE});
-
-    EXPECT_EQ(fakeHand.getHandValue(), 21);
-    EXPECT_EQ(fakeHand.getSoftAceCount(), 1);
-    EXPECT_EQ(fakeHand.isBlackJack(), false);
-    EXPECT_EQ(fakeHand.canDouble(), false);
-    EXPECT_EQ(fakeHand.isHandFinished(), true);    //Subject to change, you could hit a soft 21, but there is almost no reason to do so
+    hand.addCard({Card::HEARTS, Card::NINE});
+    EXPECT_EQ(hand.getHandValue(), 21);
+    EXPECT_EQ(hand.getSoftAceCount(), 0);
+    EXPECT_EQ(hand.isBlackJack(), false);
 }

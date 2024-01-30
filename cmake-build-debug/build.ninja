@@ -353,6 +353,20 @@ build Google_tests/CMakeFiles/Google_Tests_run.dir/PlayerBotTests.cpp.obj: CXX_C
   OBJECT_DIR = Google_tests\CMakeFiles\Google_Tests_run.dir
   OBJECT_FILE_DIR = Google_tests\CMakeFiles\Google_Tests_run.dir
 
+build Google_tests/CMakeFiles/Google_Tests_run.dir/DealerHandTests.cpp.obj: CXX_COMPILER__Google_Tests_run_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/Google_tests/DealerHandTests.cpp || cmake_object_order_depends_target_Google_Tests_run
+  DEP_FILE = Google_tests\CMakeFiles\Google_Tests_run.dir\DealerHandTests.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib -isystem C:/Users/small/CLionProjects/BasicStrategySolver/Google_tests/lib/googletest/include -isystem C:/Users/small/CLionProjects/BasicStrategySolver/Google_tests/lib/googletest
+  OBJECT_DIR = Google_tests\CMakeFiles\Google_Tests_run.dir
+  OBJECT_FILE_DIR = Google_tests\CMakeFiles\Google_Tests_run.dir
+
+build Google_tests/CMakeFiles/Google_Tests_run.dir/PlayerHandTests.cpp.obj: CXX_COMPILER__Google_Tests_run_unscanned_Debug C$:/Users/small/CLionProjects/BasicStrategySolver/Google_tests/PlayerHandTests.cpp || cmake_object_order_depends_target_Google_Tests_run
+  DEP_FILE = Google_tests\CMakeFiles\Google_Tests_run.dir\PlayerHandTests.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/small/CLionProjects/BasicStrategySolver/BlackJackBot_lib -isystem C:/Users/small/CLionProjects/BasicStrategySolver/Google_tests/lib/googletest/include -isystem C:/Users/small/CLionProjects/BasicStrategySolver/Google_tests/lib/googletest
+  OBJECT_DIR = Google_tests\CMakeFiles\Google_Tests_run.dir
+  OBJECT_FILE_DIR = Google_tests\CMakeFiles\Google_Tests_run.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Google_Tests_run
@@ -361,7 +375,7 @@ build Google_tests/CMakeFiles/Google_Tests_run.dir/PlayerBotTests.cpp.obj: CXX_C
 #############################################
 # Link the executable Google_tests\Google_Tests_run.exe
 
-build Google_tests/Google_Tests_run.exe: CXX_EXECUTABLE_LINKER__Google_Tests_run_Debug Google_tests/CMakeFiles/Google_Tests_run.dir/CardTest.cpp.obj Google_tests/CMakeFiles/Google_Tests_run.dir/HandTest.cpp.obj Google_tests/CMakeFiles/Google_Tests_run.dir/StrategyGuideHandlerTests.cpp.obj Google_tests/CMakeFiles/Google_Tests_run.dir/PlayerBotTests.cpp.obj | BlackJackBot_lib/libBlackJackBot_lib.a lib/libgtest.a lib/libgtest_main.a lib/libgtest.a || BlackJackBot_lib/libBlackJackBot_lib.a lib/libgtest.a lib/libgtest_main.a
+build Google_tests/Google_Tests_run.exe: CXX_EXECUTABLE_LINKER__Google_Tests_run_Debug Google_tests/CMakeFiles/Google_Tests_run.dir/CardTest.cpp.obj Google_tests/CMakeFiles/Google_Tests_run.dir/HandTest.cpp.obj Google_tests/CMakeFiles/Google_Tests_run.dir/StrategyGuideHandlerTests.cpp.obj Google_tests/CMakeFiles/Google_Tests_run.dir/PlayerBotTests.cpp.obj Google_tests/CMakeFiles/Google_Tests_run.dir/DealerHandTests.cpp.obj Google_tests/CMakeFiles/Google_Tests_run.dir/PlayerHandTests.cpp.obj | BlackJackBot_lib/libBlackJackBot_lib.a lib/libgtest.a lib/libgtest_main.a lib/libgtest.a || BlackJackBot_lib/libBlackJackBot_lib.a lib/libgtest.a lib/libgtest_main.a
   FLAGS = -g
   LINK_LIBRARIES = BlackJackBot_lib/libBlackJackBot_lib.a  lib/libgtest.a  lib/libgtest_main.a  lib/libgtest.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = Google_tests\CMakeFiles\Google_Tests_run.dir

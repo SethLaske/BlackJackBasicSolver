@@ -23,6 +23,9 @@ void PlayerHand::stay() {
 }
 
 void PlayerHand::addCard(const Card& addedCard) {
+    if(handFinished){
+        std::cerr << "The hand can not be hit" << std::endl;
+    }
     Hand::addCard(addedCard);
 
     //If its equal to 21, then the player will be forced to stop, and if over then they busted and cant do anything
@@ -32,7 +35,7 @@ void PlayerHand::addCard(const Card& addedCard) {
 }
 
 void PlayerHand::doubleDown(const Card& addedCard) {
-    if(!canDouble()){
+    if(!canDouble() || handFinished){
         std::cerr << "This hand can not be doubled" << std::endl;
         displayHand();
         return;
@@ -43,7 +46,7 @@ void PlayerHand::doubleDown(const Card& addedCard) {
 }
 
 Card PlayerHand::splitCards() {
-    if(!canSplit()){
+    if(!canSplit() || handFinished){
         std::cerr << "This hand can't be split" << std::endl;
         displayHand();
         return {Card::SPADES, Card::ACE};
