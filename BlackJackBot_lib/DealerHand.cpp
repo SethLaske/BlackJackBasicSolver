@@ -19,9 +19,10 @@ void DealerHand::revealHiddenCard() {
 }
 
 void DealerHand::clearHand() {
-    cards.clear();
+    Hand::clearHand();
+    /*cards.clear();
     valueCount = 0;
-    softAceCount = 0;
+    softAceCount = 0;*/
 
 }
 

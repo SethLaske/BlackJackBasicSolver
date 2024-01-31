@@ -25,6 +25,7 @@ void PlayerHand::stay() {
 void PlayerHand::addCard(const Card& addedCard) {
     if(handFinished){
         std::cerr << "The hand can not be hit" << std::endl;
+        return;
     }
     Hand::addCard(addedCard);
 
@@ -64,7 +65,7 @@ Card PlayerHand::splitCards() {
 }
 
 bool PlayerHand::canDouble() const{
-    if(cards.size() != 2){
+    if(cards.size() != 2 || handFinished){
         return false;
     }
     //May need addition checks for doubling split aces, but for now ignoring
@@ -72,7 +73,7 @@ bool PlayerHand::canDouble() const{
 }
 
 bool PlayerHand::canSplit() const{
-    if(cards.size() != 2){
+    if(cards.size() != 2 || handFinished){
         return false;
     }
 
@@ -99,6 +100,12 @@ void PlayerHand::displayHand() {
     Hand::displayHand();
     std::cout << "Current value is "<< valueCount << " and the soft ace count is " << softAceCount << std::endl;
     std::cout << "For a bet of: " << betSize <<std::endl;
+}
+
+void PlayerHand::clearHand() {
+    Hand::clearHand();
+    handFinished = false;
+    betSize = 0;
 }
 
 

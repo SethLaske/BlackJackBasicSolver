@@ -15,6 +15,7 @@ public:
     ~PlayerHand();
 
     int getBetSize() const;
+    //Used to manage split hands while maintaining proper card order
     int getHandSize() const;
 
     void stay();
@@ -28,6 +29,7 @@ public:
     bool isHandFinished() const;
 
     void displayHand() override;
+    void clearHand() override;
 
 private:
     bool handFinished;

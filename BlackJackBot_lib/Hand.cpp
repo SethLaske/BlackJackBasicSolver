@@ -55,4 +55,10 @@ void Hand::displayHand() {
     }
 }
 
+void Hand::clearHand() {
+    cards.clear();
+    valueCount = 0;
+    softAceCount = 0;
+}
+
 

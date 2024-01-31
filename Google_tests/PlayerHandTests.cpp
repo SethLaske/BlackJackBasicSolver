@@ -70,8 +70,9 @@ TEST(PlayerHandTestSuite, PlayerDoubling){
     EXPECT_EQ(playerHand.canSplit(), false);
     EXPECT_EQ(playerHand.isHandFinished(), false);
 
-    playerHand.addCard({Card::SPADES, Card::ACE});
+    playerHand.doubleDown({Card::SPADES, Card::ACE});
 
+    EXPECT_EQ(playerHand.getBetSize(), 20);
     EXPECT_EQ(playerHand.getHandValue(), 21);
     EXPECT_EQ(playerHand.getSoftAceCount(), 1);
     EXPECT_EQ(playerHand.isBlackJack(), false);
@@ -121,3 +122,54 @@ TEST(PlayerHandTestSuite, PlayerSplitting){
     EXPECT_EQ(playerHand.isHandFinished(), true);
 }
 
+TEST(PlayerHandTestSuite, FinishedHandValidation){
+    PlayerHand playerHand(10);
+
+    playerHand.addCard({Card::SPADES, Card::QUEEN});
+    playerHand.addCard({Card::SPADES, Card::KING});
+
+    EXPECT_EQ(playerHand.getHandValue(), 20);
+    EXPECT_EQ(playerHand.getSoftAceCount(), 0);
+    EXPECT_EQ(playerHand.isBlackJack(), false);
+    EXPECT_EQ(playerHand.canDouble(), true);
+    EXPECT_EQ(playerHand.canSplit(), true);
+    EXPECT_EQ(playerHand.isHandFinished(), false);
+
+    playerHand.stay();
+
+    EXPECT_EQ(playerHand.getHandValue(), 20);
+    EXPECT_EQ(playerHand.getSoftAceCount(), 0);
+    EXPECT_EQ(playerHand.isBlackJack(), false);
+    EXPECT_EQ(playerHand.canDouble(), false);
+    EXPECT_EQ(playerHand.canSplit(), false);
+    EXPECT_EQ(playerHand.isHandFinished(), true);
+
+    playerHand.addCard({Card::SPADES, Card::ACE});
+
+    EXPECT_EQ(playerHand.getHandValue(), 20);
+    EXPECT_EQ(playerHand.getSoftAceCount(), 0);
+    EXPECT_EQ(playerHand.isBlackJack(), false);
+    EXPECT_EQ(playerHand.canDouble(), false);
+    EXPECT_EQ(playerHand.canSplit(), false);
+    EXPECT_EQ(playerHand.isHandFinished(), true);
+
+    playerHand.doubleDown({Card::SPADES, Card::ACE});
+
+    EXPECT_EQ(playerHand.getBetSize(), 10);
+    EXPECT_EQ(playerHand.getHandValue(), 20);
+    EXPECT_EQ(playerHand.getSoftAceCount(), 0);
+    EXPECT_EQ(playerHand.isBlackJack(), false);
+    EXPECT_EQ(playerHand.canDouble(), false);
+    EXPECT_EQ(playerHand.canSplit(), false);
+    EXPECT_EQ(playerHand.isHandFinished(), true);
+
+    playerHand.splitCards();
+
+    EXPECT_EQ(playerHand.getHandSize(), 2);
+    EXPECT_EQ(playerHand.getHandValue(), 20);
+    EXPECT_EQ(playerHand.getSoftAceCount(), 0);
+    EXPECT_EQ(playerHand.isBlackJack(), false);
+    EXPECT_EQ(playerHand.canDouble(), false);
+    EXPECT_EQ(playerHand.canSplit(), false);
+    EXPECT_EQ(playerHand.isHandFinished(), true);
+}

@@ -25,6 +25,7 @@ public:
 
     //Prints out the hand
     virtual void displayHand();
+    virtual void clearHand();
 
 protected:
     std::vector<Card> cards;

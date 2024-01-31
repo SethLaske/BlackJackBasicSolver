@@ -18,7 +18,7 @@ public:
 
     //Prints the hand, and shows that there is a hidden card
     void displayHand() override;
-    void clearHand();
+    void clearHand() override;
 
 private:
     Card hiddenCard = Card(Card::SPADES, Card::ACE);
