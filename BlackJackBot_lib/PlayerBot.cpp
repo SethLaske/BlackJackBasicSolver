@@ -11,6 +11,9 @@ PlayerBot::~PlayerBot() {
 }
 
 PLAYERACTION PlayerBot::getPlayerAction(PlayerHand &playerHand, const DealerHand &dealerHand) {
+    if(playerHand.isHandFinished()){
+        return STAY;
+    }
     std::string playerCardsString = getPlayerCardDecoding(playerHand);
     std::basic_string<char> strategyRecommendation = strategyGuideHandler.getEntry(playerCardsString , dealerHand.getHandValue());
     return getUseableAction(playerHand, strategyRecommendation);
@@ -123,12 +126,16 @@ void PlayerBot::resetStats() {
     numberOfTimesPaid = 0;
 }
 
-void PlayerBot::saveResultsToFile() {
-    float netProfit = money - initialMoney;
-    float profitPerHand = netProfit/numberOfHandsPlayed;
-    strategyGuideHandler.saveResults(profitPerHand);
-}
-
 float PlayerBot::getMoney() const {
     return money;
+}
+
+void PlayerBot::calculateResults(bool saveToFile) {
+    float netProfit = money - initialMoney;
+    float profitPerHand = netProfit/numberOfHandsPlayed;
+
+    strategyGuideHandler.updateResults(profitPerHand);
+    if(saveToFile){
+        strategyGuideHandler.saveResults(profitPerHand);
+    }
 }

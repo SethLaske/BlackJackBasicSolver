@@ -126,6 +126,8 @@ void GeneticAlgorithmManager::testGenerationStrategies(const std::string& genera
                     newStrategy.loadStrategyGuide(strategyFilePath);
 
                     table.runGameTesting(gamesPerStrategy);
+                    std::cout << "The most recent result was " << newStrategy.getResults();
+
                 } else {
                     std::cerr << "Error: Strategy file not found in " << findFileData.cFileName << std::endl;
                 }

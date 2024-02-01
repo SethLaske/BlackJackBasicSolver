@@ -19,12 +19,17 @@ public:
     void saveStrategyGuide(const std::string& csvFileName);
 
     void saveResults(float results);
+    void updateResults(float results);
+
+    float getResults() const;
+
     std::basic_string<char> getEntry(const std::string& playerCards, int dealerCard);
     //void editEntry(const std::string& playerCards, int dealerCard, std::string newMove);
 
     static const int  POSSIBLE_DEALER_CARDS = 10;
 private:
     std::string folderPath;
+    float lastResults;
 
     std::unordered_map<std::string, std::array<std::string,  POSSIBLE_DEALER_CARDS>> strategy;
 

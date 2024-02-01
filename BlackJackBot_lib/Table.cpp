@@ -43,7 +43,7 @@ void Table::runGameTesting(int numberOfGames) {
     if(HouseRules::DISPLAYRESULTS){
         playerBot.displayStats();
     }
-    playerBot.saveResultsToFile();
+    playerBot.calculateResults(false);
 
     playerBot.resetStats();
 }

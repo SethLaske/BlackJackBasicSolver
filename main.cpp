@@ -102,16 +102,19 @@ void testTable(){
 
     Table table(playerBot);
 
+    //table.playGame();
+
     table.runGameTesting(100000);
+    cout << "Results: " << newStrategy.getResults() << endl;
 
     //StrategyGuideHandler newStrategy2(R"(C:\Users\small\CLionProjects\BasicStrategySolver\)");
-    newStrategy.loadStrategyGuide("Book1.csv");
+    //newStrategy.loadStrategyGuide("Book1.csv");
 
     //PlayerBot playerBot2(bankRoll, newStrategy2);
 
     //Table table2(playerBot2);
 
-    table.runGameTesting(100000);
+    //table.runGameTesting(100000);
     //table.startGame();
 }
 
@@ -129,5 +132,5 @@ void testGeneticAlgorithm(){
 
     GeneticAlgorithmManager geneticAlgorithmManager;
 
-    geneticAlgorithmManager.runGeneticAlgorithm(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Root)", 500, 10, 10);
+    geneticAlgorithmManager.runGeneticAlgorithm(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Root)", 500, 10, 5);
 }
