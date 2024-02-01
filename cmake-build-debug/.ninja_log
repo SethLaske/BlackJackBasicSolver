@@ -115,3 +115,14 @@
 7	1818	7284717735922986	BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/GeneticAlgorithmManager.cpp.obj	fe0117340cdd8ace
 1818	2057	7284717738306754	BlackJackBot_lib/libBlackJackBot_lib.a	b9efd625de9afc77
 2057	2398	7284717741690633	BasicStrategySolver_run.exe	18700adaa23ac518
+7	816	7284728666109794	BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/Table.cpp.obj	461b78476974489b
+3	1379	7284728671744731	CMakeFiles/BasicStrategySolver_run.dir/main.cpp.obj	c82257dab69ee05f
+10	1592	7284728673875769	BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/GeneticAlgorithmManager.cpp.obj	fe0117340cdd8ace
+1593	1827	7284728676209520	BlackJackBot_lib/libBlackJackBot_lib.a	b9efd625de9afc77
+1828	2167	7284728679583576	BasicStrategySolver_run.exe	18700adaa23ac518
+3	1566	7284731600370625	BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/GeneticAlgorithmManager.cpp.obj	fe0117340cdd8ace
+1566	1791	7284731602625588	BlackJackBot_lib/libBlackJackBot_lib.a	b9efd625de9afc77
+1791	2137	7284731606062646	BasicStrategySolver_run.exe	18700adaa23ac518
+3	1519	7284732646553751	BlackJackBot_lib/CMakeFiles/BlackJackBot_lib.dir/GeneticAlgorithmManager.cpp.obj	fe0117340cdd8ace
+1519	1746	7284732648843225	BlackJackBot_lib/libBlackJackBot_lib.a	b9efd625de9afc77
+1747	2079	7284732652149330	BasicStrategySolver_run.exe	18700adaa23ac518

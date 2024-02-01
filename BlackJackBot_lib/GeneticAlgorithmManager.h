@@ -25,8 +25,8 @@ private:
     int numberOfChildrenPerGeneration;
     int numberOfGenerations;
 
-    const std::string strategyFileName = "\\Strategy.csv";
-    const std::string childFolderName = "\\Child";
+    const std::string strategyFileName = "Strategy.csv";
+    //const std::string childFolderName = "\\Child";
 
     float highestResult;
     std::string highestResultPath;

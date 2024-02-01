@@ -55,7 +55,7 @@ float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolder
 
         std::unordered_map<std::string, float> previousGenerationResults = testGeneration(parentGenerationPath, testsPerChild);
 
-        saveGenerationResultsToFile(parentGenerationPath + "\\_Generation_Results.txt", previousGenerationResults);
+        saveGenerationResultsToFile(parentGenerationPath + "\\Generation_Results.txt", previousGenerationResults);
 
         processGenerationResults(previousGenerationResults);
 
@@ -70,7 +70,7 @@ float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolder
 
     std::unordered_map<std::string, float> lastGenerationResults = testGeneration(parentGenerationPath, testsPerChild);
 
-    saveGenerationResultsToFile(parentGenerationPath + "\\_Generation_Results.txt", lastGenerationResults);
+    saveGenerationResultsToFile(parentGenerationPath + "\\Generation_Results.txt", lastGenerationResults);
 
     std::cout << std::endl << "*******GA Recap*******" << std::endl;
     std::cout << "Highest Results: "<< highestResult << std::endl;
@@ -86,11 +86,9 @@ void GeneticAlgorithmManager::spawnInitialGeneration(const std::string& generati
     }
 
     for(int i = 0; i < numberOfChildrenPerGeneration; i++){
-        if(createFolder(generationFolderPath + childFolderName + std::to_string(i + 1))){
-            strategyGuideGenerator.createRandomGuideFile(generationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName);
-        }else{
-            std::cerr << "While spawning the initial wave, was unable to spawn " + generationFolderPath + childFolderName + std::to_string(i + 1) << std::endl;
-        }
+
+        strategyGuideGenerator.createRandomGuideFile(generationFolderPath + "\\" + std::to_string(i + 1) + "_" + strategyFileName);
+
     }
 }
 
@@ -284,10 +282,10 @@ void GeneticAlgorithmManager::breedGeneration(const std::unordered_map<std::stri
     }*/
 
     for(int i = 0; i < numberOfChildrenPerGeneration; i++){
-        if(createFolder(childGenerationFolderPath + childFolderName + std::to_string(i + 1))){
-            strategyGuideGenerator.mergeTwoGuides(selectWeightedEntry(parentGenerationResults) + strategyFileName, selectWeightedEntry(parentGenerationResults) + strategyFileName,
-                                                  childGenerationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName, true);
-        }
+
+        strategyGuideGenerator.mergeTwoGuides(selectWeightedEntry(parentGenerationResults), selectWeightedEntry(parentGenerationResults),
+                                                  childGenerationFolderPath + "\\" + std::to_string(i + 1) + "_" + strategyFileName, true);
+
     }
 }
 
@@ -301,8 +299,10 @@ std::unordered_map<std::string, float> GeneticAlgorithmManager::testGeneration(c
 
     Table table(playerBot);
 
+    std::string searchPattern = generationFolderPath + "\\*" + strategyFileName;
+
     WIN32_FIND_DATA findFileData;
-    HANDLE hFind = FindFirstFile((generationFolderPath + "\\*").c_str(), &findFileData);
+    HANDLE hFind = FindFirstFile(searchPattern.c_str(), &findFileData);
 
     if (hFind == INVALID_HANDLE_VALUE) {
         std::cerr << "Error: Unable to open directory " << generationFolderPath << " for testing." << std::endl;
@@ -310,28 +310,17 @@ std::unordered_map<std::string, float> GeneticAlgorithmManager::testGeneration(c
     }
 
     do {
+        if (!(findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+            std::string strategyFilePath = generationFolderPath + "\\" + findFileData.cFileName;
 
-        if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
-            if (strcmp(findFileData.cFileName, ".") != 0 && strcmp(findFileData.cFileName, "..") != 0) {
-                std::string strategyFilePath = generationFolderPath + "\\" + findFileData.cFileName + strategyFileName;
-
-                if (GetFileAttributes(strategyFilePath.c_str()) != INVALID_FILE_ATTRIBUTES) {
-
-                    strategyGuideHandler.loadStrategyGuide(strategyFilePath);
-
-                    generationResults[strategyFilePath] = table.runGameTesting(gamesPerStrategy);;
-
-                    std::cout << "Adding entry: " << strategyFilePath << " / " << generationResults[strategyFilePath] << std::endl;
-
-                } else {
-                    std::cerr << "Error: Strategy file not found in " << findFileData.cFileName << std::endl;
-                }
-            }
+            // MY CODE: Load strategy and run tests
+            strategyGuideHandler.loadStrategyGuide(strategyFilePath);
+            generationResults[strategyFilePath] = table.runGameTesting(gamesPerStrategy);
+            std::cout << "Adding entry: " << strategyFilePath << " : " << generationResults[strategyFilePath] << std::endl;
         }
     } while (FindNextFile(hFind, &findFileData) != 0);
 
     FindClose(hFind);
-
 
     return generationResults;
 }
