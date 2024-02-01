@@ -105,7 +105,7 @@ void testTable(){
     //table.playGame();
 
     table.runGameTesting(100000);
-    cout << "Results: " << newStrategy.getResults() << endl;
+    //cout << "Results: " << newStrategy.getResults() << endl;
 
     //StrategyGuideHandler newStrategy2(R"(C:\Users\small\CLionProjects\BasicStrategySolver\)");
     //newStrategy.loadStrategyGuide("Book1.csv");

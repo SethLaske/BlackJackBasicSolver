@@ -40,7 +40,8 @@ private:
     //Scale all results for weighted selections
     void processGenerationResults(std::unordered_map<std::string, float>& results);
 
-
+    //Include overload to save the generation results
+    std::unordered_map<std::string, float> testGeneration(const std::string& generationFolderPath, int gamesPerStrategy);
     //Pick a random entry based on weighted results
     std::string selectWeightedEntry(const std::unordered_map<std::string, float>& weightedMap);
 };

@@ -39,7 +39,7 @@ public:
     void displayStats() const;
     void resetStats();
 
-    void calculateResults(bool saveToFile);
+    float calculateResults(bool saveToFile);
 
 private:
     //Variables used for optional data tracking

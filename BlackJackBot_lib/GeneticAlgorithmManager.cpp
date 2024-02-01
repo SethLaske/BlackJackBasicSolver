@@ -49,9 +49,11 @@ float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolder
             }
         }
 
-        testGenerationStrategies(parentGenerationPath, testsPerChild);
+        //testGenerationStrategies(parentGenerationPath, testsPerChild);
 
-        std::unordered_map<std::string, float> previousGenerationResults = getGenerationResults(parentGenerationPath);
+        //std::unordered_map<std::string, float> previousGenerationResults = getGenerationResults(parentGenerationPath);
+
+        std::unordered_map<std::string, float> previousGenerationResults = testGeneration(parentGenerationPath, testsPerChild);
 
         saveGenerationResultsToFile(parentGenerationPath + "\\_Generation_Results.txt", previousGenerationResults);
 
@@ -63,8 +65,11 @@ float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolder
 
     }
 
-    testGenerationStrategies(parentGenerationPath, testsPerChild);
-    std::unordered_map<std::string, float> lastGenerationResults = getGenerationResults(parentGenerationPath);
+    //testGenerationStrategies(parentGenerationPath, testsPerChild);
+    //std::unordered_map<std::string, float> lastGenerationResults = getGenerationResults(parentGenerationPath);
+
+    std::unordered_map<std::string, float> lastGenerationResults = testGeneration(parentGenerationPath, testsPerChild);
+
     saveGenerationResultsToFile(parentGenerationPath + "\\_Generation_Results.txt", lastGenerationResults);
 
     std::cout << std::endl << "*******GA Recap*******" << std::endl;
@@ -126,7 +131,7 @@ void GeneticAlgorithmManager::testGenerationStrategies(const std::string& genera
                     newStrategy.loadStrategyGuide(strategyFilePath);
 
                     table.runGameTesting(gamesPerStrategy);
-                    std::cout << "The most recent result was " << newStrategy.getResults();
+                    //std::cout << "The result for: " << strategyFilePath << " was: " << newStrategy.getResults() << std::endl;
 
                 } else {
                     std::cerr << "Error: Strategy file not found in " << findFileData.cFileName << std::endl;
@@ -284,4 +289,49 @@ void GeneticAlgorithmManager::breedGeneration(const std::unordered_map<std::stri
                                                   childGenerationFolderPath + childFolderName + std::to_string(i + 1) + strategyFileName, true);
         }
     }
+}
+
+std::unordered_map<std::string, float> GeneticAlgorithmManager::testGeneration(const std::string &generationFolderPath, int gamesPerStrategy) {
+
+    std::unordered_map<std::string, float> generationResults;
+    StrategyGuideHandler strategyGuideHandler;
+
+    float bankRoll = 5000;
+    PlayerBot playerBot(bankRoll, strategyGuideHandler);
+
+    Table table(playerBot);
+
+    WIN32_FIND_DATA findFileData;
+    HANDLE hFind = FindFirstFile((generationFolderPath + "\\*").c_str(), &findFileData);
+
+    if (hFind == INVALID_HANDLE_VALUE) {
+        std::cerr << "Error: Unable to open directory " << generationFolderPath << " for testing." << std::endl;
+        return generationResults;
+    }
+
+    do {
+
+        if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+            if (strcmp(findFileData.cFileName, ".") != 0 && strcmp(findFileData.cFileName, "..") != 0) {
+                std::string strategyFilePath = generationFolderPath + "\\" + findFileData.cFileName + strategyFileName;
+
+                if (GetFileAttributes(strategyFilePath.c_str()) != INVALID_FILE_ATTRIBUTES) {
+
+                    strategyGuideHandler.loadStrategyGuide(strategyFilePath);
+
+                    generationResults[strategyFilePath] = table.runGameTesting(gamesPerStrategy);;
+
+                    std::cout << "Adding entry: " << strategyFilePath << " / " << generationResults[strategyFilePath] << std::endl;
+
+                } else {
+                    std::cerr << "Error: Strategy file not found in " << findFileData.cFileName << std::endl;
+                }
+            }
+        }
+    } while (FindNextFile(hFind, &findFileData) != 0);
+
+    FindClose(hFind);
+
+
+    return generationResults;
 }

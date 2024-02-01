@@ -130,12 +130,13 @@ float PlayerBot::getMoney() const {
     return money;
 }
 
-void PlayerBot::calculateResults(bool saveToFile) {
+float PlayerBot::calculateResults(bool saveToFile) {
     float netProfit = money - initialMoney;
     float profitPerHand = netProfit/numberOfHandsPlayed;
 
-    strategyGuideHandler.updateResults(profitPerHand);
     if(saveToFile){
         strategyGuideHandler.saveResults(profitPerHand);
     }
+
+    return profitPerHand;
 }

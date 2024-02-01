@@ -22,7 +22,7 @@ Table::~Table() {
 
 }
 
-void Table::runGameTesting(int numberOfGames) {
+float Table::runGameTesting(int numberOfGames) {
 
     shoe.doShuffle();   //force shuffle at start
     dealerHand.clearHand();
@@ -43,9 +43,12 @@ void Table::runGameTesting(int numberOfGames) {
     if(HouseRules::DISPLAYRESULTS){
         playerBot.displayStats();
     }
-    playerBot.calculateResults(false);
+    //playerBot.calculateResults(true);
 
+    //playerBot.resetStats();
+    float playerResults = playerBot.calculateResults(false);
     playerBot.resetStats();
+    return playerResults;
 }
 
 void Table::playGame() {

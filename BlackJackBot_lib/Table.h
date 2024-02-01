@@ -19,7 +19,7 @@ public:
     ~Table();
 
     //Repeats games, shuffling until finished
-    void runGameTesting(int numberOfGames);
+    float runGameTesting(int numberOfGames);
     //Plays a single game
     void playGame();
 

@@ -7,7 +7,6 @@ using namespace std;
 // Constructor
 StrategyGuideHandler::StrategyGuideHandler() {
     strategy = unordered_map< string, array<string, POSSIBLE_DEALER_CARDS>>();
-    lastResults = 0;
 }
 
 // Destructor
@@ -176,10 +175,3 @@ void StrategyGuideHandler::setNewFolder(const string &folderPath) {
     this->folderPath = folderPath;
 }
 
-void StrategyGuideHandler::updateResults(float results) {
-    lastResults = results;
-}
-
-float StrategyGuideHandler::getResults() const {
-    return lastResults;
-}
