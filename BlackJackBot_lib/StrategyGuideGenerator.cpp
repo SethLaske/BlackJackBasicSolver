@@ -208,7 +208,40 @@ bool StrategyGuideGenerator::isCSVFile(const std::string &fileName) {
 std::array<std::string, 10> StrategyGuideGenerator::getRandomLine(const std::string &rowHead) {
     std::array<std::string, 10> newLine;
     for (int i = 1; i < lenColumns; i++) {
-        newLine [i-1] = getRandomOption(ROWS[i]);
+        //CHANGING THIS, IT SEEMS WRONG
+        newLine [i-1] = getRandomOption(rowHead);
     }
     return newLine;
+}
+
+bool StrategyGuideGenerator::copyFile(const std::string& sourceFilePath, const std::string& destinationFilePath) {
+    // Open the source file for reading
+    std::ifstream sourceFile(sourceFilePath, std::ios::binary);
+    if (!sourceFile.is_open()) {
+        std::cerr << "Error: Unable to open source file " << sourceFilePath << std::endl;
+        return false;
+    }
+
+    // Open the destination file for writing
+    std::ofstream destinationFile(destinationFilePath, std::ios::binary);
+    if (!destinationFile.is_open()) {
+        std::cerr << "Error: Unable to create destination file " << destinationFilePath << std::endl;
+        return false;
+    }
+
+    // Copy the contents of the source file to the destination file
+    destinationFile << sourceFile.rdbuf();
+
+    // Check if any errors occurred during the copying process
+    if (destinationFile.bad()) {
+        std::cerr << "Error: Failed to write to destination file " << destinationFilePath << std::endl;
+        return false;
+    }
+
+    // Close the files
+    sourceFile.close();
+    destinationFile.close();
+
+    //std::cout << "File copied successfully from " << sourceFilePath << " to " << destinationFilePath << std::endl;
+    return true;
 }

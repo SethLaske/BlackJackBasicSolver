@@ -1,7 +1,3 @@
-//
-// Created by small on 1/22/2024.
-//
-
 #include <algorithm>
 #include "GeneticAlgorithmManager.h"
 #include "StrategyGuideHandler.h"
@@ -41,32 +37,23 @@ float GeneticAlgorithmManager::runGeneticAlgorithm(const std::string &rootFolder
 
     for(int i = 0; i < numberOfGenerations; i ++){
 
-        //std::cout << "Testing generation: " << i << std::endl;
-
         if(HouseRules::DISPLAYGENETICALGORITHMPROGRESS) {
             if (numberOfGenerations > HouseRules::GENETICALGORITHMPROGRESSINCREMENTS && i % (numberOfGenerations / HouseRules::GENETICALGORITHMPROGRESSINCREMENTS) == 0) {
                 std::cout << (i * 100/numberOfGenerations) << "% completed with this trial" << std::endl;
             }
         }
 
-        //testGenerationStrategies(parentGenerationPath, testsPerChild);
-
-        //std::unordered_map<std::string, float> previousGenerationResults = getGenerationResults(parentGenerationPath);
-
         std::unordered_map<std::string, float> previousGenerationResults = testGeneration(parentGenerationPath, testsPerChild);
 
         saveGenerationResultsToFile(parentGenerationPath + "\\Generation_Results.txt", previousGenerationResults);
 
-        processGenerationResults(previousGenerationResults);
+        //processGenerationResults(previousGenerationResults);
 
         breedGeneration(previousGenerationResults, nextGenerationPath);
         parentGenerationPath = nextGenerationPath;
         nextGenerationPath = rootFolderName + "\\Gen" + std::to_string(i+2);
 
     }
-
-    //testGenerationStrategies(parentGenerationPath, testsPerChild);
-    //std::unordered_map<std::string, float> lastGenerationResults = getGenerationResults(parentGenerationPath);
 
     std::unordered_map<std::string, float> lastGenerationResults = testGeneration(parentGenerationPath, testsPerChild);
 
@@ -101,46 +88,6 @@ bool GeneticAlgorithmManager::createFolder(const std::string& folderPath) {
     }
 }
 
-void GeneticAlgorithmManager::testGenerationStrategies(const std::string& generationFolderPath, int gamesPerStrategy) {
-
-    StrategyGuideHandler newStrategy;
-
-    float bankRoll = 5000;
-    PlayerBot playerBot(bankRoll, newStrategy);
-
-    Table table(playerBot);
-
-    WIN32_FIND_DATA findFileData;
-    HANDLE hFind = FindFirstFile((generationFolderPath + "\\*").c_str(), &findFileData);
-
-    if (hFind == INVALID_HANDLE_VALUE) {
-        std::cerr << "Error: Unable to open directory " << generationFolderPath << " for testing." << std::endl;
-        return;
-    }
-
-    do {
-
-        if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
-            if (strcmp(findFileData.cFileName, ".") != 0 && strcmp(findFileData.cFileName, "..") != 0) {
-                std::string strategyFilePath = generationFolderPath + "\\" + findFileData.cFileName + strategyFileName;
-
-                if (GetFileAttributes(strategyFilePath.c_str()) != INVALID_FILE_ATTRIBUTES) {
-
-                    newStrategy.loadStrategyGuide(strategyFilePath);
-
-                    table.runGameTesting(gamesPerStrategy);
-                    //std::cout << "The result for: " << strategyFilePath << " was: " << newStrategy.getResults() << std::endl;
-
-                } else {
-                    std::cerr << "Error: Strategy file not found in " << findFileData.cFileName << std::endl;
-                }
-            }
-        }
-    } while (FindNextFile(hFind, &findFileData) != 0);
-
-    FindClose(hFind);
-}
-
 std::string GeneticAlgorithmManager::selectWeightedEntry(const std::unordered_map<std::string, float>& weightedMap) {
     float totalSum = 0.0f;
     for (const auto& entry : weightedMap) {
@@ -165,48 +112,6 @@ std::string GeneticAlgorithmManager::selectWeightedEntry(const std::unordered_ma
 
 }
 
-std::unordered_map<std::string, float> GeneticAlgorithmManager::getGenerationResults(const std::string &generationFolderPath) {
-    std::unordered_map<std::string, float> generationResults;
-
-    WIN32_FIND_DATA findFileData;
-    HANDLE hFind = FindFirstFile((generationFolderPath + "\\*").c_str(), &findFileData);
-
-    if (hFind == INVALID_HANDLE_VALUE) {
-        std::cerr << "Error: Unable to open directory " << generationFolderPath << " for testing." << std::endl;
-        return generationResults;
-    }
-
-
-    do {
-        if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
-            if (strcmp(findFileData.cFileName, ".") != 0 && strcmp(findFileData.cFileName, "..") != 0) {
-                std::string childFolderPath = generationFolderPath + "\\" + findFileData.cFileName;
-                std::string resultsFilePath = childFolderPath + "\\Results.txt";
-
-                // Check if Results.txt file exists in the current child folder
-                if (GetFileAttributes(resultsFilePath.c_str()) != INVALID_FILE_ATTRIBUTES) {
-                    // Open the Results.txt file and extract the float value
-                    std::ifstream resultsFile(resultsFilePath);
-                    if (resultsFile.is_open()) {
-                        float resultValue;
-                        resultsFile >> resultValue;
-                        resultsFile.close();
-
-                        // Add entry to parentResults map
-                        generationResults[childFolderPath] = resultValue;
-                    } else {
-                        std::cerr << "Error: Unable to open Results.txt in " << childFolderPath << std::endl;
-                    }
-                }
-            }
-        }
-    } while (FindNextFile(hFind, &findFileData) != 0);
-
-    FindClose(hFind);
-
-    return generationResults;
-}
-
 void GeneticAlgorithmManager::saveGenerationResultsToFile(const std::string &filePath, std::unordered_map<std::string, float> results) {
     std::ofstream file(filePath);
 
@@ -221,36 +126,17 @@ void GeneticAlgorithmManager::saveGenerationResultsToFile(const std::string &fil
 
     for(const auto& entry : results){
         file << entry.first << " scored: " << entry.second << "\n";
-        if(entry.second > highestResult){
-            highestResult = entry.second;
-            highestResultPath = entry.first;
-        }
+
     }
 
     file.close();
 
 }
 
-void GeneticAlgorithmManager::processGenerationResults(std::unordered_map<std::string, float> &results) {
-    float lowestResult = 0;
+/*void GeneticAlgorithmManager::processGenerationResults(std::unordered_map<std::string, float> &results) {
 
-    for(const auto& pair : results){
-        if(pair.second < lowestResult){
-            lowestResult = pair.second;
-        }
-        if(pair.second > 0){
 
-            std::cerr << "********POSITIVE RESULTS********" << std::endl;
-        }
-    }
-
-    for(const auto& pair : results){
-        //I would like to find a way to scale out the data even more, so the highest results are even more heavily favored
-        //results[pair.first] = pair.second - lowestResult + 1;
-        results[pair.first] = pair.second - (lowestResult) + 1;
-    }
-
-    /*float percentToRemove = .5;
+    float percentToRemove = .5;
     std::vector<std::pair<std::string, float>> sortedMap(results.begin(), results.end());
     std::sort(sortedMap.begin(), sortedMap.end(), [](const auto& a, const auto& b) {
         return a.second < b.second;
@@ -262,29 +148,74 @@ void GeneticAlgorithmManager::processGenerationResults(std::unordered_map<std::s
     // Step 3: Remove elements below the threshold
     for (int i = 0; i < thresholdIndex; ++i) {
         results.erase(sortedMap[i].first);
-    }*/
+    }
 
-}
+}*/
 
-void GeneticAlgorithmManager::breedGeneration(const std::unordered_map<std::string, float> &parentGenerationResults, const std::string &childGenerationFolderPath) {
+void GeneticAlgorithmManager::breedGeneration(std::unordered_map<std::string, float> &parentGenerationResults, const std::string &childGenerationFolderPath) {
     if(!createFolder(childGenerationFolderPath)){
         return;
     }
 
-    /*int r = 1;
-    for(const auto& pair : parentGenerationResults){
-        if(createFolder(childGenerationFolderPath + childFolderName + "Repeat" + std::to_string(r))) {
-            strategyGuideGenerator.mergeTwoGuides(pair.first + strategyFileName, pair.first + strategyFileName,
-                                                  childGenerationFolderPath + childFolderName + "Repeat" +
-                                                  std::to_string(r) + strategyFileName, true);
-            r++;
-        }
-    }*/
+    //PROCESSING
+    float lowestResult = 0;
 
-    for(int i = 0; i < numberOfChildrenPerGeneration; i++){
+    for(const auto& pair : parentGenerationResults){
+        if(pair.second < lowestResult){
+            lowestResult = pair.second;
+        }
+        if(pair.second > 0){
+
+            std::cerr << "********POSITIVE RESULTS********" << std::endl;
+        }
+    }
+
+    for(const auto& pair : parentGenerationResults){
+        //I would like to find a way to scale out the data even more, so the highest results are even more heavily favored
+        parentGenerationResults[pair.first] = pair.second - (lowestResult) + 1;
+    }
+
+    float percentToRemove = .5;
+    std::vector<std::pair<std::string, float>> sortedMap(parentGenerationResults.begin(), parentGenerationResults.end());
+    std::sort(sortedMap.begin(), sortedMap.end(), [](const auto& a, const auto& b) {
+        return a.second < b.second;
+    });
+
+    // Step 2: Calculate the threshold value
+    int thresholdIndex = static_cast<int>(sortedMap.size() * percentToRemove);
+
+    // Step 3: Remove elements below the threshold
+    for (int i = 0; i < thresholdIndex; ++i) {
+        parentGenerationResults.erase(sortedMap[i].first);
+    }
+
+    saveGenerationResultsToFile(childGenerationFolderPath + "\\Parent_Processed_Results.txt", parentGenerationResults);
+
+    //BREEDING
+    float percentToCopy = .2;
+    int copiedFiles = static_cast<int>(sortedMap.size() * percentToCopy);
+    float percentToMutate = .3;
+    int mutatedFiles = static_cast<int>(sortedMap.size() * percentToMutate);
+
+    int childCount = 0;
+
+
+    for (int i = sortedMap.size() - 1; i >= sortedMap.size() - copiedFiles; --i) {
+        std::cout << "Copying file " << sortedMap[i].first << " To: " << childGenerationFolderPath + "\\" + std::to_string(childCount+1) + "_" + strategyFileName << std::endl;
+        strategyGuideGenerator.copyFile(sortedMap[i].first, childGenerationFolderPath + "\\" + std::to_string(childCount+1) + "_" + strategyFileName);
+        childCount ++;
+    }
+    for (int i = sortedMap.size() - 1; i >= sortedMap.size() - mutatedFiles; --i) {
+        std::cout << "Mutating file " << sortedMap[i].first << " with itself To: " << childGenerationFolderPath + "\\" + std::to_string(childCount+1) + "_" + strategyFileName << std::endl;
+        strategyGuideGenerator.mergeTwoGuides(sortedMap[i].first, sortedMap[i].first, childGenerationFolderPath + "\\" + std::to_string(childCount+1) + "_" + strategyFileName, true);
+        childCount ++;
+    }
+
+    while(childCount < numberOfChildrenPerGeneration){
 
         strategyGuideGenerator.mergeTwoGuides(selectWeightedEntry(parentGenerationResults), selectWeightedEntry(parentGenerationResults),
-                                                  childGenerationFolderPath + "\\" + std::to_string(i + 1) + "_" + strategyFileName, true);
+                                                  childGenerationFolderPath + "\\" + std::to_string(childCount + 1) + "_" + strategyFileName, true);
+        childCount++;
 
     }
 }
@@ -309,14 +240,22 @@ std::unordered_map<std::string, float> GeneticAlgorithmManager::testGeneration(c
         return generationResults;
     }
 
+    float result = 0;
     do {
         if (!(findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
             std::string strategyFilePath = generationFolderPath + "\\" + findFileData.cFileName;
 
             // MY CODE: Load strategy and run tests
             strategyGuideHandler.loadStrategyGuide(strategyFilePath);
-            generationResults[strategyFilePath] = table.runGameTesting(gamesPerStrategy);
-            std::cout << "Adding entry: " << strategyFilePath << " : " << generationResults[strategyFilePath] << std::endl;
+
+            result = table.runGameTesting(gamesPerStrategy);
+            generationResults[strategyFilePath] = result;
+
+            if(result > highestResult){
+                highestResult = result;
+                highestResultPath = strategyFilePath;
+            }
+            //std::cout << "Adding entry: " << strategyFilePath << " : " << generationResults[strategyFilePath] << std::endl;
         }
     } while (FindNextFile(hFind, &findFileData) != 0);
 

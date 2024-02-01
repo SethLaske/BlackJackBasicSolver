@@ -30,6 +30,7 @@ public:
     void mergeTwoGuides(const std::string& parentFilePath1, const std::string& parentFilePath2, const std::string& childFilePath, bool mutate);
 
     static bool isCSVFile(const std::string &fileName);
+    bool copyFile(const std::string& sourceFilePath, const std::string& destinationFilePath);
 
 private:
 

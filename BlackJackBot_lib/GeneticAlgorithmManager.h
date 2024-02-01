@@ -16,9 +16,9 @@ public:
     //Create a randomized generation
     void spawnInitialGeneration(const std::string& generationFolderPath);
     //Test a generation (results for each file saved to Results.txt in corresponding folder)
-    void testGenerationStrategies(const std::string& generationFolderPath, int gamesPerStrategy);
+    //void testGenerationStrategies(const std::string& generationFolderPath, int gamesPerStrategy);
     //Creates a new folder and populates it based on the weighted (processed) scores in the parent Generation
-    void breedGeneration(const std::unordered_map<std::string, float>& parentGenerationResults, const std::string& childGenerationFolderPath);
+    void breedGeneration(std::unordered_map<std::string, float>& parentGenerationResults, const std::string& childGenerationFolderPath);
 private:
     StrategyGuideGenerator strategyGuideGenerator;
 
@@ -34,11 +34,11 @@ private:
     bool createFolder(const std::string& folderPath);
 
     //Scan through all subfolders for result.txt and return the map of strategy files with results
-    std::unordered_map<std::string, float> getGenerationResults(const std::string& generationFolderPath);
+    //std::unordered_map<std::string, float> getGenerationResults(const std::string& generationFolderPath);
     //Create a new file with the results
     void saveGenerationResultsToFile(const std::string& filePath, std::unordered_map<std::string, float> results);
     //Scale all results for weighted selections
-    void processGenerationResults(std::unordered_map<std::string, float>& results);
+    //void processGenerationResults(std::unordered_map<std::string, float>& results);
 
     //Include overload to save the generation results
     std::unordered_map<std::string, float> testGeneration(const std::string& generationFolderPath, int gamesPerStrategy);
