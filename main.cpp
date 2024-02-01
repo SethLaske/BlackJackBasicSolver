@@ -132,5 +132,5 @@ void testGeneticAlgorithm(){
 
     GeneticAlgorithmManager geneticAlgorithmManager;
 
-    geneticAlgorithmManager.runGeneticAlgorithm(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Root)", 1000, 20, 50);
+    geneticAlgorithmManager.runGeneticAlgorithm(R"(C:\Users\small\CLionProjects\BasicStrategySolver\GA_Testing\Root)", 1000, 50, 50);
 }

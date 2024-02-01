@@ -201,12 +201,12 @@ void GeneticAlgorithmManager::breedGeneration(std::unordered_map<std::string, fl
 
 
     for (int i = sortedMap.size() - 1; i >= sortedMap.size() - copiedFiles; --i) {
-        std::cout << "Copying file " << sortedMap[i].first << " To: " << childGenerationFolderPath + "\\" + std::to_string(childCount+1) + "_" + strategyFileName << std::endl;
+        //std::cout << "Copying file " << sortedMap[i].first << " To: " << childGenerationFolderPath + "\\" + std::to_string(childCount+1) + "_" + strategyFileName << std::endl;
         strategyGuideGenerator.copyFile(sortedMap[i].first, childGenerationFolderPath + "\\" + std::to_string(childCount+1) + "_" + strategyFileName);
         childCount ++;
     }
     for (int i = sortedMap.size() - 1; i >= sortedMap.size() - mutatedFiles; --i) {
-        std::cout << "Mutating file " << sortedMap[i].first << " with itself To: " << childGenerationFolderPath + "\\" + std::to_string(childCount+1) + "_" + strategyFileName << std::endl;
+        //std::cout << "Mutating file " << sortedMap[i].first << " with itself To: " << childGenerationFolderPath + "\\" + std::to_string(childCount+1) + "_" + strategyFileName << std::endl;
         strategyGuideGenerator.mergeTwoGuides(sortedMap[i].first, sortedMap[i].first, childGenerationFolderPath + "\\" + std::to_string(childCount+1) + "_" + strategyFileName, true);
         childCount ++;
     }
